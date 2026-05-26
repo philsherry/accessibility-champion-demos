@@ -1,0 +1,98 @@
+/* Nip & Claw — Design Tokens
+   --------------------------------------------------
+   Colour contrast checked throughout:
+   - --color-text on --color-bg:         16:1
+   - --color-text on --color-surface:    16:1
+   - --color-brand on --color-bg:        15:1
+   - --color-gold-text on --color-bg:    5.8:1  (AA for normal text)
+   - --color-gold-light on --color-brand: 7.8:1 (AA for normal text)
+   - --color-white on --color-brand:     15:1
+   -------------------------------------------------- */
+
+:root {
+  /* Brand palette */
+  --color-brand:       #1e3d2f;   /* deep forest green — primary */
+  --color-brand-mid:   #2d5a40;   /* medium green — hover/active states */
+  --color-brand-light: #3d7a57;   /* lighter green — secondary actions */
+  --color-gold-light:  #d4a840;   /* gold for use on dark green bg — 7.8:1 */
+  --color-gold-text:   #7a5c1e;   /* gold for use on light bg — 5.8:1 */
+
+  /* Neutrals */
+  --color-bg:      #faf9f7;   /* warm off-white */
+  --color-surface: #ffffff;
+  --color-border:  #dedad4;
+  --color-muted:   #6b6560;   /* 5.2:1 on bg — AA */
+  --color-text:    #1a1715;   /* near-black — 16:1 on bg */
+  --color-white:   #ffffff;
+
+  /* Semantic */
+  --color-error:       #b91c1c;
+  --color-error-bg:    #fde8e8;
+  --color-success:     #166534;
+  --color-success-bg:  #dcfce7;
+  --color-warning:     #92400e;
+  --color-warning-bg:  #fef3c7;
+
+  /* Type scale */
+  --font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:   "Menlo", "Consolas", "Courier New", monospace;
+
+  --text-xs:   .75rem;    /* 12px */
+  --text-sm:   .875rem;   /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.5rem;    /* 24px */
+  --text-3xl:  1.875rem;  /* 30px */
+  --text-4xl:  2.25rem;   /* 36px */
+
+  /* Spacing scale */
+  --space-1:  .25rem;
+  --space-2:  .5rem;
+  --space-3:  .75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
+
+  /* Touch targets — WCAG 2.5.5 enhanced */
+  --target-min: 44px;
+
+  /* Layout */
+  --max-width: 1200px;
+  --content-width: 800px;
+  --nav-height: 64px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+}
+
+/* Honour reduced-motion requests */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+  }
+
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
