@@ -134,6 +134,32 @@ body {
   font-weight: 700;
 }
 
+/* Mobile nav — hide tagline and tighten spacing so everything fits in one row */
+@media (max-width: 640px) {
+  .site-logo .tagline {
+    display: none;
+  }
+
+  .site-header .inner {
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+  }
+
+  .site-nav a {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+  }
+
+  .cart-link {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+  }
+
+  .cart-link span:not(.cart-count) {
+    display: none; /* hide "Cart" text, keep badge */
+  }
+}
+
 .nav-cart {
   margin-left: auto;
   display: flex;
