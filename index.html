@@ -343,7 +343,13 @@
                   <span class="product-rating">★★★★★ (4.9)</span>
                 </div>
                 <p class="product-desc">Our flagship strain. Classic, reliable, and beloved by cats across the postcode. Enhanced loaf formation guaranteed.</p>
-                <button class="btn btn-primary product-cta" data-product="Purple Whisker" onclick="addToCart(this)">Add to cart</button>
+                <!-- Each "Add to cart" button needs a unique accessible name so keyboard
+                     and screen reader users can distinguish 12 identical-sounding buttons.
+                     The sr-only span appends the product name to the visible text:
+                     screen readers announce "Add to cart Purple Whisker";
+                     sighted users see "Add to cart" with the card heading providing context.
+                     Discussed in Chapter 06021 — HTML (accessible button names). -->
+                <button class="btn btn-primary product-cta" data-product="Purple Whisker" onclick="addToCart(this)">Add to cart<span class="sr-only"> Purple Whisker</span></button>
               </div>
             </article>
           </li>
@@ -362,7 +368,7 @@
                   <span class="product-rating">★★★★☆ (4.7)</span>
                 </div>
                 <p class="product-desc">Heritage strain, very chill. Makes them stare at walls and reconsider whether the bird outside is real.</p>
-                <button class="btn btn-primary product-cta" data-product="OG Floof" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="OG Floof" onclick="addToCart(this)">Add to cart<span class="sr-only"> OG Floof</span></button>
               </div>
             </article>
           </li>
@@ -381,7 +387,7 @@
                   <span class="product-rating">★★★★★ (4.8)</span>
                 </div>
                 <p class="product-desc">Strong. Unpredictable. Not recommended near anything fragile, a full water glass, or a sleeping human.</p>
-                <button class="btn btn-primary product-cta" data-product="Trainwreck (My Owner's Furniture)" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="Trainwreck (My Owner's Furniture)" onclick="addToCart(this)">Add to cart<span class="sr-only"> Trainwreck (My Owner's Furniture)</span></button>
               </div>
             </article>
           </li>
@@ -400,7 +406,7 @@
                   <span class="product-rating">★★★★☆ (4.6)</span>
                 </div>
                 <p class="product-desc">For the senior cat. Gentle onset, soft landing. Extended loaf duration. Reduced curtain incidents.</p>
-                <button class="btn btn-primary product-cta" data-product="Grand Daddy Pawple" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="Grand Daddy Pawple" onclick="addToCart(this)">Add to cart<span class="sr-only"> Grand Daddy Pawple</span></button>
               </div>
             </article>
           </li>
@@ -419,7 +425,7 @@
                   <span class="product-rating">★★★★★ (5.0)</span>
                 </div>
                 <p class="product-desc">Limited seasonal batch. Gone when it's gone. Three cats queued for this. One of them was Lucy Fur.</p>
-                <button class="btn btn-primary product-cta" data-product="Girl Scout Mousies" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="Girl Scout Mousies" onclick="addToCart(this)">Add to cart<span class="sr-only"> Girl Scout Mousies</span></button>
               </div>
             </article>
           </li>
@@ -438,7 +444,7 @@
                   <span class="product-rating">★★★★☆ (4.5)</span>
                 </div>
                 <p class="product-desc">Sticky. Long-lasting. You'll know why it's called the Good Rug Variety after the third session.</p>
-                <button class="btn btn-primary product-cta" data-product="Gorilla Glue (The Good Rug Variety)" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="Gorilla Glue (The Good Rug Variety)" onclick="addToCart(this)">Add to cart<span class="sr-only"> Gorilla Glue (The Good Rug Variety)</span></button>
               </div>
             </article>
           </li>
@@ -457,7 +463,7 @@
                   <span class="product-rating">★★★★☆ (4.4)</span>
                 </div>
                 <p class="product-desc">High anxiety. Strong zoomies. The name is a warning and a promise. Best enjoyed without anything breakable in the room.</p>
-                <button class="btn btn-primary product-cta" data-product="White Widow… It's a Spider, I Will Destroy It" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="White Widow… It's a Spider, I Will Destroy It" onclick="addToCart(this)">Add to cart<span class="sr-only"> White Widow… It's a Spider, I Will Destroy It</span></button>
               </div>
             </article>
           </li>
@@ -476,7 +482,7 @@
                   <span class="product-rating">★★★★★ (4.8)</span>
                 </div>
                 <p class="product-desc">Fast onset. Very zoomy. Zoomies onset: 2–4 minutes. Duration: until the human wakes up and checks the kitchen.</p>
-                <button class="btn btn-primary product-cta" data-product="Sour Diesel Paws" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="Sour Diesel Paws" onclick="addToCart(this)">Add to cart<span class="sr-only"> Sour Diesel Paws</span></button>
               </div>
             </article>
           </li>
@@ -495,7 +501,7 @@
                   <span class="product-rating">★★★★★ (4.9)</span>
                 </div>
                 <p class="product-desc">Very potent. Not for beginners. The name says it. Review: "I have seen things." — Chairman Meow, Liverpool.</p>
-                <button class="btn btn-primary product-cta" data-product="Bruce Banner (Smash the Curtains)" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="Bruce Banner (Smash the Curtains)" onclick="addToCart(this)">Add to cart<span class="sr-only"> Bruce Banner (Smash the Curtains)</span></button>
               </div>
             </article>
           </li>
@@ -514,7 +520,7 @@
                   <span class="product-rating">★★★★☆ (4.6)</span>
                 </div>
                 <p class="product-desc">Celebratory. Messy. Order for special occasions: birthdays, 4am Tuesdays, revenge on the vacuum cleaner.</p>
-                <button class="btn btn-primary product-cta" data-product="Wedding Cake (I Knocked It Off the Counter)" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="Wedding Cake (I Knocked It Off the Counter)" onclick="addToCart(this)">Add to cart<span class="sr-only"> Wedding Cake (I Knocked It Off the Counter)</span></button>
               </div>
             </article>
           </li>
@@ -533,7 +539,7 @@
                   <span class="product-rating">★★★★★ (4.9)</span>
                 </div>
                 <p class="product-desc">For when you want your loaf super-baked. Onset: gradual. Duration: the entire working day and then some. One reviewer described it as "transcendently horizontal".</p>
-                <button class="btn btn-primary product-cta" data-product="The Deep Loaf" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="The Deep Loaf" onclick="addToCart(this)">Add to cart<span class="sr-only"> The Deep Loaf</span></button>
               </div>
             </article>
           </li>
@@ -552,7 +558,7 @@
                   <span class="product-rating">★★★★★ (5.0)</span>
                 </div>
                 <p class="product-desc">3am flat circuit at full speed, narrated. Your neighbours will hear. There is a Rolling Stones connection, if you look hard enough. Named in honour of Lucy Fur, who has done this thing.</p>
-                <button class="btn btn-primary product-cta" data-product="Midnight Howler" onclick="addToCart(this)">Add to cart</button>
+                <button class="btn btn-primary product-cta" data-product="Midnight Howler" onclick="addToCart(this)">Add to cart<span class="sr-only"> Midnight Howler</span></button>
               </div>
             </article>
           </li>
