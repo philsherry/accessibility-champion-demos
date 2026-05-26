@@ -162,6 +162,19 @@
       outline: none;
     }
 
+    /* Hero — responsive font size and padding */
+    @media (max-width: 640px) {
+      .site-hero {
+        padding: var(--space-8) var(--space-4);
+      }
+      .site-hero h1 {
+        font-size: var(--text-2xl); /* 24px — readable without overflowing */
+      }
+      .site-hero p {
+        font-size: var(--text-base);
+      }
+    }
+
     /* Section divider */
     .section-header {
       display: flex;

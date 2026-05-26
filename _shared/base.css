@@ -134,20 +134,70 @@ body {
   font-weight: 700;
 }
 
-/* Mobile nav — hide tagline and tighten spacing so everything fits in one row */
+/* Mobile nav — two-row layout: logo + cart on row 1, nav on row 2.
+   Single-row doesn't work because "Subscriptions" + "My Orders" push the
+   logo off-screen on narrow viewports. Two-row keeps logo always visible.
+   Nav scrolls horizontally if labels overflow — items remain keyboard
+   accessible and touch-swipeable. Scrollbar hidden via scrollbar-width. */
 @media (max-width: 640px) {
   .site-logo .tagline {
     display: none;
   }
 
+  .site-header {
+    height: auto; /* grow to fit two rows */
+  }
+
   .site-header .inner {
-    gap: var(--space-3);
-    padding: 0 var(--space-4);
+    flex-wrap: wrap;
+    row-gap: 0;
+    column-gap: var(--space-3);
+    padding: var(--space-2) var(--space-4) 0;
+    align-items: center;
+  }
+
+  /* Row 1: logo (left) + cart (right).
+     Row 2: nav — full width, horizontally scrollable.
+     flex order overrides document order so cart stays with logo. */
+  .site-logo {
+    flex-shrink: 0;
+    order: 1;
+  }
+
+  /* Cart pulled to right end of row 1 */
+  .nav-cart {
+    order: 2;
+    margin-left: auto;
+    gap: var(--space-2);
+  }
+
+  /* Nav bumped to row 2, full width, scrollable */
+  .site-nav {
+    order: 3;
+    flex: 0 0 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;  /* Firefox */
+    padding-bottom: var(--space-2);
+    /* bleed to edges so items reach the gutters */
+    margin-left: calc(-1 * var(--space-4));
+    margin-right: calc(-1 * var(--space-4));
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;  /* Chrome / Safari */
+  }
+
+  .site-nav ul {
+    flex-wrap: nowrap; /* keep items in one horizontal strip */
   }
 
   .site-nav a {
     padding: var(--space-2) var(--space-3);
     font-size: var(--text-xs);
+    white-space: nowrap; /* prevent label wrapping inside a button */
   }
 
   .cart-link {
@@ -156,7 +206,7 @@ body {
   }
 
   .cart-link span:not(.cart-count) {
-    display: none; /* hide "Cart" text, keep badge */
+    display: none; /* hide "Cart" text, keep icon + badge */
   }
 }
 
