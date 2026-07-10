@@ -7,292 +7,7 @@
   <meta name="description" content="Complete your Nip &amp; Claw subscription. Secure checkout.">
   <link rel="stylesheet" href="_shared/tokens.css">
   <link rel="stylesheet" href="_shared/base.css">
-  <style>
-    /* Checkout layout */
-    .checkout-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--space-10);
-      align-items: start;
-    }
-
-    @media (width >= 900px) {
-      .checkout-layout {
-        grid-template-columns: 1fr 360px;
-      }
-    }
-
-    /* Error summary — GDS-style
-     *
-     * role="alert" causes screen readers to announce the contents immediately
-     * when the element is un-hidden. This is the correct mechanism for
-     * surfacing form errors — the user doesn't need to search for them.
-     *
-     * The summary is also given tabindex="-1" so focus can be programmatically
-     * moved to it after validation fires. Keyboard users land at the top of
-     * the error list and can Tab through the links to each invalid field.
-     *
-     * Discussed in:
-     *   Chapter 06080 — Forms and validation (error summary pattern)
-     *   Chapter 06120 — Live regions and error announcement (role="alert")
-     *   Chapter 06090 — Keyboard navigation and focus (tabindex="-1", programmatic focus)
-     */
-    .error-summary {
-      background: var(--color-error-bg);
-      border: 2px solid var(--color-error);
-      border-radius: var(--radius-md);
-      padding: var(--space-5) var(--space-6);
-      margin-bottom: var(--space-8);
-    }
-
-    .error-summary:focus {
-      outline: 3px solid var(--color-error);
-      outline-offset: 2px;
-    }
-
-    .error-summary h2 {
-      color: var(--color-error);
-      font-size: var(--text-lg);
-      margin-bottom: var(--space-2);
-    }
-
-    .error-summary > p {
-      color: var(--color-text);
-      font-size: var(--text-sm);
-      margin-bottom: var(--space-3);
-    }
-
-    .error-summary ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .error-summary li {
-      margin-bottom: var(--space-1);
-    }
-
-    .error-summary a {
-      color: var(--color-error);
-      font-weight: 600;
-      font-size: var(--text-sm);
-    }
-
-    .error-summary a:focus-visible {
-      outline-color: var(--color-error);
-    }
-
-    /* Form sections */
-    .checkout-form fieldset {
-      border: none;
-      padding: 0;
-      margin: 0 0 var(--space-8);
-    }
-
-    .checkout-form legend {
-      font-size: var(--text-xl);
-      font-weight: 700;
-      color: var(--color-brand);
-      margin-bottom: var(--space-5);
-      padding: 0;
-      width: 100%;
-      border-bottom: 2px solid var(--color-border);
-      padding-bottom: var(--space-3);
-    }
-
-    /* Two-column field rows */
-    .field-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-4);
-    }
-
-    @media (width <= 480px) {
-      .field-row { grid-template-columns: 1fr; }
-    }
-
-    /* Error state on form group */
-    .form-group.has-error label {
-      color: var(--color-error);
-    }
-
-    .form-group.has-error input,
-    .form-group.has-error select {
-      border-color: var(--color-error);
-      border-width: 2px;
-    }
-
-    .form-group.has-error input:focus,
-    .form-group.has-error select:focus {
-      box-shadow: 0 0 0 3px rgb(185 28 28 / 20%);
-    }
-
-    /* Optional label suffix */
-    .field-optional {
-      font-size: var(--text-xs);
-      color: var(--color-muted);
-      font-weight: 400;
-      margin-left: var(--space-2);
-    }
-
-    /* Card number input group */
-    .card-input-wrapper {
-      position: relative;
-    }
-
-    .card-input-wrapper input {
-      padding-right: 5.5rem;
-    }
-
-    .card-brands {
-      position: absolute;
-      right: var(--space-3);
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: var(--space-2);
-      align-items: center;
-      pointer-events: none;
-    }
-
-    .card-brand {
-      font-size: var(--text-xs);
-      font-weight: 700;
-      color: var(--color-muted);
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: 3px;
-      padding: 1px 4px;
-    }
-
-    /* Submit section */
-    .checkout-submit {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-    }
-
-    .checkout-submit .btn {
-      width: 100%;
-      justify-content: center;
-      font-size: var(--text-lg);
-      padding: var(--space-4) var(--space-6);
-    }
-
-    .checkout-security {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-2);
-      font-size: var(--text-xs);
-      color: var(--color-muted);
-    }
-
-    /* Order summary card */
-    .order-summary {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .order-summary-header {
-      background: var(--color-brand);
-      color: var(--color-white);
-      padding: var(--space-5) var(--space-6);
-    }
-
-    .order-summary-header h2 {
-      font-size: var(--text-lg);
-      font-weight: 700;
-      margin-bottom: var(--space-1);
-    }
-
-    .order-summary-header p {
-      font-size: var(--text-sm);
-      color: rgb(255 255 255 / 70%);
-      font-style: italic;
-    }
-
-    .order-summary-body {
-      padding: var(--space-5) var(--space-6);
-    }
-
-    .order-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: var(--space-4);
-      padding: var(--space-3) 0;
-      border-bottom: 1px solid var(--color-border);
-      font-size: var(--text-sm);
-    }
-
-    .order-line:last-of-type {
-      border-bottom: none;
-    }
-
-    .order-line-label { color: var(--color-muted); }
-    .order-line-value { font-weight: 600; }
-
-    .order-line-promo .order-line-label { color: var(--color-success); }
-    .order-line-promo .order-line-value { color: var(--color-success); font-weight: 700; }
-
-    .order-total {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: var(--space-4);
-      padding: var(--space-4) 0 0;
-      font-weight: 800;
-      font-size: var(--text-lg);
-    }
-
-    .order-total-label { color: var(--color-text); }
-    .order-total-value { color: var(--color-brand); font-size: var(--text-2xl); }
-
-    .order-summary-footer {
-      padding: 0 var(--space-6) var(--space-5);
-    }
-
-    .order-summary-footer p {
-      font-size: var(--text-xs);
-      color: var(--color-muted);
-      margin-top: var(--space-2);
-      line-height: 1.5;
-    }
-
-    /* Success state */
-    .checkout-success {
-      text-align: center;
-      padding: var(--space-16) var(--space-8);
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .success-icon {
-      width: 64px;
-      height: 64px;
-      background: var(--color-success-bg);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto var(--space-6);
-      color: var(--color-success);
-    }
-
-    .checkout-success h1 {
-      color: var(--color-brand);
-      margin-bottom: var(--space-4);
-    }
-
-    .checkout-success p {
-      color: var(--color-muted);
-      margin-bottom: var(--space-6);
-    }
-  </style>
+  <link rel="stylesheet" href="_shared/checkout.css">
 </head>
 <body>
   <div class="page-wrapper">
@@ -328,7 +43,7 @@
         Success state — hidden until the form submits successfully.
         When revealed, focus is moved to the h1 so screen reader users
         hear the confirmation without having to navigate to it.
-        Discussed in Chapter 06090 — Keyboard navigation and focus (programmatic focus management).
+        Discussed in Section 6, Chapter 9 — Keyboard navigation and focus (programmatic focus management).
       -->
       <div class="checkout-success" id="checkout-success" hidden>
         <div class="success-icon" aria-hidden="true">
@@ -349,7 +64,7 @@
 
         <!--
           Error summary — GDS pattern.
-          Discussed in Chapter 06080 (forms and validation) and Chapter 06120 (live regions).
+          Discussed in Section 6, Chapter 8 (forms and validation) and Section 6, Chapter 12 (live regions).
 
           role="alert" causes screen readers to announce the element's contents
           as soon as it becomes visible (hidden attribute removed). The user
@@ -357,7 +72,7 @@
 
           tabindex="-1" allows focus to be moved here programmatically so
           keyboard users land at the top of the error list on submission.
-          Discussed in Chapter 06090 — Keyboard navigation and focus.
+          Discussed in Section 6, Chapter 9 — Keyboard navigation and focus.
 
           Each list item is an anchor linking to the invalid field — pressing
           Enter moves focus directly to that field.
@@ -395,7 +110,7 @@
                   Screen readers announce the label when the input receives focus:
                   "Full name, edit text".
                   The for/id pairing also gives sighted users a larger click target.
-                  Discussed in Chapter 06080 — Forms and validation (label association).
+                  Discussed in Section 6, Chapter 8 — Forms and validation (label association).
                 -->
                 <label for="full-name">Full name</label>
                 <input
@@ -428,7 +143,7 @@
                   It appears in the label and is therefore announced to screen readers.
                   Sighted and non-sighted users get identical information.
                   There is no need for aria-required="false" — that is the default.
-                  Discussed in Chapter 06080 — Forms and validation (optional field labelling).
+                  Discussed in Section 6, Chapter 8 — Forms and validation (optional field labelling).
                 -->
                 <label for="address-line2">
                   Address line 2
@@ -464,7 +179,7 @@
                     "Postcode, invalid data, edit text" — without any visual change.
                     Combined with aria-describedby pointing to the error message,
                     the user hears both the field name and the specific error.
-                    Discussed in Chapter 06080 — Forms and validation (aria-invalid).
+                    Discussed in Section 6, Chapter 8 — Forms and validation (aria-invalid).
                   -->
                   <label for="postcode">Postcode</label>
                   <input
@@ -490,7 +205,7 @@
                   The hint is announced after the label when the field receives focus:
                   "Phone number, optional — for delivery notifications, edit text.
                    We'll only use this to contact you about your delivery."
-                  Discussed in Chapter 06080 — Forms and validation (aria-describedby hint text).
+                  Discussed in Section 6, Chapter 8 — Forms and validation (aria-describedby hint text).
                 -->
                 <input
                   type="tel"
@@ -519,7 +234,7 @@
 
                   The hint comes first so it is announced before the error.
                   The error describes the problem; the hint describes the format.
-                  Discussed in Chapter 06080 — Forms and validation
+                  Discussed in Section 6, Chapter 8 — Forms and validation
                   (aria-describedby with multiple IDs; hint-before-error ordering).
                 -->
                 <span class="field-hint" id="card-number-hint">Visa, Mastercard, or Amex</span>
@@ -570,7 +285,7 @@
                     as visible text (field-hint), not visually hidden.
                     Sighted users can read it; screen reader users hear it via
                     aria-describedby. Same information for everyone.
-                    Discussed in Chapter 06080 — Forms and validation
+                    Discussed in Section 6, Chapter 8 — Forms and validation
                     (visible hint text preferred over visually-hidden text).
                   -->
                   <label for="cvc">Security code</label>
@@ -848,14 +563,14 @@
       /*
        * Remove hidden — role="alert" fires immediately, announcing the error count
        * and list to screen readers without the user needing to navigate to it.
-       * Discussed in Chapter 06120 — Live regions and error announcement.
+       * Discussed in Section 6, Chapter 12 — Live regions and error announcement.
        */
       summary.hidden = false;
 
       /*
        * Move keyboard focus to the summary so Tab starts from the first error link.
        * tabindex="-1" is already set in the HTML.
-       * Discussed in Chapter 06090 — Keyboard navigation and focus.
+       * Discussed in Section 6, Chapter 9 — Keyboard navigation and focus.
        */
       summary.focus();
     }

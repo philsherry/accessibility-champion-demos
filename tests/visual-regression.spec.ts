@@ -12,7 +12,13 @@ import { test, expect } from '@playwright/test';
 // captured on macOS, but CI runs Ubuntu, and Playwright screenshots are
 // platform-dependent (font rendering differs), so they'd fail there
 // without Linux-specific baselines. Run explicitly via `npm run test:visual`.
-const PAGES = ['index.html', 'checkout.html', 'orders.html', 'plans.html', 'accessibility.html'];
+const PAGES = [
+  'index.html',
+  'checkout.html',
+  'orders.html',
+  'plans.html',
+  'accessibility.html',
+];
 
 for (const page_ of PAGES) {
   test(`${page_} renders unchanged @visual`, async ({ page }) => {
