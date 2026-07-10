@@ -1,23 +1,36 @@
 /* Nip & Claw — Design Tokens
    --------------------------------------------------
    Colour contrast checked throughout:
+   Light theme:
    - --color-text on --color-bg:         16:1
    - --color-text on --color-surface:    16:1
-   - --color-brand on --color-bg:        15:1
+   - --color-brand-text on --color-bg:   15:1
    - --color-gold-text on --color-bg:    5.8:1  (AA for normal text)
    - --color-gold-light on --color-brand: 7.8:1 (AA for normal text)
    - --color-white on --color-brand:     15:1
+   Dark theme (see the @media/[data-user-color-scheme] blocks below):
+   - --color-text on --color-bg:         14.6:1
+   - --color-text on --color-surface:    13.2:1
+   - --color-brand-text on --color-bg:   6.7:1  (AA for normal text)
+   - --color-muted on --color-bg:        7.5:1  (AA for normal text)
+   - --color-gold-text on --color-bg:    8.9:1
+   - --color-error on --color-bg:        6.1:1  (AA for normal text)
+   - --color-success on --color-bg:      9.6:1
+   - --color-warning on --color-bg:      10:1
    -------------------------------------------------- */
 
 :root {
-  /* Brand palette */
+  /* Brand palette — fixed, used only on permanently brand-coloured
+     surfaces (header, hero, footer, filled buttons/badges) that don't
+     change with the colour-scheme theme. */
   --color-brand: #1e3d2f; /* deep forest green — primary */
   --color-brand-mid: #2d5a40; /* medium green — hover/active states */
   --color-brand-light: #3d7a57; /* lighter green — secondary actions */
   --color-gold-light: #d4a840; /* gold for use on dark green bg — 7.8:1 */
   --color-gold-text: #7a5c1e; /* gold for use on light bg — 5.8:1 */
+  --color-gold-hover: #c09030; /* hero button hover — hero is always brand-dark, no theme variant needed */
 
-  /* Neutrals */
+  /* Neutrals — page background/surface/text. These flip per theme. */
   --color-bg: #faf9f7; /* warm off-white */
   --color-surface: #fff;
   --color-border: #dedad4;
@@ -25,13 +38,37 @@
   --color-text: #1a1715; /* near-black — 16:1 on bg */
   --color-white: #fff;
 
+  /* Text/link/heading colour used ON page background/surface. Distinct
+     from --color-brand (used only as a fill) because deep forest green
+     text stops being legible once the page background goes dark. */
+  --color-brand-text: #1e3d2f;
+  --color-brand-text-rgb: 30 61 47; /* same colour, unpacked for rgb()-with-alpha use (focus rings) */
+
   /* Semantic */
   --color-error: #b91c1c;
+  --color-error-rgb: 185 28 28; /* unpacked for rgb()-with-alpha use (error focus rings) */
   --color-error-bg: #fde8e8;
+  --color-error-border: #fca5a5; /* danger icon-button border */
   --color-success: #166534;
   --color-success-bg: #dcfce7;
   --color-warning: #92400e;
   --color-warning-bg: #fef3c7;
+
+  /* Form/table furniture that was previously hardcoded per-file */
+  --color-input-border: #b8b3ac;
+  --color-table-row-hover: #f4f2ef;
+  --color-table-stripe: #f9f8f6;
+  --color-table-header-cell: #f7f6f4;
+
+  /* Strain-type / order-status badges (index.html, orders.html) */
+  --color-type-naptime-bg: #e0f2f1;
+  --color-type-naptime-text: #00695c; /* 5.0:1 */
+  --color-type-zoomies-bg: #fff3e0;
+  --color-type-zoomies-text: #92400e; /* 5.8:1 */
+  --color-type-existential-bg: #ede7f6;
+  --color-type-existential-text: #4527a0; /* 7.2:1 */
+  --color-status-shipped-bg: #e0f2fe;
+  --color-status-shipped-text: #075985;
 
   /* Type scale */
   --font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -79,6 +116,114 @@
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 200ms ease;
+  --transition-theme: 200ms ease; /* bg/text colour swap on theme change */
+}
+
+/* -------------------------------------------------- */
+
+/* Dark mode — see docs/superpowers/specs/2026-07-10-dark-mode-design.md */
+
+/* -------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #15201b;
+    --color-surface: #1c2921;
+    --color-border: #33453a;
+    --color-muted: #a6b0a8; /* 7.5:1 on bg */
+    --color-text: #f2efe9; /* 14.6:1 on bg */
+    --color-gold-text: #e0b84f; /* 8.9:1 on bg */
+    --color-brand-text: #5fb583; /* 6.7:1 on bg */
+    --color-brand-text-rgb: 95 181 131;
+    --color-error: #f87171; /* 6.1:1 on bg */
+    --color-error-rgb: 248 113 113;
+    --color-error-bg: #3a1a1a;
+    --color-error-border: #7a3838;
+    --color-success: #4ade80; /* 9.6:1 on bg */
+    --color-success-bg: #14291c;
+    --color-warning: #fbbf24; /* 10:1 on bg */
+    --color-warning-bg: #2e2308;
+    --color-input-border: #4a5c50;
+    --color-table-row-hover: #253128;
+    --color-table-stripe: #1f2c24;
+    --color-table-header-cell: #202e26;
+    --color-type-naptime-bg: #0d3d38;
+    --color-type-naptime-text: #7fd9c9;
+    --color-type-zoomies-bg: #3d2508;
+    --color-type-zoomies-text: #ffb74d;
+    --color-type-existential-bg: #2a1f47;
+    --color-type-existential-text: #c5a8f0;
+    --color-status-shipped-bg: #0c2d45;
+    --color-status-shipped-text: #7dd3fc;
+  }
+}
+
+:root[data-user-color-scheme='dark'] {
+  --color-bg: #15201b;
+  --color-surface: #1c2921;
+  --color-border: #33453a;
+  --color-muted: #a6b0a8;
+  --color-text: #f2efe9;
+  --color-gold-text: #e0b84f;
+  --color-brand-text: #5fb583;
+  --color-brand-text-rgb: 95 181 131;
+  --color-error: #f87171;
+  --color-error-rgb: 248 113 113;
+  --color-error-bg: #3a1a1a;
+  --color-error-border: #7a3838;
+  --color-success: #4ade80;
+  --color-success-bg: #14291c;
+  --color-warning: #fbbf24;
+  --color-warning-bg: #2e2308;
+  --color-input-border: #4a5c50;
+  --color-table-row-hover: #253128;
+  --color-table-stripe: #1f2c24;
+  --color-table-header-cell: #202e26;
+  --color-type-naptime-bg: #0d3d38;
+  --color-type-naptime-text: #7fd9c9;
+  --color-type-zoomies-bg: #3d2508;
+  --color-type-zoomies-text: #ffb74d;
+  --color-type-existential-bg: #2a1f47;
+  --color-type-existential-text: #c5a8f0;
+  --color-status-shipped-bg: #0c2d45;
+  --color-status-shipped-text: #7dd3fc;
+}
+
+:root[data-user-color-scheme='light'] {
+  --color-bg: #faf9f7;
+  --color-surface: #fff;
+  --color-border: #dedad4;
+  --color-muted: #6b6560;
+  --color-text: #1a1715;
+  --color-gold-text: #7a5c1e;
+  --color-brand-text: #1e3d2f;
+  --color-brand-text-rgb: 30 61 47;
+  --color-error: #b91c1c;
+  --color-error-rgb: 185 28 28;
+  --color-error-bg: #fde8e8;
+  --color-error-border: #fca5a5;
+  --color-success: #166534;
+  --color-success-bg: #dcfce7;
+  --color-warning: #92400e;
+  --color-warning-bg: #fef3c7;
+  --color-input-border: #b8b3ac;
+  --color-table-row-hover: #f4f2ef;
+  --color-table-stripe: #f9f8f6;
+  --color-table-header-cell: #f7f6f4;
+  --color-type-naptime-bg: #e0f2f1;
+  --color-type-naptime-text: #00695c;
+  --color-type-zoomies-bg: #fff3e0;
+  --color-type-zoomies-text: #92400e;
+  --color-type-existential-bg: #ede7f6;
+  --color-type-existential-text: #4527a0;
+  --color-status-shipped-bg: #e0f2fe;
+  --color-status-shipped-text: #075985;
+}
+
+body {
+  transition:
+    background-color var(--transition-theme),
+    color var(--transition-theme);
 }
 
 /* Honour reduced-motion requests */
@@ -86,6 +231,7 @@
   :root {
     --transition-fast: 0ms;
     --transition-base: 0ms;
+    --transition-theme: 0ms;
   }
 
   *,
