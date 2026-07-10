@@ -1,16 +1,26 @@
 let cartCount = 2;
 
-// Shared between index.html's "Add to cart" buttons and orders.html's
-// "Reorder" buttons — both are the same action (add a product to the
-// cart), just triggered from a different page. Extracted here so the
-// increment/badge/aria-label/live-region-announce logic exists in exactly
-// one place rather than being duplicated inline a second time.
-// Discussed in Section 6, Chapter 12 — Live regions and error announcement.
-//
-// Called from inline onclick="addProductToCart(this)" (orders.html) and
-// wrapped by addToCart() (index.html) — both invisible to ESLint's static
-// analysis, hence the /* exported */ below telling no-unused-vars this
-// global is consumed elsewhere.
+/**
+ * Adds a product to the cart: increments the count, updates the cart
+ * badge and accessible label, and announces the change via the shared
+ * live region.
+ *
+ * Shared between index.html's "Add to cart" buttons and orders.html's
+ * "Reorder" buttons — both are the same action (add a product to the
+ * cart), just triggered from a different page. Extracted here so the
+ * increment/badge/aria-label/live-region-announce logic exists in
+ * exactly one place rather than being duplicated inline a second time.
+ * Discussed in Section 6, Chapter 12 — Live regions and error
+ * announcement.
+ *
+ * Called from inline onclick="addProductToCart(this)" (orders.html) and
+ * wrapped by addToCart() (index.html) — both invisible to ESLint's
+ * static analysis, hence the `exported` pragma below telling
+ * no-unused-vars this global is consumed elsewhere.
+ *
+ * @param {HTMLButtonElement} btn - The clicked button; its
+ *   `data-product` attribute names the product being added.
+ */
 /* exported addProductToCart */
 function addProductToCart(btn) {
   const product = btn.dataset.product;

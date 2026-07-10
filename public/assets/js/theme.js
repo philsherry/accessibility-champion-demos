@@ -1,23 +1,27 @@
-// Wires every page's theme-toggle fieldset (see theme-init.js for the
-// blocking script that applies a stored choice before first paint).
-document.addEventListener('DOMContentLoaded', function () {
-  var toggle = document.querySelector('[data-component="theme-toggle"]');
+/**
+ * Wires every page's theme-toggle fieldset (see theme-init.js for the
+ * blocking script that applies a stored choice before first paint).
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.querySelector('[data-component="theme-toggle"]');
   if (!toggle) return;
 
-  var radios = toggle.querySelectorAll('input[name="theme"]');
-  var current =
+  const radios = toggle.querySelectorAll('input[name="theme"]');
+  const current =
     document.documentElement.getAttribute('data-user-color-scheme') || 'auto';
 
-  radios.forEach(function (radio) {
+  radios.forEach((radio) => {
     radio.checked = radio.value === current;
 
-    radio.addEventListener('change', function () {
+    radio.addEventListener('change', () => {
       if (radio.value === 'auto') {
         document.documentElement.removeAttribute('data-user-color-scheme');
         try {
           localStorage.removeItem('theme');
-        } catch {
-          // localStorage unavailable — theme reverts to auto next load anyway.
+        } catch (error) {
+          // localStorage unavailable — theme reverts to auto next load
+          // anyway. Logged, not silently swallowed.
+          console.warn('theme: could not clear stored theme preference', error);
         }
       } else {
         document.documentElement.setAttribute(
@@ -26,9 +30,10 @@ document.addEventListener('DOMContentLoaded', function () {
         );
         try {
           localStorage.setItem('theme', radio.value);
-        } catch {
-          // localStorage unavailable — choice won't persist across reloads,
-          // but still applies for the rest of this page view.
+        } catch (error) {
+          // localStorage unavailable — choice won't persist across
+          // reloads, but still applies for the rest of this page view.
+          console.warn('theme: could not persist theme preference', error);
         }
       }
     });
