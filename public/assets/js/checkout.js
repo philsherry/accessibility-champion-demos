@@ -175,15 +175,10 @@ const setFieldError = (rule, message) => {
   const groupEl = document.getElementById('group-' + rule.id);
   if (!input || !errorEl) return;
 
-  if (message) {
-    input.setAttribute('aria-invalid', 'true');
-    errorEl.textContent = message;
-    if (groupEl) groupEl.classList.add('has-error');
-  } else {
-    input.setAttribute('aria-invalid', 'false');
-    errorEl.textContent = '';
-    if (groupEl) groupEl.classList.remove('has-error');
-  }
+  const hasError = Boolean(message);
+  input.setAttribute('aria-invalid', String(hasError));
+  errorEl.textContent = message || '';
+  groupEl?.classList.toggle('has-error', hasError);
 };
 
 /**
