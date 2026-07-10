@@ -33,9 +33,9 @@
      * the error list and can Tab through the links to each invalid field.
      *
      * Discussed in:
-     *   Chapter 06024 — Forms and validation (error summary pattern)
-     *   Chapter 06028 — Live regions and error announcement (role="alert")
-     *   Chapter 06025 — Keyboard navigation and focus (tabindex="-1", programmatic focus)
+     *   Chapter 06080 — Forms and validation (error summary pattern)
+     *   Chapter 06120 — Live regions and error announcement (role="alert")
+     *   Chapter 06090 — Keyboard navigation and focus (tabindex="-1", programmatic focus)
      */
     .error-summary {
       background: var(--color-error-bg);
@@ -328,7 +328,7 @@
         Success state — hidden until the form submits successfully.
         When revealed, focus is moved to the h1 so screen reader users
         hear the confirmation without having to navigate to it.
-        Discussed in Chapter 06025 — Keyboard navigation and focus (programmatic focus management).
+        Discussed in Chapter 06090 — Keyboard navigation and focus (programmatic focus management).
       -->
       <div class="checkout-success" id="checkout-success" hidden>
         <div class="success-icon" aria-hidden="true">
@@ -349,7 +349,7 @@
 
         <!--
           Error summary — GDS pattern.
-          Discussed in Chapter 06024 (forms and validation) and Chapter 06028 (live regions).
+          Discussed in Chapter 06080 (forms and validation) and Chapter 06120 (live regions).
 
           role="alert" causes screen readers to announce the element's contents
           as soon as it becomes visible (hidden attribute removed). The user
@@ -357,7 +357,7 @@
 
           tabindex="-1" allows focus to be moved here programmatically so
           keyboard users land at the top of the error list on submission.
-          Discussed in Chapter 06025 — Keyboard navigation and focus.
+          Discussed in Chapter 06090 — Keyboard navigation and focus.
 
           Each list item is an anchor linking to the invalid field — pressing
           Enter moves focus directly to that field.
@@ -395,7 +395,7 @@
                   Screen readers announce the label when the input receives focus:
                   "Full name, edit text".
                   The for/id pairing also gives sighted users a larger click target.
-                  Discussed in Chapter 06024 — Forms and validation (label association).
+                  Discussed in Chapter 06080 — Forms and validation (label association).
                 -->
                 <label for="full-name">Full name</label>
                 <input
@@ -428,7 +428,7 @@
                   It appears in the label and is therefore announced to screen readers.
                   Sighted and non-sighted users get identical information.
                   There is no need for aria-required="false" — that is the default.
-                  Discussed in Chapter 06024 — Forms and validation (optional field labelling).
+                  Discussed in Chapter 06080 — Forms and validation (optional field labelling).
                 -->
                 <label for="address-line2">
                   Address line 2
@@ -464,7 +464,7 @@
                     "Postcode, invalid data, edit text" — without any visual change.
                     Combined with aria-describedby pointing to the error message,
                     the user hears both the field name and the specific error.
-                    Discussed in Chapter 06024 — Forms and validation (aria-invalid).
+                    Discussed in Chapter 06080 — Forms and validation (aria-invalid).
                   -->
                   <label for="postcode">Postcode</label>
                   <input
@@ -490,7 +490,7 @@
                   The hint is announced after the label when the field receives focus:
                   "Phone number, optional — for delivery notifications, edit text.
                    We'll only use this to contact you about your delivery."
-                  Discussed in Chapter 06024 — Forms and validation (aria-describedby hint text).
+                  Discussed in Chapter 06080 — Forms and validation (aria-describedby hint text).
                 -->
                 <input
                   type="tel"
@@ -519,7 +519,7 @@
 
                   The hint comes first so it is announced before the error.
                   The error describes the problem; the hint describes the format.
-                  Discussed in Chapter 06024 — Forms and validation
+                  Discussed in Chapter 06080 — Forms and validation
                   (aria-describedby with multiple IDs; hint-before-error ordering).
                 -->
                 <span class="field-hint" id="card-number-hint">Visa, Mastercard, or Amex</span>
@@ -570,7 +570,7 @@
                     as visible text (field-hint), not visually hidden.
                     Sighted users can read it; screen reader users hear it via
                     aria-describedby. Same information for everyone.
-                    Discussed in Chapter 06024 — Forms and validation
+                    Discussed in Chapter 06080 — Forms and validation
                     (visible hint text preferred over visually-hidden text).
                   -->
                   <label for="cvc">Security code</label>
@@ -848,14 +848,14 @@
       /*
        * Remove hidden — role="alert" fires immediately, announcing the error count
        * and list to screen readers without the user needing to navigate to it.
-       * Discussed in Chapter 06028 — Live regions and error announcement.
+       * Discussed in Chapter 06120 — Live regions and error announcement.
        */
       summary.hidden = false;
 
       /*
        * Move keyboard focus to the summary so Tab starts from the first error link.
        * tabindex="-1" is already set in the HTML.
-       * Discussed in Chapter 06025 — Keyboard navigation and focus.
+       * Discussed in Chapter 06090 — Keyboard navigation and focus.
        */
       summary.focus();
     }

@@ -62,7 +62,7 @@ Cross-page user flows, testing the seams between pages rather than any one regio
 
 ## Feature addition: reorder behavior
 
-`orders.html`'s reorder buttons currently have no click handler at all — they exist solely to demonstrate the accessible-icon-button-naming pattern (Ch. 06021), not as a working feature. Making `reorder.spec.ts` meaningful requires wiring them up.
+`orders.html`'s reorder buttons currently have no click handler at all — they exist solely to demonstrate the accessible-icon-button-naming pattern (Section 6, Chapter 5 — Accessible HTML), not as a working feature. Making `reorder.spec.ts` meaningful requires wiring them up.
 
 **Shared module: `public/_shared/js/cart.js`** — extracted from `index.html`'s inline `addToCart`, since orders.html now needs the same "increment count, update badge/aria-label, announce via live region" logic and duplicating it inline a second time is exactly the kind of drift this whole effort is trying to eliminate:
 
@@ -86,6 +86,14 @@ function addProductToCart(btn) {
 - `orders.html`'s reorder buttons call `addProductToCart(this)` directly (no wrapper needed) — each button needs a new `data-product="<name>"` attribute added (currently only `aria-label` carries the product name).
 - `orders.html` gains a `#cart-status` live region: `<div id="cart-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>`, reusing the shared `.sr-only` utility class — not a new bespoke CSS block.
 - **Consolidation:** `index.html`'s existing `#cart-status` rule is a duplicate, unconditional reimplementation of `.sr-only` (unlike the `orders-table thead` rule, which legitimately can't use `.sr-only` because it's conditionally scoped to one breakpoint). Drop that duplicate CSS block and apply the `.sr-only` class to `index.html`'s `#cart-status` element too, matching orders.html.
+
+## Addition: chapter-citation cleanup + CSS extraction, with a visual-regression safety net
+
+While scoping the header-site work, found the demo repo's "Discussed in Chapter NNNNN — Title" comments (scattered across every page, in both HTML/JS comments and inline `<style>` blocks) cite stale filename-sort numbers from before the book's chapters were renumbered — e.g. "06025" doesn't exist at all (the real chapter is 06090), and several others point at the wrong chapter entirely (06020 is actually "Colour vision deficiencies", not "Document structure"). Per direction: these numbers exist **only** to order files on disk and must never be used as a stable reference — going forward, citations use frontmatter (`section`/`chapter` numbers, e.g. "Section 6, Chapter 9") plus the exact current title, matching the format the book's own UI uses to caption a chapter ("Chapter N of M in this section").
+
+While fixing these, also surfaced that each page's inline `<style>` block (73–286 lines each, ~930 total) contains page-specific CSS mixed into the HTML `<head>` — including genuine duplication (`#cart-status` reimplements `.sr-only` byte-for-byte instead of using the class; `.product-card` and `.product-card .card-body` declare the identical three properties in different order). Extracting each page's styles into its own `public/{page}.css` file means a stale chapter citation only ever needs fixing in one place, and surfaces this kind of duplication for cleanup along the way.
+
+Given how mechanical and error-prone moving ~930 lines of CSS across 5 files is, added a **visual-regression safety net first**: `tests/visual-regression.spec.ts`, full-page screenshots of all 5 pages × 3 viewports (15 total), tagged `@visual` and excluded from the default `npm test`/CI run (baselines captured on macOS; CI runs Ubuntu, and Playwright screenshots are platform-dependent, so cross-platform baselines are a separate follow-up, not bundled into this pass). Run via `npm run test:visual`. Baselines captured before any CSS moved; re-run after to confirm the refactor was purely mechanical.
 
 ## Out of scope
 

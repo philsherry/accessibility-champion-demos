@@ -27,8 +27,9 @@
     "lint:css": "stylelint \"**/*.{css,html}\"",
     "lint:js": "eslint .",
     "start": "http-server ./public -p 4310 -o",
-    "test": "playwright test",
-    "test:ui": "playwright test --ui"
+    "test": "playwright test --grep-invert @visual",
+    "test:ui": "playwright test --ui",
+    "test:visual": "playwright test --grep @visual"
   },
   "type": "module"
 }

@@ -21,7 +21,7 @@
        to the bottom regardless of description length.
        The [hidden] rule restores display:none for filtered items —
        .product-grid li { display: flex } would otherwise win on specificity.
-       CSS specificity pitfall discussed in Chapter 06028 — Live regions and
+       CSS specificity pitfall discussed in Chapter 06120 — Live regions and
        error announcement (hidden attribute vs display property). */
     .product-grid li {
       list-style: none;
@@ -233,7 +233,7 @@
     /* Live region for cart feedback
      * Must exist in the DOM at page load — screen readers only observe
      * live regions they encounter during initial load.
-     * Discussed in Chapter 06028 — Live regions and error announcement. */
+     * Discussed in Chapter 06120 — Live regions and error announcement. */
     #cart-status {
       position: absolute;
       width: 1px;
@@ -274,7 +274,7 @@
     <!-- Skip link — first focusable element on every page.
          Keyboard users press Tab once to reach it; Enter activates it and
          moves focus to #main, bypassing repeated navigation.
-         Discussed in Chapter 06025 — Keyboard navigation and focus. -->
+         Discussed in Chapter 06090 — Keyboard navigation and focus. -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
     <!-- role="banner" is the implicit ARIA role for <header> at page level.
@@ -319,7 +319,7 @@
            full updated text, not just the changed portion.
            Must exist in the DOM at page load — screen readers register live regions
            during initial parse; regions injected later may not be observed.
-           Discussed in Chapter 06028 — Live regions and error announcement. -->
+           Discussed in Chapter 06120 — Live regions and error announcement. -->
       <div id="cart-status" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="toast" id="toast" aria-hidden="true"></div>
 
@@ -333,8 +333,8 @@
              "true" = active filter; "false" = inactive. Without aria-pressed, a
              screen reader user cannot tell which filter is currently selected.
              role="group" + aria-label groups the buttons semantically.
-             Discussed in Chapter 06021 — HTML (interactive elements and state)
-             and Chapter 06028 — Live regions (filter result announcement). -->
+             Discussed in Chapter 06050 — HTML (interactive elements and state)
+             and Chapter 06120 — Live regions (filter result announcement). -->
         <div class="filter-bar" role="group" aria-label="Filter by type">
           <button class="filter-btn" aria-pressed="true"  data-filter="all">All strains</button>
           <button class="filter-btn" aria-pressed="false" data-filter="naptime">Naptime</button>
@@ -363,7 +363,7 @@
                      The sr-only span appends the product name to the visible text:
                      screen readers announce "Add to cart Purple Whisker";
                      sighted users see "Add to cart" with the card heading providing context.
-                     Discussed in Chapter 06021 — HTML (accessible button names). -->
+                     Discussed in Chapter 06050 — HTML (accessible button names). -->
                 <button class="btn btn-primary product-cta" data-product="Purple Whisker" onclick="addToCart(this)">Add to cart<span class="sr-only"> Purple Whisker</span></button>
               </div>
             </article>
@@ -613,7 +613,7 @@
       // Announce to screen readers via live region.
       // Clearing then re-setting the text forces screen readers to re-announce
       // even if the new text is identical to the previous value.
-      // Discussed in Chapter 06028 — Live regions and error announcement.
+      // Discussed in Chapter 06120 — Live regions and error announcement.
       const liveRegion = document.getElementById('cart-status');
       liveRegion.textContent = '';
       // Force repaint so screen readers notice the change
@@ -642,7 +642,7 @@
     // Filter buttons — toggle aria-pressed, show/hide cards, announce result.
     // aria-pressed state changes are announced by screen readers immediately.
     // The live region announcement tells users how many results are now showing.
-    // Discussed in Chapter 06021 — HTML and Chapter 06028 — Live regions.
+    // Discussed in Chapter 06050 — HTML and Chapter 06120 — Live regions.
     document.querySelectorAll('.filter-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         document.querySelectorAll('.filter-btn').forEach(function(b) {
