@@ -45,6 +45,12 @@
         <p class="order-count">Showing 8 orders · Account: Lucy Fur</p>
       </div>
 
+      <!-- Live region for reorder feedback — mirrors index.html's
+           #cart-status exactly (shared cart.js relies on both pages having
+           an element by this id). Discussed in Section 6, Chapter 12 —
+           Live regions and error announcement. -->
+      <div id="cart-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
       <!-- Accessible table patterns — discussed in Section 6, Chapter 13 — Accessible tables.
 
            <caption> provides the table's accessible name. sr-only hides it visually
@@ -86,7 +92,7 @@
               <td data-label="Status"><span class="status-badge status-processing">Processing</span></td>
               <td>
                 <div class="table-actions">
-                  <button class="btn-icon" aria-label="Reorder Girl Scout Mousies from 26 May 2026">
+                  <button class="btn-icon" aria-label="Reorder Girl Scout Mousies from 26 May 2026" data-product="Girl Scout Mousies" onclick="addProductToCart(this)">
                     <svg class="icon icon-reorder" viewBox="0 0 24 24" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5.06"/></svg>
                   </button>
                   <button class="btn-icon btn-icon--danger" aria-label="Cancel order of Girl Scout Mousies from 26 May 2026">
@@ -103,7 +109,7 @@
               <td data-label="Status"><span class="status-badge status-delivered">Delivered</span></td>
               <td>
                 <div class="table-actions">
-                  <button class="btn-icon" aria-label="Reorder Purple Whisker from 19 May 2026">
+                  <button class="btn-icon" aria-label="Reorder Purple Whisker from 19 May 2026" data-product="Purple Whisker" onclick="addProductToCart(this)">
                     <svg class="icon icon-reorder" viewBox="0 0 24 24" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5.06"/></svg>
                   </button>
                   <button class="btn-icon btn-icon--danger" aria-label="Delete Purple Whisker order from 19 May 2026 from history">
@@ -120,7 +126,7 @@
               <td data-label="Status"><span class="status-badge status-delivered">Delivered</span></td>
               <td>
                 <div class="table-actions">
-                  <button class="btn-icon" aria-label="Reorder Sour Diesel Paws from 14 May 2026">
+                  <button class="btn-icon" aria-label="Reorder Sour Diesel Paws from 14 May 2026" data-product="Sour Diesel Paws" onclick="addProductToCart(this)">
                     <svg class="icon icon-reorder" viewBox="0 0 24 24" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5.06"/></svg>
                   </button>
                   <button class="btn-icon btn-icon--danger" aria-label="Delete Sour Diesel Paws order from 14 May 2026 from history">
@@ -137,7 +143,7 @@
               <td data-label="Status"><span class="status-badge status-delivered">Delivered</span></td>
               <td>
                 <div class="table-actions">
-                  <button class="btn-icon" aria-label="Reorder OG Floof from 7 May 2026">
+                  <button class="btn-icon" aria-label="Reorder OG Floof from 7 May 2026" data-product="OG Floof" onclick="addProductToCart(this)">
                     <svg class="icon icon-reorder" viewBox="0 0 24 24" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5.06"/></svg>
                   </button>
                   <button class="btn-icon btn-icon--danger" aria-label="Delete OG Floof order from 7 May 2026 from history">
@@ -154,7 +160,7 @@
               <td data-label="Status"><span class="status-badge status-delivered">Delivered</span></td>
               <td>
                 <div class="table-actions">
-                  <button class="btn-icon" aria-label="Reorder Trainwreck (My Owner's Furniture) from 30 April 2026">
+                  <button class="btn-icon" aria-label="Reorder Trainwreck (My Owner's Furniture) from 30 April 2026" data-product="Trainwreck (My Owner's Furniture)" onclick="addProductToCart(this)">
                     <svg class="icon icon-reorder" viewBox="0 0 24 24" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5.06"/></svg>
                   </button>
                   <button class="btn-icon btn-icon--danger" aria-label="Delete Trainwreck order from 30 April 2026 from history">
@@ -179,5 +185,6 @@
 
   </div>
 
+  <script src="_shared/js/cart.js"></script>
 </body>
 </html>

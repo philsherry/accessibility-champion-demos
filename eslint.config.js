@@ -22,12 +22,23 @@ export default tseslint.config(
     },
   },
 
-  // Inline <script> blocks in the 5 page files.
+  // Shared browser JS, loaded via <script src> on multiple pages.
+  {
+    files: ['public/_shared/js/*.js'],
+    languageOptions: {
+      globals: { ...globals.browser },
+    },
+  },
+
+  // Inline <script> blocks in the 5 page files. addProductToCart comes from
+  // the externally-loaded _shared/js/cart.js — eslint-plugin-html only sees
+  // inline script content, not <script src> references, so it has no way to
+  // know that global exists without being told here.
   {
     files: ['public/*.html'],
     plugins: { html },
     languageOptions: {
-      globals: { ...globals.browser },
+      globals: { ...globals.browser, addProductToCart: 'readonly' },
     },
   },
 

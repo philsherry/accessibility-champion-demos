@@ -47,15 +47,15 @@ Each spec tests one region "in isolation" — meaning: scoped to that region's o
 - **product-cards.spec.ts** — index.html only. Absorbs the card-count-after-filter check from `index.spec.ts`. Adds: each card's heading level, each "Add to cart" button's accessible name is unique (via its `sr-only` product-name suffix), and decorative elements are correctly `aria-hidden`.
 - **footer-site.spec.ts** — loops all 5 pages. New. Asserts `role="contentinfo"`, and that every page's footer contains a link to the accessibility statement page.
 
-## Fix surfaced by footer-site.spec.ts
+## Correction: no footer bug after all
 
-`index.html`'s footer is missing the "· Accessibility statement" link present on the other 4 pages — a real inconsistency, not just a coverage gap. Fixed as part of this work (red test on discovery → fix → green), rather than landing a spec that starts out failing.
+This spec originally claimed `index.html`'s footer was missing the "· Accessibility statement" link present on the other pages. Checked against `git show main:index.html` while writing `footer-site.spec.ts` — the link was already there on `main` before any of this branch's work; the original claim was a mistake made while first surveying the footer markup, not a real bug. No fix needed; `footer-site.spec.ts` tests the actual (correct) behavior: every page except `accessibility.html` itself links to it (a self-referential link on the accessibility statement page would be pointless).
 
 ## E2E journeys
 
 Cross-page user flows, testing the seams between pages rather than any one region.
 
-- **purchase-flow.spec.ts** — filter products on index.html, add one to cart, follow the cart link to checkout, submit a valid order, land on the confirmation state.
+- **purchase-flow.spec.ts** — filter products on index.html, add one to cart, follow the cart link to checkout, submit a valid order, land on the confirmation state. Writing this surfaced two real bugs in checkout.html's default field values — its own default postcode ("W11 4N") failed its own validation regex (fixed to "W11 4NR"), and its own default card number ("4111 1111 1111", 12 digits) failed its own 16-digit minimum (fixed to "4111 1111 1111 1111"). Both are genuine defects: a prefilled demo form should be submittable as shipped, not silently broken against its own rules. The CVC field's blank default is not a bug — deliberately never prefilled, since a real checkout form never persists or prefills a security code; the test fills it in itself, same as a real user would.
 - **checkout-recovery.spec.ts** — submit checkout with invalid data, confirm focus moves to the error summary, fix the fields, resubmit, confirm success — a full recovery loop, vs. `checkout.spec.ts`'s existing single-shot "hits the error state" check.
 - **cross-page-nav.spec.ts** — keyboard-only, moves between index → plans → orders → checkout via the header nav, confirming `aria-current` and focus land correctly at each stop (this is the "does it hold across a real journey" complement to header-site.spec.ts's per-page snapshot checks).
 - **reorder.spec.ts** — from orders.html, click a reorder button, confirm the cart-count badge increments and the live region announces it. Requires the feature addition below, built test-first (write the failing test against current no-op buttons, then implement).

@@ -335,33 +335,17 @@
   </div><!-- /.page-wrapper -->
 
   <!-- Toast notification — visible to sighted users; cart-status announces to screen readers -->
+  <script src="_shared/js/cart.js"></script>
   <script>
-    let cartCount = 2;
-
     // eslint-disable-next-line no-unused-vars -- called from inline onclick="addToCart(this)" on each product card, invisible to ESLint's static analysis
     function addToCart(btn) {
+      addProductToCart(btn);
+
+      // Show toast for sighted users — supplementary to the live-region
+      // announcement addProductToCart already sent (screen reader users are
+      // covered by that alone); orders.html's reorder doesn't need this,
+      // its buttons call addProductToCart directly.
       const product = btn.dataset.product;
-      cartCount++;
-
-      // Update visible cart count
-      const cartCountEl = document.querySelector('.cart-count');
-      cartCountEl.textContent = cartCount;
-
-      // Update aria-label on cart link
-      const cartLink = document.querySelector('.cart-link');
-      cartLink.setAttribute('aria-label', `Cart, ${cartCount} items`);
-
-      // Announce to screen readers via live region.
-      // Clearing then re-setting the text forces screen readers to re-announce
-      // even if the new text is identical to the previous value.
-      // Discussed in Section 6, Chapter 12 — Live regions and error announcement.
-      const liveRegion = document.getElementById('cart-status');
-      liveRegion.textContent = '';
-      // Force repaint so screen readers notice the change
-      void liveRegion.offsetWidth;
-      liveRegion.textContent = `${product} added to cart. Cart now contains ${cartCount} items.`;
-
-      // Show toast for sighted users
       const toast = document.getElementById('toast');
       toast.textContent = `${product} added to cart`;
       toast.removeAttribute('aria-hidden');
