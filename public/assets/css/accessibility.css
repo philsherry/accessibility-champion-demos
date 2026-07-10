@@ -87,15 +87,23 @@
   font-size: var(--text-sm);
 }
 
+/* Wrapper constrains and horizontally scrolls the table on narrow
+   viewports, instead of letting its content push the whole page wider —
+   same pattern as .plans-table-wrapper (plans.css) and the book's own
+   Table component. */
+.audit-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-6);
+}
+
 .audit-table {
   width: 100%;
   border-collapse: collapse;
   font-size: var(--text-sm);
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  margin-bottom: var(--space-6);
 }
 
 .audit-table th {

@@ -26,7 +26,10 @@ test.describe('reorder from order history', () => {
       'aria-label',
       'Cart, 3 items',
     );
-    await expect(page.getByRole('status')).toHaveText(
+    // Scoped by id, not getByRole('status') — the header's
+    // #connectivity-status live region shares the same role on every
+    // page now, which makes a bare role locator ambiguous.
+    await expect(page.locator('#cart-status')).toHaveText(
       'Girl Scout Mousies added to cart. Cart now contains 3 items.',
     );
   });
@@ -40,7 +43,10 @@ test.describe('reorder from order history', () => {
       .getByRole('button', { name: 'Reorder Purple Whisker from 19 May 2026' })
       .click();
 
-    await expect(page.getByRole('status')).toHaveText(
+    // Scoped by id, not getByRole('status') — the header's
+    // #connectivity-status live region shares the same role on every
+    // page now, which makes a bare role locator ambiguous.
+    await expect(page.locator('#cart-status')).toHaveText(
       'Purple Whisker added to cart. Cart now contains 3 items.',
     );
   });

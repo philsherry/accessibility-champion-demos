@@ -73,11 +73,11 @@ body {
 .site-header .inner {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--space-6);
+  padding: 0 var(--space-4);
   height: 100%;
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-3);
 }
 
 .site-logo {
@@ -120,9 +120,12 @@ body {
 }
 
 .site-nav a {
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   color: var(--color-white);
-  text-decoration: none;
+  /* Underlined by default so links are recognisable without relying on
+     colour alone (WCAG 1.4.1) — removed on hover/focus, where the
+     background fill already provides that same distinction. */
+  text-decoration: underline;
   font-size: var(--text-sm);
   font-weight: 500;
   border-radius: var(--radius-md);
@@ -135,6 +138,7 @@ body {
 .site-nav a:hover,
 .site-nav a:focus-visible {
   background: var(--color-brand-mid);
+  text-decoration: none;
   outline: none;
 }
 
@@ -173,9 +177,8 @@ body {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
-      'logo  cart'
-      'nav   nav'
-      'theme theme';
+      'logo cart'
+      'nav  badge';
     align-items: center;
     gap: var(--space-4) var(--space-3);
     padding: var(--space-2) var(--space-4);
@@ -203,9 +206,8 @@ body {
     font-size: var(--text-xs);
   }
 
-  .theme-toggle {
-    grid-area: theme;
-    justify-content: center;
+  .connectivity-badge {
+    grid-area: badge;
   }
 
   .skip-link {
@@ -228,7 +230,7 @@ body {
   text-decoration: none;
   font-size: var(--text-sm);
   font-weight: 600;
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   border: 1.5px solid rgb(255 255 255 / 30%);
   border-radius: var(--radius-pill);
   min-height: var(--target-min);
@@ -254,6 +256,31 @@ body {
   min-width: 1.4rem;
   text-align: center;
   line-height: 1.5;
+}
+
+.connectivity-badge {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-white);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: var(--space-2) var(--space-3);
+  border: 1.5px solid rgb(255 255 255 / 30%);
+  /* Matches the theme-toggle buttons' radius (--radius-md), not the
+     cart-link pill's (--radius-pill) — the badge isn't clickable, and
+     sharing the cart's fully-rounded shape would visually imply it is. */
+  border-radius: var(--radius-md);
+  min-height: var(--target-min);
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.connectivity-badge--offline {
+  background: var(--color-gold-light);
+  color: var(--color-brand);
+  border-color: var(--color-gold-light);
 }
 
 /* -------------------------------------------------- */
@@ -691,6 +718,20 @@ tbody th[scope='row'] {
 
 .footer-brand {
   color: var(--color-white);
+}
+
+/* Brand line + theme toggle, side by side with the toggle pinned right —
+   wraps to stack vertically once the row no longer has room for both,
+   rather than a fixed-width breakpoint. The theme toggle lives here
+   (moved from the header) rather than in the header's single-row flex
+   layout, which only has a fixed budget of horizontal space; the footer
+   has no such constraint. */
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
 }
 
 /* -------------------------------------------------- */

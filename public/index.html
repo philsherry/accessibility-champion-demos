@@ -46,24 +46,8 @@
             <li><a href="orders.html">My Orders</a></li>
           </ul>
         </nav>
-        <fieldset class="theme-toggle" data-component="theme-toggle">
-          <legend class="sr-only">Colour scheme</legend>
-          <label class="theme-option">
-            <input type="radio" name="theme" value="auto" checked>
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            <span class="sr-only">System default</span>
-          </label>
-          <label class="theme-option">
-            <input type="radio" name="theme" value="light">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-            <span class="sr-only">Light theme</span>
-          </label>
-          <label class="theme-option">
-            <input type="radio" name="theme" value="dark">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-            <span class="sr-only">Dark theme</span>
-          </label>
-        </fieldset>
+        <span class="connectivity-badge" data-component="connectivity-badge">Online</span>
+        <div id="connectivity-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
       </div>
     </header>
 
@@ -350,7 +334,27 @@
 
     <footer class="site-footer" role="contentinfo">
       <div class="inner">
-        <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
+        <div class="footer-top">
+          <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
+          <fieldset class="theme-toggle" data-component="theme-toggle">
+            <legend class="sr-only">Colour scheme</legend>
+            <label class="theme-option">
+              <input type="radio" name="theme" value="auto" checked>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span class="sr-only">System default</span>
+            </label>
+            <label class="theme-option">
+              <input type="radio" name="theme" value="light">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+              <span class="sr-only">Light theme</span>
+            </label>
+            <label class="theme-option">
+              <input type="radio" name="theme" value="dark">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              <span class="sr-only">Dark theme</span>
+            </label>
+          </fieldset>
+        </div>
         <p>All strains are 100% catnip. No cats were consulted about GDPR compliance. <a href="plans.html">Subscription plans</a> · <a href="orders.html">My orders</a></p>
         <p>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion</a> book. All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not. · <a href="accessibility.html">Accessibility statement</a> · <a href="offline.html">Offline access</a></p>
       </div>
@@ -360,6 +364,7 @@
 
   <!-- Toast notification — visible to sighted users; cart-status announces to screen readers -->
   <script src="assets/js/theme.js"></script>
+  <script src="assets/js/connectivity-badge.js"></script>
   <script src="assets/js/cart.js"></script>
   <script src="assets/js/index.js"></script>
 
