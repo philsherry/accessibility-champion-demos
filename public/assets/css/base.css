@@ -311,7 +311,7 @@ p + p {
 }
 
 .page-heading h1 {
-  color: var(--color-brand);
+  color: var(--color-brand-text);
 }
 
 .page-heading p {
@@ -332,17 +332,19 @@ p + p {
 }
 
 .type-naptime {
-  background: #e0f2f1;
-  color: #00695c;
-} /* 5.0:1 */
+  background: var(--color-type-naptime-bg);
+  color: var(--color-type-naptime-text);
+}
+
 .type-zoomies {
-  background: #fff3e0;
-  color: #92400e;
-} /* 5.8:1 — was #e65100 at 3.45:1, failed AA */
+  background: var(--color-type-zoomies-bg);
+  color: var(--color-type-zoomies-text);
+} /* was #e65100 at 3.45:1, failed AA */
+
 .type-existential {
-  background: #ede7f6;
-  color: #4527a0;
-} /* 7.2:1 */
+  background: var(--color-type-existential-bg);
+  color: var(--color-type-existential-text);
+}
 
 /* -------------------------------------------------- */
 
@@ -384,8 +386,8 @@ p + p {
 
 .btn-secondary {
   background: transparent;
-  color: var(--color-brand);
-  border-color: var(--color-brand);
+  color: var(--color-brand-text);
+  border-color: var(--color-brand-text);
 }
 
 .btn-secondary:hover,
@@ -438,7 +440,7 @@ p + p {
 
 .btn-icon.btn-icon--danger {
   color: var(--color-error);
-  border-color: #fca5a5;
+  border-color: var(--color-error-border);
 }
 
 .btn-icon.btn-icon--danger:hover,
@@ -509,7 +511,7 @@ textarea {
   font-size: var(--text-base);
   color: var(--color-text);
   background: var(--color-surface);
-  border: 1.5px solid #b8b3ac;
+  border: 1.5px solid var(--color-input-border);
   border-radius: var(--radius-md);
   transition:
     border-color var(--transition-fast),
@@ -521,8 +523,8 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--color-brand);
-  box-shadow: 0 0 0 3px rgb(30 61 47 / 15%);
+  border-color: var(--color-brand-text);
+  box-shadow: 0 0 0 3px rgb(var(--color-brand-text-rgb) / 15%);
 }
 
 input[aria-invalid='true'],
@@ -532,7 +534,7 @@ input.has-error {
 
 input[aria-invalid='true']:focus,
 input.has-error:focus {
-  box-shadow: 0 0 0 3px rgb(185 28 28 / 15%);
+  box-shadow: 0 0 0 3px rgb(var(--color-error-rgb) / 15%);
 }
 
 .field-error {
@@ -596,7 +598,7 @@ tbody tr:last-child {
 }
 
 tbody tr:hover {
-  background: #f4f2ef;
+  background: var(--color-table-row-hover);
 }
 
 tbody td,
@@ -645,8 +647,8 @@ tbody th[scope='row'] {
 }
 
 .status-shipped {
-  background: #e0f2fe;
-  color: #075985;
+  background: var(--color-status-shipped-bg);
+  color: var(--color-status-shipped-text);
 }
 
 /* -------------------------------------------------- */
