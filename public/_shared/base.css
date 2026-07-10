@@ -36,10 +36,17 @@ body {
 
 /* Skip link — always visible (not hidden-until-focus), matching the
    Accessibility Champion book's own site, which keeps its skip links
-   permanently on screen rather than revealing them only on focus. */
+   permanently on screen rather than revealing them only on focus.
+   Horizontal padding matches .site-header .inner's padding at each
+   breakpoint (below) so the link text lines up with the logo directly
+   underneath it, rather than using its own unrelated spacing value.
+   min-height matches --target-min, the same touch-target size every
+   other interactive element in the header already uses. */
 .skip-link {
-  display: inline-block;
-  padding: var(--space-2) var(--space-5);
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-6);
   background: var(--color-brand);
   color: var(--color-white);
   font-weight: 700;
@@ -96,7 +103,13 @@ body {
 }
 
 .site-nav {
-  flex: 1;
+  /* Pushed flush right — DOM order is logo, cart, nav (see the mobile
+     comment below for why), so on desktop's single-row flex layout nav
+     naturally ends up last and takes over the "flush right" role the
+     cart link used to have, keeping visual left-to-right order matching
+     DOM/tab order exactly: logo, then cart (grouped together on the
+     left), then nav (pushed right). */
+  margin-left: auto;
 }
 
 .site-nav ul {
@@ -130,18 +143,27 @@ body {
   font-weight: 700;
 }
 
-/* Mobile nav — CSS Grid, two rows: logo (full width) on row 1, nav + cart
-   on row 2. Grid areas place elements visually WITHOUT touching document
-   order — logo, nav, and cart stay in that exact order in the DOM, so
-   keyboard tab order always matches what's on screen, row by row,
-   left-to-right. (The previous version used flexbox `order` to pull the
-   cart up next to the logo — visually tidy, but it meant a keyboard user
-   watching the focus ring saw it jump: logo, then down to the nav row,
-   then back up to the cart. That mismatch is why the tagline used to get
-   dropped too — cramming logo + cart onto one row left no room for it.
-   Giving the logo its own full row removes that pressure entirely.)
-   Nav scrolls horizontally if labels overflow — items remain keyboard
-   accessible and touch-swipeable. Scrollbar hidden via scrollbar-width. */
+/* Mobile nav — CSS Grid, two rows: logo + cart share row 1 (logo left,
+   cart right — the same visual grouping as desktop, just stacked above
+   nav instead of alongside it), nav gets the full width of row 2 to
+   itself. Grid areas place elements visually WITHOUT touching document
+   order — logo, cart, and nav stay in that exact DOM order, matching
+   this row-by-row, left-to-right visual layout exactly, so keyboard tab
+   order always matches what's on screen.
+   (An earlier version used flexbox `order` to pull the cart up next to
+   the logo without changing DOM order — visually tidy, but it meant a
+   keyboard user watching the focus ring saw it jump backward: logo, down
+   to the nav row, then back up to the cart. Fixed properly this time by
+   actually moving the cart earlier in the DOM instead of just repainting
+   it earlier — see the desktop `.site-nav` rule above for the other half
+   of this. A later version put nav and cart on one shared row, which
+   fixed the tab-order jump but squeezed the two against each other and
+   clipped nav's three links; a version after that gave all three their
+   own full-width row each, correct but wasteful — the cart sat alone on
+   a mostly-empty row. This version fixes both at once.)
+   Tagline may wrap to two lines here — row 1 is narrower now that it
+   shares space with the cart pill, and that's fine: wrapping is cheaper
+   than truncating or forcing the cart down to yet another row. */
 @media (width <= 640px) {
   .site-header {
     height: auto; /* grow to fit two rows */
@@ -151,9 +173,10 @@ body {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
-      'logo logo'
-      'nav  cart';
-    gap: var(--space-2) var(--space-3);
+      'logo cart'
+      'nav  nav';
+    align-items: center;
+    gap: var(--space-4) var(--space-3);
     padding: var(--space-2) var(--space-4);
   }
 
@@ -161,46 +184,31 @@ body {
     grid-area: logo;
   }
 
-  .site-nav {
-    grid-area: nav;
-    min-width: 0; /* let a grid item shrink below its content size */
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    padding-bottom: var(--space-2);
+  .nav-cart {
+    grid-area: cart;
   }
 
-  .site-nav::-webkit-scrollbar {
-    display: none; /* Chrome / Safari */
+  .site-nav {
+    grid-area: nav;
+    margin-left: 0; /* only meaningful in the desktop single-row flex layout */
   }
 
   .site-nav ul {
-    flex-wrap: nowrap; /* keep items in one horizontal strip */
+    flex-wrap: wrap; /* nav has the full row to itself, room to wrap if needed */
   }
 
   .site-nav a {
     padding: var(--space-2) var(--space-3);
     font-size: var(--text-xs);
-    white-space: nowrap; /* prevent label wrapping inside a button */
   }
 
-  .nav-cart {
-    grid-area: cart;
-    gap: var(--space-2);
-  }
-
-  .cart-link {
-    padding: var(--space-2) var(--space-3);
-    font-size: var(--text-xs);
-  }
-
-  .cart-link span:not(.cart-count) {
-    display: none; /* hide "Cart" text, keep icon + badge */
+  .skip-link {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
   }
 }
 
 .nav-cart {
-  margin-left: auto;
   display: flex;
   align-items: center;
   gap: var(--space-4);
