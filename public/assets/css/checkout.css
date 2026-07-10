@@ -82,7 +82,7 @@
 .checkout-form legend {
   font-size: var(--text-xl);
   font-weight: 700;
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   margin-bottom: var(--space-5);
   padding: 0;
   width: 100%;
@@ -116,7 +116,7 @@
 
 .form-group.has-error input:focus,
 .form-group.has-error select:focus {
-  box-shadow: 0 0 0 3px rgb(185 28 28 / 20%);
+  box-shadow: 0 0 0 3px rgb(var(--color-error-rgb) / 20%);
 }
 
 /* Optional label suffix */
@@ -257,7 +257,7 @@
 }
 
 .order-total-value {
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   font-size: var(--text-2xl);
 }
 
@@ -293,7 +293,7 @@
 }
 
 .checkout-success h1 {
-  color: var(--color-brand);
+  color: var(--color-brand-text);
   margin-bottom: var(--space-4);
 }
 
