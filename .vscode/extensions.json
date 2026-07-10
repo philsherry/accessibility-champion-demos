@@ -4,7 +4,8 @@
     "stylelint.vscode-stylelint",
     "esbenp.prettier-vscode",
     "monosans.djlint",
-    "ms-playwright.playwright"
+    "ms-playwright.playwright",
+    "fallow-rs.fallow-vscode"
   ],
   "unwantedRecommendations": [
     "googlecloudtools.cloudcode",

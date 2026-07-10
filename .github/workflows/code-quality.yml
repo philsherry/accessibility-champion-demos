@@ -1,0 +1,48 @@
+name: Code quality
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  dead-code:
+    name: Dead code & health (fallow)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history so audit's --base resolves correctly
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+
+      - name: Generate coverage
+        run: npm run test:coverage
+        # Coverage feeds fallow's per-function CRAP scoring (see
+        # tests/global-teardown.ts — real coverage instead of fallow's
+        # export-reference-estimated fallback).
+
+      - name: Audit changed files (fallow)
+        run: npx fallow audit --base origin/main --fail-on-issues --coverage reports/coverage/coverage-final.json
+
+      - name: Health score (informational)
+        run: npx fallow health --score --coverage reports/coverage/coverage-final.json
+        continue-on-error: true
+
+  css-metrics:
+    name: CSS metrics (wallace)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: CSS analytics (informational — wallace has no pass/fail gate itself)
+        run: npm run analyze:css

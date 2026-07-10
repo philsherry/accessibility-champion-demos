@@ -1,0 +1,14 @@
+{
+  "health": {
+    "maxCognitive": 15,
+    "maxCrap": 31,
+    "maxCyclomatic": 20
+  },
+  "ignoreDependencies": ["npm-run-all-next", "postcss-html", "wallace-cli"],
+  "rules": {
+    "circular-dependencies": "error",
+    "unused-dependencies": "error",
+    "unused-exports": "warn",
+    "unused-files": "error"
+  }
+}

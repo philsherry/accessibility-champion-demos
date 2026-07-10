@@ -12,6 +12,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-html": "^8.1.4",
     "eslint-plugin-playwright": "^2.10.5",
+    "fallow": "^3.3.0",
     "globals": "^17.7.0",
     "html-validate": "^11.5.5",
     "http-server": "^14.1.1",
@@ -25,11 +26,15 @@
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-standard": "^40.0.0",
     "typescript-eslint": "^8.63.0",
-    "v8-to-istanbul": "^9.3.0"
+    "v8-to-istanbul": "^9.3.0",
+    "wallace-cli": "^4.0.2"
   },
   "name": "accessibility-champion-demos",
   "private": true,
   "scripts": {
+    "analyze": "run-s test:coverage analyze:code analyze:css",
+    "analyze:code": "fallow health --score --coverage reports/coverage/coverage-final.json",
+    "analyze:css": "cat public/assets/css/*.css | wallace",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "run-s lint:js lint:css format:check",
