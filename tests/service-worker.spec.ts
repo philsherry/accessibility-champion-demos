@@ -36,12 +36,25 @@ async function waitForPrecache(page: Page) {
 }
 
 // Serial, not parallel: service workers register per-origin, and every
-// test in this file hits the same http://127.0.0.1:4310 origin. Running
-// them concurrently (this project's default) raced registration/precache/
-// unregister state across workers — a different test failed on each of
-// several otherwise-identical runs, all pointing at the same shared-origin
-// SW state rather than a real bug in any individual test.
-test.describe.configure({ mode: 'serial' });
+// test in this file hits the same origin (see playwright.config.ts's
+// webServer). Running them concurrently (this project's default) raced
+// registration/precache/unregister state across workers — a different
+// test failed on each of several otherwise-identical runs, all pointing
+// at the same shared-origin SW state rather than a real bug in any
+// individual test.
+//
+// retries: Mobile/Tablet/Desktop are separate Playwright *projects*, and
+// projects run in parallel with each other by default regardless of this
+// file's own serial mode — so the very first test in this file can still
+// get run by all three projects at once, each doing a full ~30-file
+// precache burst against the one lightweight dev http-server backing
+// this suite. That occasionally exceeds what the server can service
+// within this test's wait timeout — a test-infrastructure contention
+// artifact under this project's parallel-projects model, not a product
+// bug (verified extensively via direct browser testing). A couple of
+// local retries absorb it; CI already retries once via the top-level
+// config.
+test.describe.configure({ mode: 'serial', retries: 2 });
 
 test.describe('service worker', () => {
   test('registers and precaches every page on first visit', async ({

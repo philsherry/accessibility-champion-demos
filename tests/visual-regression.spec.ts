@@ -18,6 +18,7 @@ const PAGES = [
   'orders.html',
   'subscriptions.html',
   'accessibility.html',
+  'offline.html',
 ];
 
 for (const page_ of PAGES) {

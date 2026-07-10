@@ -107,6 +107,12 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   if (request.method !== 'GET') return;
+  // The Cache API only supports http(s) requests — Cache.put() throws
+  // synchronously for anything else. A page can still trigger fetch
+  // events for other schemes (e.g. chrome-extension:// from an
+  // installed browser extension), so this needs an explicit guard
+  // rather than assuming every fetch event is one of ours to handle.
+  if (!request.url.startsWith('http')) return;
 
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
