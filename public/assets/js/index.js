@@ -27,11 +27,13 @@ function addToCart(btn) {
   const product = btn.dataset.product;
   const toast = document.getElementById('toast');
   toast.textContent = `${product} added to cart`;
-  toast.removeAttribute('aria-hidden');
+  // aria-hidden stays true throughout — the toast is supplementary,
+  // sighted-users-only feedback (see TODO.md); screen reader users are
+  // already covered independently via addProductToCart's live-region
+  // announcement above. Only the visual .visible class toggles.
   toast.classList.add('visible');
   setTimeout(() => {
     toast.classList.remove('visible');
-    toast.setAttribute('aria-hidden', 'true');
   }, 2500);
 }
 

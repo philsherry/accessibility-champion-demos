@@ -27,10 +27,20 @@ for (const page_ of PAGES) {
   });
 
   test(`${page_} renders unchanged in dark mode @visual`, async ({ page }) => {
-    await page.goto(`/${page_}`);
-    await page.evaluate(() => {
-      document.documentElement.setAttribute('data-user-color-scheme', 'dark');
+    // Seeds localStorage before navigation, so theme-init.js's own
+    // no-flash logic applies the attribute synchronously before first
+    // paint — same code path a real returning user hits. (Setting
+    // document.documentElement's attribute directly from addInitScript
+    // doesn't work: documentElement isn't reliably available at that
+    // very early execution point, so the call silently no-ops.) The
+    // page renders directly in dark mode either way — no light-to-dark
+    // transition ever fires, unlike setting it via page.evaluate() after
+    // navigation, which risks capturing an in-transition frame of
+    // tokens.css's --transition-theme animation.
+    await page.addInitScript(() => {
+      window.localStorage.setItem('theme', 'dark');
     });
+    await page.goto(`/${page_}`);
     await expect(page).toHaveScreenshot(
       `${page_.replace('.html', '')}-dark.png`,
       { fullPage: true },
