@@ -14,7 +14,7 @@ export default defineConfig({
   // reports the JS coverage collected by tests/fixtures.ts's page fixture.
   globalTeardown: './tests/global-teardown.ts',
   use: {
-    baseURL: 'http://127.0.0.1:4310',
+    baseURL: 'http://127.0.0.1:4312',
     trace: 'retain-on-failure',
   },
   // Ordered mobile-first, matching this project's accessibility-first,
@@ -48,8 +48,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npx http-server ./public -p 4310 -s',
-    url: 'http://127.0.0.1:4310',
+    command: 'npx http-server ./public -p 4312 -s',
+    url: 'http://127.0.0.1:4312',
     reuseExistingServer: !process.env.CI,
     timeout: 10_000,
   },
