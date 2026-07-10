@@ -27,8 +27,8 @@ export default tseslint.config(
 
   // Shared browser JS, loaded via <script src> on multiple pages. Plain
   // classic scripts, not ES modules — sourceType: 'script' both reflects
-  // that accurately and enables the /* exported */ pragma below (a no-op
-  // under the default 'module' sourceType).
+  // that accurately and enables the /* exported */ pragma in cart.js (a
+  // no-op under the default 'module' sourceType).
   {
     files: ['public/assets/js/*.js'],
     languageOptions: {
@@ -37,17 +37,33 @@ export default tseslint.config(
     },
   },
 
-  // Inline <script> blocks in the 5 page files. addProductToCart comes from
-  // the externally-loaded assets/js/cart.js — eslint-plugin-html only sees
-  // inline script content, not <script src> references, so it has no way to
-  // know that global exists without being told here. Also plain classic
-  // scripts — see sourceType note above.
+  // addProductToCart is declared in cart.js and consumed from
+  // index.js/orders.js — with no bundler, every <script src> shares one
+  // global scope in load order, so ESLint needs to be told that global
+  // exists to check these two consuming files without a no-undef false
+  // positive. Scoped to just these two files (not the block above,
+  // which also matches cart.js itself) — declaring it globally there
+  // too would make cart.js's own `function addProductToCart` collide
+  // with a same-named global (no-redeclare).
+  {
+    files: ['public/assets/js/index.js', 'public/assets/js/orders.js'],
+    languageOptions: {
+      globals: { addProductToCart: 'readonly' },
+    },
+  },
+
+  // Inline <script> blocks in the 5 page files, extracted by
+  // eslint-plugin-html and linted as real JS. None of the 5 pages
+  // currently has any inline script left (all page behaviour now lives
+  // in public/assets/js/*.js, loaded via <script src>) — this block is
+  // kept so any inline script added in future is still linted, rather
+  // than silently skipped.
   {
     files: ['public/*.html'],
     plugins: { html },
     languageOptions: {
       sourceType: 'script',
-      globals: { ...globals.browser, addProductToCart: 'readonly' },
+      globals: { ...globals.browser },
     },
   },
 
