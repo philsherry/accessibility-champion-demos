@@ -24,3 +24,16 @@ await expect(grid.locator('[data-component="product-card"]:not([hidden])')).toHa
 - `data-component` — semantic name, on that section's inner parts, used to scope queries once the section's been found. Not required to be unique on its own — scoping comes from the parent `data-testid`.
 
 Why write this down at all, on a static HTML site with no component framework? The same reason this whole site exists: to model a good practice, not just describe one — including the practice of knowing when a hook is worth adding and when the semantics you already have are enough.
+
+## Linting: one tool per concern, not one tool for everything
+
+Four tools, each scoped to what it's actually good at, rather than one tool stretched to cover all of them:
+
+- **djlint** — HTML structure, plus formatting the embedded `<style>`/`<script>` blocks inside each page (`format_css`/`format_js` in `.djlintrc`).
+- **stylelint** (`stylelint.config.js`) — CSS correctness: deprecated properties, modern colour-function notation, duplicate declarations. Runs against both `_shared/*.css` and the inline `<style>` blocks (`stylelint-config-html`).
+- **ESLint** (`eslint.config.js`) — JS correctness, both the Playwright test suite and each page's inline `<script>` (`eslint-plugin-html` extracts and lints it as real JS).
+- **Prettier** (`prettier.config.js`) — formatting for everything djlint doesn't already own: `.ts`/`.js`/`.css`/`.json`. Deliberately excludes `*.html` (`.prettierignore`) — running two formatters against the same file just means they fight each other on every save.
+
+`npm run lint` runs all of them; `lint:js`/`lint:css`/`format:check` run independently for a faster loop while editing one layer.
+
+Two fixes this setup caught worth calling out as examples of what a linter is actually for: `.site-nav a` had two conflicting `display` declarations in the same rule (dead code — the second silently won), and the `.sr-only` visually-hidden technique (Chapter 06025) used the deprecated `clip: rect(0,0,0,0)` instead of modern `clip-path: inset(50%)` — same visual result, but `clip` has been removed from the spec for years. Neither was a style nit; both were stylelint pointing at something actually wrong.

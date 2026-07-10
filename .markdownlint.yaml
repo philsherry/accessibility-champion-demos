@@ -1,0 +1,67 @@
+---
+MD003:
+  style: 'atx'
+MD004:
+  style: 'dash'
+MD009: false
+MD012:
+  maximum: 1
+MD013: false
+MD024:
+  siblings_only: true
+MD027: false
+MD029: false
+MD031: false
+MD032: false
+MD033:
+  allowed_elements:
+    - 'a'
+    - 'abbr'
+    - 'BookEditions'
+    - 'br'
+    - 'caption'
+    - 'code'
+    - 'dd'
+    - 'del'
+    - 'details'
+    - 'dl'
+    - 'dt'
+    - 'em'
+    - 'figcaption'
+    - 'figure'
+    - 'GlossaryItem'
+    - 'img'
+    - 'kbd'
+    - 'li'
+    - 'mark'
+    - 'MetadataRole'
+    - 'p'
+    - 'picture'
+    - 'q'
+    - 'Quiz'
+    - 'Scenario'
+    - 'script'
+    - 'source'
+    - 'strong'
+    - 'summary'
+    - 'sup'
+    - 'table'
+    - 'tbody'
+    - 'td'
+    - 'tfoot'
+    - 'th'
+    - 'thead'
+    - 'tr'
+    - 'UIPath'
+    - 'ul'
+    - 'video'
+MD034: false
+MD041: false
+MD049:
+  style: 'asterisk'
+MD050:
+  style: 'asterisk'
+MD051: false
+MD060: false
+# Autoformatter friendly markdownlint config with a narrow inline-HTML allowlist
+default: true

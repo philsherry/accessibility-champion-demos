@@ -55,7 +55,7 @@ test.describe('site header', () => {
       expect(
         curr.y,
         `Tab order jumped backward: "${curr.label}" (y=${curr.y}) appears above ` +
-          `"${prev.label}" (y=${prev.y}) — tab order doesn't match visual layout`
+          `"${prev.label}" (y=${prev.y}) — tab order doesn't match visual layout`,
       ).toBeGreaterThanOrEqual(prev.y - ROW_TOLERANCE);
 
       const sameRow = Math.abs(curr.y - prev.y) <= ROW_TOLERANCE;
@@ -63,7 +63,7 @@ test.describe('site header', () => {
         expect(
           curr.x,
           `Tab order goes right-to-left within a row: "${curr.label}" (x=${curr.x}) appears to ` +
-            `the left of "${prev.label}" (x=${prev.x}), both on the same row`
+            `the left of "${prev.label}" (x=${prev.x}), both on the same row`,
         ).toBeGreaterThanOrEqual(prev.x);
       }
     }
@@ -71,7 +71,9 @@ test.describe('site header', () => {
 });
 
 test.describe('index.html in-page jump link', () => {
-  test('"Browse strains" moves focus to the products section', async ({ page }) => {
+  test('"Browse strains" moves focus to the products section', async ({
+    page,
+  }) => {
     await page.goto('/index.html');
     await page.getByRole('link', { name: 'Browse strains' }).click();
     await expect(page.locator('#products')).toBeFocused();

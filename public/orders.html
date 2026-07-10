@@ -19,7 +19,7 @@
     .icon-delete  { color: var(--color-error); }
 
     /* Responsive: on narrow viewports, each row stacks */
-    @media (max-width: 600px) {
+    @media (width <= 600px) {
       /* Visually hidden, not display:none — display:none removes the
          <th scope="col"> headers from the accessibility tree entirely, so a
          screen reader user navigating this table in table mode would hear
@@ -35,7 +35,7 @@
         height: 1px;
         padding: 0;
         overflow: hidden;
-        clip: rect(0, 0, 0, 0);
+        clip-path: inset(50%);
         white-space: nowrap;
         border: 0;
       }
@@ -243,7 +243,7 @@
 
     <footer class="site-footer" role="contentinfo">
       <div class="inner">
-        <p><strong style="color:#fff;">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
+        <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
         <p>Questions about an order? Lucy Fur is not available to answer them. She is asleep. <a href="index.html">Back to products</a></p>
         <p>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion</a> book. All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not. · <a href="accessibility.html">Accessibility statement</a></p>
       </div>

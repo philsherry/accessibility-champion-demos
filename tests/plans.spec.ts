@@ -1,6 +1,9 @@
 import { test } from '@playwright/test';
 import { expectNoAxeViolations } from './axe-helpers';
-import { expectSkipLinkBypassesHeader, expectFullKeyboardTraversalStaysVisible } from './keyboard-helpers';
+import {
+  expectSkipLinkBypassesHeader,
+  expectFullKeyboardTraversalStaysVisible,
+} from './keyboard-helpers';
 
 test.describe('plans.html', () => {
   test.beforeEach(async ({ page }) => {
@@ -15,7 +18,9 @@ test.describe('plans.html', () => {
     await expectSkipLinkBypassesHeader(page);
   });
 
-  test('full keyboard traversal never lands on a hidden element', async ({ page }) => {
+  test('full keyboard traversal never lands on a hidden element', async ({
+    page,
+  }) => {
     await expectFullKeyboardTraversalStaysVisible(page, 30);
   });
 });

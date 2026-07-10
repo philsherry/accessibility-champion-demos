@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { expectNoAxeViolations } from './axe-helpers';
-import { expectSkipLinkBypassesHeader, expectFullKeyboardTraversalStaysVisible } from './keyboard-helpers';
+import {
+  expectSkipLinkBypassesHeader,
+  expectFullKeyboardTraversalStaysVisible,
+} from './keyboard-helpers';
 
 test.describe('index.html', () => {
   test.beforeEach(async ({ page }) => {
@@ -15,7 +18,9 @@ test.describe('index.html', () => {
     await expectSkipLinkBypassesHeader(page);
   });
 
-  test('full keyboard traversal never lands on a hidden element', async ({ page }) => {
+  test('full keyboard traversal never lands on a hidden element', async ({
+    page,
+  }) => {
     await expectFullKeyboardTraversalStaysVisible(page, 30);
   });
 
@@ -33,6 +38,8 @@ test.describe('index.html', () => {
     await expect(zoomiesBtn).toHaveAttribute('aria-pressed', 'true');
     await expect(allBtn).toHaveAttribute('aria-pressed', 'false');
     await expect(liveRegion).toHaveText('Showing 5 zoomies strains.');
-    await expect(grid.locator('[data-component="product-card"]:not([hidden])')).toHaveCount(5);
+    await expect(
+      grid.locator('[data-component="product-card"]:not([hidden])'),
+    ).toHaveCount(5);
   });
 });

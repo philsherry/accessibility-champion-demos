@@ -14,7 +14,7 @@ export async function expectSkipLinkBypassesHeader(page: Page): Promise<void> {
 
 export async function expectFullKeyboardTraversalStaysVisible(
   page: Page,
-  tabPresses: number
+  tabPresses: number,
 ): Promise<void> {
   for (let i = 0; i < tabPresses; i++) {
     await page.keyboard.press('Tab');
@@ -34,7 +34,12 @@ export async function expectFullKeyboardTraversalStaysVisible(
           style.display === 'none' ||
           style.visibility === 'hidden';
         if (hiddenHere) {
-          return { skip: false, hidden: true, focusedTag: el.tagName, hiddenTag: node.tagName } as const;
+          return {
+            skip: false,
+            hidden: true,
+            focusedTag: el.tagName,
+            hiddenTag: node.tagName,
+          } as const;
         }
         node = node.parentElement;
       }
@@ -46,7 +51,7 @@ export async function expectFullKeyboardTraversalStaysVisible(
       result.hidden,
       result.hidden
         ? `Tab ${i + 1} landed on <${result.focusedTag}>, hidden via an ancestor <${result.hiddenTag}>`
-        : ''
+        : '',
     ).toBe(false);
   }
 }

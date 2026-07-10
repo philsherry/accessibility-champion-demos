@@ -24,12 +24,24 @@ export default defineConfig({
   // still exercises the thing these tests care about: does keyboard
   // navigation survive this site's responsive layout at each width.
   projects: [
-    { name: 'Mobile', use: { ...devices['iPhone 14'], defaultBrowserType: 'chromium' } },
-    { name: 'Tablet', use: { ...devices['iPad Mini'], defaultBrowserType: 'chromium' } },
-    { name: 'Desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
+    {
+      name: 'Mobile',
+      use: { ...devices['iPhone 14'], defaultBrowserType: 'chromium' },
+    },
+    {
+      name: 'Tablet',
+      use: { ...devices['iPad Mini'], defaultBrowserType: 'chromium' },
+    },
+    {
+      name: 'Desktop',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1440, height: 900 },
+      },
+    },
   ],
   webServer: {
-    command: 'npx http-server . -p 4310 -s',
+    command: 'npx http-server ./public -p 4310 -s',
     url: 'http://127.0.0.1:4310',
     reuseExistingServer: !process.env.CI,
     timeout: 10_000,

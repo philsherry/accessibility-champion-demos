@@ -16,7 +16,7 @@
       align-items: start;
     }
 
-    @media (min-width: 900px) {
+    @media (width >= 900px) {
       .checkout-layout {
         grid-template-columns: 1fr 360px;
       }
@@ -107,7 +107,7 @@
       gap: var(--space-4);
     }
 
-    @media (max-width: 480px) {
+    @media (width <= 480px) {
       .field-row { grid-template-columns: 1fr; }
     }
 
@@ -124,7 +124,7 @@
 
     .form-group.has-error input:focus,
     .form-group.has-error select:focus {
-      box-shadow: 0 0 0 3px rgba(185,28,28,.2);
+      box-shadow: 0 0 0 3px rgb(185 28 28 / 20%);
     }
 
     /* Optional label suffix */
@@ -211,7 +211,7 @@
 
     .order-summary-header p {
       font-size: var(--text-sm);
-      color: rgba(255,255,255,.7);
+      color: rgb(255 255 255 / 70%);
       font-style: italic;
     }
 
@@ -656,7 +656,7 @@
 
     <footer class="site-footer" role="contentinfo">
       <div class="inner">
-        <p><strong style="color:#fff;">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
+        <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
         <p>Checkout support: lucy@nipandclaw.com · <a href="plans.html">Back to plans</a></p>
         <p>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion</a> book. All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not. · <a href="accessibility.html">Accessibility statement</a></p>
       </div>

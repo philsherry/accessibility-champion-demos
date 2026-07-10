@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "esbenp.prettier-vscode",
+    "monosans.djlint",
+    "ms-playwright.playwright"
+  ],
+  "unwantedRecommendations": [
+    "googlecloudtools.cloudcode",
+    "ms-azuretools.vscode-azureappservice",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "vscodevim.vim"
+  ]
+}

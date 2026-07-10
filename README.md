@@ -20,11 +20,11 @@ Screenshots taken from these pages appear in the book pipeline (epub, PDF, print
 
 | Page | File | Demonstrates |
 |---|---|---|
-| Product listing | `index.html` | Landmark regions, heading hierarchy, DOM order |
-| Strain detail | `product.html` | Focus management, accessible SVG (usage chart) |
-| Subscription plans | `plans.html` | `<th scope>`, accessible tables, responsive table patterns |
-| Checkout | `checkout.html` | Label association, form validation, error announcements |
-| Order history | `orders.html` | Touch targets, target spacing, accessible table patterns |
+| Product listing | `public/index.html` | Landmark regions, heading hierarchy, DOM order |
+| Strain detail | `public/product.html` | Focus management, accessible SVG (usage chart) |
+| Subscription plans | `public/plans.html` | `<th scope>`, accessible tables, responsive table patterns |
+| Checkout | `public/checkout.html` | Label association, form validation, error announcements |
+| Order history | `public/orders.html` | Touch targets, target spacing, accessible table patterns |
 
 Standalone diagrams that don't fit the store context live in `snippets/`.
 
@@ -66,10 +66,10 @@ All strains are artisanal, small-batch, and responsibly sourced by cats who have
 
 ## Setup
 
-No build step for the site itself. Open any `.html` file directly in a browser, or serve the directory:
+No build step for the site itself. Open any file in `public/` directly in a browser, or serve the directory:
 
 ```bash
-npx http-server . -p 8080
+npm start
 ```
 
 ## Testing
