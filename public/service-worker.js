@@ -6,12 +6,15 @@
 // assets/js/async-waituntil-polyfill.js for the full rationale.
 importScripts('assets/js/async-waituntil-polyfill.js');
 
-// Bump this string whenever a deploy should force a cache refresh for
-// returning visitors. No build step generates this automatically — it's
-// a deliberate manual step, same as the reference implementation this is
-// adapted from (resilientwebdesign.com/serviceworker.js). See
+// __BUILD_ID__ is substituted with the deploying commit's short SHA by
+// .github/workflows/deploy-pages.yml before the site is published, so
+// every deploy automatically busts the previous cache — no human needs
+// to remember to bump anything. Locally, and in the test.yml CI job
+// (which runs against the raw, unsubstituted source), this stays
+// literally "nip-claw-__BUILD_ID__", which is still a perfectly valid
+// (if unchanging) cache name for dev/test purposes. See
 // docs/superpowers/specs/2026-07-10-offline-caching-design.md.
-const CACHE_VERSION = 'nip-claw-v1';
+const CACHE_VERSION = 'nip-claw-__BUILD_ID__';
 
 // Every URL below is relative (no leading slash) so it resolves against
 // this script's own location — the site root locally, but
