@@ -25,4 +25,15 @@ for (const page_ of PAGES) {
     await page.goto(`/${page_}`);
     await expect(page).toHaveScreenshot(`${page_}.png`, { fullPage: true });
   });
+
+  test(`${page_} renders unchanged in dark mode @visual`, async ({ page }) => {
+    await page.goto(`/${page_}`);
+    await page.evaluate(() => {
+      document.documentElement.setAttribute('data-user-color-scheme', 'dark');
+    });
+    await expect(page).toHaveScreenshot(
+      `${page_.replace('.html', '')}-dark.png`,
+      { fullPage: true },
+    );
+  });
 }
