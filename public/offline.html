@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="assets/js/theme-init.js"></script>
+  <title>Offline access — Nip &amp; Claw</title>
+  <meta name="description" content="Manage offline access to Nip & Claw: check cache status, or clear offline data.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#1e3d2f">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/offline.css">
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+      <div class="inner">
+        <a href="index.html" class="site-logo">
+          <span class="wordmark">Nip &amp; Claw</span>
+          <span class="tagline">purrveyors of the finest artisanal catnip</span>
+        </a>
+        <div class="nav-cart">
+          <a href="checkout.html" class="cart-link" aria-label="Cart, 2 items">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Cart
+            <span class="cart-count" aria-hidden="true">2</span>
+          </a>
+        </div>
+        <nav class="site-nav" aria-label="Main">
+          <ul role="list">
+            <li><a href="index.html">Products</a></li>
+            <li><a href="plans.html">Subscriptions</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+          </ul>
+        </nav>
+        <fieldset class="theme-toggle" data-component="theme-toggle">
+          <legend class="sr-only">Colour scheme</legend>
+          <label class="theme-option">
+            <input type="radio" name="theme" value="auto" checked>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span class="sr-only">System default</span>
+          </label>
+          <label class="theme-option">
+            <input type="radio" name="theme" value="light">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <span class="sr-only">Light theme</span>
+          </label>
+          <label class="theme-option">
+            <input type="radio" name="theme" value="dark">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            <span class="sr-only">Dark theme</span>
+          </label>
+        </fieldset>
+      </div>
+    </header>
+
+    <main id="main" class="main-content" tabindex="-1">
+      <div class="offline-body">
+
+        <div class="page-heading">
+          <h1>Offline access</h1>
+          <p>Nip &amp; Claw keeps working after your connection drops.</p>
+        </div>
+
+        <h2>How this works</h2>
+
+        <p>The pages, styles, and scripts that make up this site are saved on your device the first time you visit. If your connection drops later, you'll still be able to browse — the site is built to be resilient, not to demand a constant connection.</p>
+
+        <p>Any page that hasn't been saved yet, or that fails to load while you're offline, shows this page instead.</p>
+
+        <h2>Cache status</h2>
+
+        <p id="offline-cache-status">Checking cache status…</p>
+
+        <p>
+          <button type="button" class="btn btn-secondary" data-component="clear-offline-data">Clear offline data</button>
+        </p>
+
+        <div id="offline-page-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="inner">
+        <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
+        <p>Managing offline access · <a href="index.html">Back to products</a></p>
+        <p>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion</a> book. All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not. · <a href="accessibility.html">Accessibility statement</a></p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/offline.js"></script>
+</body>
+</html>

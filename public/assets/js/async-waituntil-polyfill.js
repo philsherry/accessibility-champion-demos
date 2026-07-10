@@ -45,16 +45,14 @@
         const len = promises.length;
 
         // wait for all to settle
-        return Promise.all(promises.map((p) => p.catch(() => {}))).then(
-          () => {
-            // have new items been added? If so, wait again
-            if (promises.length != len) return processPromises();
-            // we're done!
-            promisesMap.delete(extendableEvent);
-            // reject if one of the promises rejected
-            return Promise.all(promises);
-          },
-        );
+        return Promise.all(promises.map((p) => p.catch(() => {}))).then(() => {
+          // have new items been added? If so, wait again
+          if (promises.length != len) return processPromises();
+          // we're done!
+          promisesMap.delete(extendableEvent);
+          // reject if one of the promises rejected
+          return Promise.all(promises);
+        });
       }),
     );
   };

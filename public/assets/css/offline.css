@@ -1,0 +1,21 @@
+.offline-body {
+  max-width: var(--content-width);
+}
+
+.offline-body h2 {
+  color: var(--color-brand-text);
+  margin-top: var(--space-10);
+  margin-bottom: var(--space-4);
+}
+
+.offline-body p {
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+#offline-cache-status {
+  font-weight: 600;
+  color: var(--color-text);
+}

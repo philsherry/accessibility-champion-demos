@@ -33,4 +33,7 @@ export const PAGES: PageMeta[] = [
     currentNavLabel: null,
     cartHasAriaCurrent: false,
   },
+  // Reachable via a footer link on every other page, not the main nav —
+  // no nav link should be current here.
+  { path: '/offline.html', currentNavLabel: null, cartHasAriaCurrent: false },
 ];
