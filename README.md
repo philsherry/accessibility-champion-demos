@@ -66,14 +66,15 @@ All strains are artisanal, small-batch, and responsibly sourced by cats who have
 
 ## Setup
 
-No build step. Open any `.html` file directly in a browser, or serve the directory:
+No build step for the site itself. Open any `.html` file directly in a browser, or serve the directory:
 
 ```bash
-cd demos
-npx serve .
-# or
-python3 -m http.server 8080
+npx http-server . -p 8080
 ```
+
+## Testing
+
+`npm install && npx playwright install --with-deps chromium` once, then `npm test` runs the full accessibility test suite (axe-core + keyboard navigation checks) against every page, at three viewports — Mobile (390×844), Tablet (768×1024), and Desktop (1440×900) — run in that order, matching this project's accessibility-first, mobile-second design priority. See `CONVENTIONS.md` for how tests locate elements on the page.
 
 ---
 
