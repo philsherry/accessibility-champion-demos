@@ -102,15 +102,6 @@ body {
   margin-top: 1px;
 }
 
-.site-nav {
-  /* Pushed flush right, taking the cart link with it (cart comes right
-     after nav in DOM order) — leaves logo + connectivity badge as a
-     left-aligned identity cluster, nav + cart as a right-aligned
-     actions cluster, with visual left-to-right order matching DOM/tab
-     order exactly throughout. */
-  margin-left: auto;
-}
-
 .site-nav ul {
   list-style: none;
   display: flex;
@@ -121,6 +112,7 @@ body {
 .site-nav a {
   padding: var(--space-2) var(--space-3);
   color: var(--color-white);
+
   /* Underlined by default so links are recognisable without relying on
      colour alone (WCAG 1.4.1) — removed on hover/focus, where the
      background fill already provides that same distinction. */
@@ -192,6 +184,7 @@ body {
 
   .nav-cart {
     grid-area: cart;
+
     /* nav (sharing this row) can wrap its 3 links to a second line at
        narrow widths — align-self: end keeps cart level with nav's last
        (lowest) line instead of vertically centering across both lines,
@@ -203,7 +196,6 @@ body {
 
   .site-nav {
     grid-area: nav;
-    margin-left: 0; /* only meaningful in the desktop single-row flex layout */
   }
 
   .site-nav ul {
@@ -217,6 +209,7 @@ body {
 
   .connectivity-badge {
     grid-area: badge;
+    margin-inline: 0; /* desktop's centring margin doesn't apply to the grid layout */
   }
 
   .skip-link {
@@ -276,11 +269,20 @@ body {
 .connectivity-badge {
   display: inline-flex;
   align-items: center;
+  gap: var(--space-2);
   color: var(--color-white);
   font-size: var(--text-sm);
   font-weight: 600;
   padding: var(--space-2) var(--space-3);
   min-height: var(--target-min);
+
+  /* Auto margins on both sides split the row's remaining free space
+     evenly between "logo↔badge" and "badge↔nav" — centred, equidistant
+     from the identity cluster on its left and the actions cluster on
+     its right, rather than hugging the logo and leaving one big empty
+     gap before nav. Reset to 0 in the mobile grid layout below, where
+     the badge is positioned by grid-area instead. */
+  margin-inline: auto;
   transition:
     background var(--transition-fast),
     color var(--transition-fast);
@@ -778,6 +780,14 @@ tbody th[scope='row'] {
   stroke-linejoin: round;
   flex-shrink: 0;
   vertical-align: -0.15em;
+}
+
+/* The HTML UA stylesheet's [hidden] { display: none } rule doesn't
+   reliably apply to inline <svg> elements (SVG's own UA stylesheet
+   defaults interact oddly with it) — without this, an svg.icon carrying
+   the hidden attribute still renders. */
+svg.icon[hidden] {
+  display: none;
 }
 
 /* -------------------------------------------------- */
