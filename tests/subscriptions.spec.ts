@@ -2,9 +2,9 @@ import { test } from './fixtures';
 import { expectNoAxeViolations } from './axe-helpers';
 import { expectFullKeyboardTraversalStaysVisible } from './keyboard-helpers';
 
-test.describe('plans.html', () => {
+test.describe('subscriptions.html', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/plans.html');
+    await page.goto('/subscriptions.html');
   });
 
   test('has no accessibility violations', async ({ page }) => {

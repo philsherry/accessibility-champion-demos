@@ -103,12 +103,11 @@ body {
 }
 
 .site-nav {
-  /* Pushed flush right — DOM order is logo, cart, nav (see the mobile
-     comment below for why), so on desktop's single-row flex layout nav
-     naturally ends up last and takes over the "flush right" role the
-     cart link used to have, keeping visual left-to-right order matching
-     DOM/tab order exactly: logo, then cart (grouped together on the
-     left), then nav (pushed right). */
+  /* Pushed flush right, taking the cart link with it (cart comes right
+     after nav in DOM order) — leaves logo + connectivity badge as a
+     left-aligned identity cluster, nav + cart as a right-aligned
+     actions cluster, with visual left-to-right order matching DOM/tab
+     order exactly throughout. */
   margin-left: auto;
 }
 
@@ -147,13 +146,12 @@ body {
   font-weight: 700;
 }
 
-/* Mobile nav — CSS Grid, two rows: logo + cart share row 1 (logo left,
-   cart right — the same visual grouping as desktop, just stacked above
-   nav instead of alongside it), nav gets the full width of row 2 to
-   itself. Grid areas place elements visually WITHOUT touching document
-   order — logo, cart, and nav stay in that exact DOM order, matching
-   this row-by-row, left-to-right visual layout exactly, so keyboard tab
-   order always matches what's on screen.
+/* Mobile nav — CSS Grid, two rows: logo + connectivity badge share row 1
+   (identity cluster, logo left/badge right), nav + cart share row 2
+   (actions cluster). Grid areas place elements visually WITHOUT touching
+   document order — logo, badge, nav, and cart stay in that exact DOM
+   order, matching this row-by-row, left-to-right visual layout exactly,
+   so keyboard tab order always matches what's on screen.
    (An earlier version used flexbox `order` to pull the cart up next to
    the logo without changing DOM order — visually tidy, but it meant a
    keyboard user watching the focus ring saw it jump backward: logo, down
@@ -164,10 +162,14 @@ body {
    fixed the tab-order jump but squeezed the two against each other and
    clipped nav's three links; a version after that gave all three their
    own full-width row each, correct but wasteful — the cart sat alone on
-   a mostly-empty row. This version fixes both at once.)
+   a mostly-empty row. That version fixed both at once, with cart sharing
+   row 1 with the logo; cart and the connectivity badge later swapped
+   rows so cart sits with the other navigation-ish items on row 2 and the
+   badge — logically closer to site identity than to navigation — sits
+   with the logo instead.)
    Tagline may wrap to two lines here — row 1 is narrower now that it
-   shares space with the cart pill, and that's fine: wrapping is cheaper
-   than truncating or forcing the cart down to yet another row. */
+   shares space with the badge, and that's fine: wrapping is cheaper than
+   truncating or forcing the badge down to yet another row. */
 @media (width <= 640px) {
   .site-header {
     height: auto; /* grow to fit two rows */
@@ -177,8 +179,8 @@ body {
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
-      'logo cart'
-      'nav  badge';
+      'logo badge'
+      'nav  cart';
     align-items: center;
     gap: var(--space-4) var(--space-3);
     padding: var(--space-2) var(--space-4);
@@ -190,6 +192,13 @@ body {
 
   .nav-cart {
     grid-area: cart;
+    /* nav (sharing this row) can wrap its 3 links to a second line at
+       narrow widths — align-self: end keeps cart level with nav's last
+       (lowest) line instead of vertically centering across both lines,
+       which put cart visually between the wrapped nav lines and broke
+       tab order (My Orders sits below cart in DOM but was rendering
+       above it). */
+    align-self: end;
   }
 
   .site-nav {
@@ -258,6 +267,12 @@ body {
   line-height: 1.5;
 }
 
+/* No border/background by default — sitting next to the logo rather
+   than sandwiched between the bordered cart pill and nav links, it no
+   longer needs a boundary to read as its own element, and a border here
+   would visually imply it's clickable like its former neighbours. The
+   offline state gets a background fill (below) to draw attention to the
+   one state actually worth noticing. */
 .connectivity-badge {
   display: inline-flex;
   align-items: center;
@@ -265,14 +280,8 @@ body {
   font-size: var(--text-sm);
   font-weight: 600;
   padding: var(--space-2) var(--space-3);
-  border: 1.5px solid rgb(255 255 255 / 30%);
-  /* Matches the theme-toggle buttons' radius (--radius-md), not the
-     cart-link pill's (--radius-pill) — the badge isn't clickable, and
-     sharing the cart's fully-rounded shape would visually imply it is. */
-  border-radius: var(--radius-md);
   min-height: var(--target-min);
   transition:
-    border-color var(--transition-fast),
     background var(--transition-fast),
     color var(--transition-fast);
 }
@@ -280,7 +289,7 @@ body {
 .connectivity-badge--offline {
   background: var(--color-gold-light);
   color: var(--color-brand);
-  border-color: var(--color-gold-light);
+  border-radius: var(--radius-md);
 }
 
 /* -------------------------------------------------- */

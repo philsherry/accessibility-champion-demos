@@ -22,7 +22,7 @@ Screenshots taken from these pages appear in the book pipeline (epub, PDF, print
 |---|---|---|
 | Product listing | `public/index.html` | Landmark regions, heading hierarchy, DOM order |
 | Strain detail | `public/product.html` | Focus management, accessible SVG (usage chart) |
-| Subscription plans | `public/plans.html` | `<th scope>`, accessible tables, responsive table patterns |
+| Subscription plans | `public/subscriptions.html` | `<th scope>`, accessible tables, responsive table patterns |
 | Checkout | `public/checkout.html` | Label association, form validation, error announcements |
 | Order history | `public/orders.html` | Touch targets, target spacing, accessible table patterns |
 

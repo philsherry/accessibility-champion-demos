@@ -14,7 +14,7 @@ test('keyboard-only journey across pages keeps aria-current correct at every sto
 
   await nav.getByRole('link', { name: 'Subscriptions' }).focus();
   await page.keyboard.press('Enter');
-  await expect(page).toHaveURL(/plans\.html/);
+  await expect(page).toHaveURL(/subscriptions\.html/);
   await expect(
     nav.getByRole('link', { name: 'Subscriptions' }),
   ).toHaveAttribute('aria-current', 'page');

@@ -16,7 +16,7 @@ const PAGES = [
   'index.html',
   'checkout.html',
   'orders.html',
-  'plans.html',
+  'subscriptions.html',
   'accessibility.html',
 ];
 

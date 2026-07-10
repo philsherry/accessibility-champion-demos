@@ -55,7 +55,8 @@ for (const { path, currentNavLabel, cartHasAriaCurrent } of PAGES) {
       await page.keyboard.press('Tab'); // logo
       await capture('logo');
       for (let i = 0; i < 4; i++) {
-        // cart link, then 3 nav links (DOM order: logo, cart, nav)
+        // 3 nav links, then cart link (DOM order: logo, status badge
+        // [not focusable], nav, cart)
         await page.keyboard.press('Tab');
         await capture(`header item ${i + 1}`);
       }

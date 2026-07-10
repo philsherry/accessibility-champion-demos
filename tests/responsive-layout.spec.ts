@@ -16,7 +16,7 @@ import { PAGES } from './utilities/pages';
 // The overflow check deliberately does NOT compare
 // document.documentElement.scrollWidth against clientWidth — scrollWidth
 // can be inflated by an element's own legitimate internal
-// `overflow-x: auto` scrolling region (e.g. plans.html's comparison
+// `overflow-x: auto` scrolling region (e.g. subscriptions.html's comparison
 // table, which is intentionally wider than the viewport and horizontally
 // scrollable within its own wrapper — the documented responsive-table
 // pattern, not a bug) without the page itself ever becoming scrollable.

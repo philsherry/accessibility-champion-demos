@@ -18,7 +18,7 @@ test('dark mode chosen on one page persists after navigating to another', async 
     .getByRole('navigation', { name: 'Main' })
     .getByRole('link', { name: 'Subscriptions' })
     .click();
-  await expect(page).toHaveURL(/plans\.html/);
+  await expect(page).toHaveURL(/subscriptions\.html/);
 
   await expect(page.locator('html')).toHaveAttribute(
     'data-user-color-scheme',

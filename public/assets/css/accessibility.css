@@ -89,7 +89,7 @@
 
 /* Wrapper constrains and horizontally scrolls the table on narrow
    viewports, instead of letting its content push the whole page wider —
-   same pattern as .plans-table-wrapper (plans.css) and the book's own
+   same pattern as .plans-table-wrapper (subscriptions.css) and the book's own
    Table component. */
 .audit-table-wrapper {
   overflow-x: auto;

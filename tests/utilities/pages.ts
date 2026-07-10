@@ -17,7 +17,7 @@ export const PAGES: PageMeta[] = [
     cartHasAriaCurrent: false,
   },
   {
-    path: '/plans.html',
+    path: '/subscriptions.html',
     currentNavLabel: 'Subscriptions',
     cartHasAriaCurrent: false,
   },
