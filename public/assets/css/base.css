@@ -530,7 +530,8 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--color-brand-text);
-  box-shadow: 0 0 0 3px rgb(var(--color-brand-text-rgb) / 15%);
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--color-brand-text) 15%, transparent);
 }
 
 input[aria-invalid='true'],
@@ -540,7 +541,7 @@ input.has-error {
 
 input[aria-invalid='true']:focus,
 input.has-error:focus {
-  box-shadow: 0 0 0 3px rgb(var(--color-error-rgb) / 15%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-error) 15%, transparent);
 }
 
 .field-error {
