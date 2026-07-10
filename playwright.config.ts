@@ -5,7 +5,14 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  reporter: 'list',
+  reporter: [
+    ['list'],
+    ['html', { outputFolder: './reports/playwright/html', open: 'never' }],
+  ],
+  outputDir: './reports/playwright/test-results',
+  // No-op unless COVERAGE=1 (see tests/utilities/coverage.ts) — merges and
+  // reports the JS coverage collected by tests/fixtures.ts's page fixture.
+  globalTeardown: './tests/global-teardown.ts',
   use: {
     baseURL: 'http://127.0.0.1:4310',
     trace: 'retain-on-failure',
@@ -24,12 +31,24 @@ export default defineConfig({
   // still exercises the thing these tests care about: does keyboard
   // navigation survive this site's responsive layout at each width.
   projects: [
-    { name: 'Mobile', use: { ...devices['iPhone 14'], defaultBrowserType: 'chromium' } },
-    { name: 'Tablet', use: { ...devices['iPad Mini'], defaultBrowserType: 'chromium' } },
-    { name: 'Desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
+    {
+      name: 'Mobile',
+      use: { ...devices['iPhone 14'], defaultBrowserType: 'chromium' },
+    },
+    {
+      name: 'Tablet',
+      use: { ...devices['iPad Mini'], defaultBrowserType: 'chromium' },
+    },
+    {
+      name: 'Desktop',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1440, height: 900 },
+      },
+    },
   ],
   webServer: {
-    command: 'npx http-server . -p 4310 -s',
+    command: 'npx http-server ./public -p 4310 -s',
     url: 'http://127.0.0.1:4310',
     reuseExistingServer: !process.env.CI,
     timeout: 10_000,

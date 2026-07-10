@@ -1,0 +1,11 @@
+node_modules/
+reports/
+package-lock.json
+
+# djlint already formats these (including embedded <style>/<script> blocks
+# via format_css/format_js in .djlintrc) — Prettier would just fight it.
+*.html
+
+# Markdown formatting/wrapping is out of scope for this lint-tooling pass —
+# not touched by this project's linters otherwise.
+*.md

@@ -9,7 +9,7 @@ export async function expectNoAxeViolations(page: Page): Promise<void> {
     .map(
       (v) =>
         `${v.id} (${v.impact}): ${v.help}\n` +
-        v.nodes.map((n) => `  - ${n.target.join(' ')}`).join('\n')
+        v.nodes.map((n) => `  - ${n.target.join(' ')}`).join('\n'),
     )
     .join('\n\n');
   expect(results.violations, summary).toHaveLength(0);

@@ -1,0 +1,184 @@
+/* Nip & Claw — Design Tokens
+   --------------------------------------------------
+   Colour contrast checked throughout:
+   Light theme:
+   - --color-text on --color-bg:         16:1
+   - --color-text on --color-surface:    16:1
+   - --color-brand-text on --color-bg:   15:1
+   - --color-gold-text on --color-bg:    5.8:1  (AA for normal text)
+   - --color-gold-light on --color-brand: 7.8:1 (AA for normal text)
+   - --color-white on --color-brand:     15:1
+   Dark theme:
+   - --color-text on --color-bg:         14.6:1
+   - --color-text on --color-surface:    13.2:1
+   - --color-brand-text on --color-bg:   6.7:1  (AA for normal text)
+   - --color-brand-light on --color-bg:  8.55:1
+   - --color-muted on --color-bg:        7.5:1  (AA for normal text)
+   - --color-gold-text on --color-bg:    8.9:1
+   - --color-error on --color-bg:        6.1:1  (AA for normal text)
+   - --color-success on --color-bg:      9.6:1
+   - --color-warning on --color-bg:      10:1
+
+   Themed tokens are declared once each via light-dark(lightValue,
+   darkValue) rather than being repeated per theme — light-dark()
+   resolves against the computed `color-scheme` property below, so one
+   declaration serves all three states (system default / explicit light
+   / explicit dark) instead of three near-duplicate blocks.
+   See docs/superpowers/specs/2026-07-10-dark-mode-design.md
+   -------------------------------------------------- */
+
+:root {
+  /* System default: follow the OS. An explicit choice (below) overrides
+     this by setting color-scheme directly, which every light-dark()
+     call in this file then resolves against. */
+  color-scheme: light dark;
+
+  /* Brand palette — fixed, used only on permanently brand-coloured
+     surfaces (header, hero, footer, filled buttons/badges) that don't
+     change with the colour-scheme theme. */
+  --color-brand: #1e3d2f; /* deep forest green — primary */
+  --color-brand-mid: #2d5a40; /* medium green — hover/active states */
+  --color-gold-light: #d4a840; /* gold for use on dark green bg — 7.8:1 */
+  --color-gold-hover: #c09030; /* hero button hover — hero is always brand-dark, no theme variant needed */
+  --color-white: #fff; /* fixed, used only on brand-coloured fills */
+
+  /* Neutrals — page background/surface/text. */
+  --color-bg: light-dark(#faf9f7, #15201b);
+  --color-surface: light-dark(#fff, #1c2921);
+  --color-border: light-dark(#dedad4, #33453a);
+  --color-muted: light-dark(#6b6560, #a6b0a8);
+  --color-text: light-dark(#1a1715, #f2efe9);
+  --color-gold-text: light-dark(#7a5c1e, #e0b84f);
+
+  /* Text/link/heading colour used ON page background/surface. Distinct
+     from --color-brand (used only as a fill) because deep forest green
+     text stops being legible once the page background goes dark. */
+  --color-brand-text: light-dark(#1e3d2f, #5fb583);
+
+  /* Lighter accent text (reorder icon, "fixed" audit label) — only ever
+     used as text on page background, never as a fill, so it's themed
+     the same way as --color-brand-text but keeps its own, lighter,
+     shade in light mode. */
+  --color-brand-light: light-dark(#3d7a57, #7fc99a);
+
+  /* Decorative "not included" mark in the plans comparison table —
+     deliberately understated (not a semantic error/muted colour), so it
+     gets its own token rather than reusing --color-muted. */
+  --color-cross-mark: light-dark(#aaa, #a6b0a8);
+
+  /* Semantic */
+  --color-error: light-dark(#b91c1c, #f87171);
+  --color-error-bg: light-dark(#fde8e8, #3a1a1a);
+
+  /* danger icon-button border */
+  --color-error-border: light-dark(#fca5a5, #7a3838);
+  --color-success: light-dark(#166534, #4ade80);
+  --color-success-bg: light-dark(#dcfce7, #14291c);
+  --color-warning: light-dark(#92400e, #fbbf24);
+  --color-warning-bg: light-dark(#fef3c7, #2e2308);
+
+  /* Form/table furniture */
+  --color-input-border: light-dark(#b8b3ac, #4a5c50);
+  --color-table-row-hover: light-dark(#f4f2ef, #253128);
+  --color-table-stripe: light-dark(#f9f8f6, #1f2c24);
+  --color-table-header-cell: light-dark(#f7f6f4, #202e26);
+
+  /* Strain-type / order-status badges (index.html, orders.html) */
+  --color-type-naptime-bg: light-dark(#e0f2f1, #0d3d38);
+  --color-type-naptime-text: light-dark(#00695c, #7fd9c9); /* 5.0:1 light */
+  --color-type-zoomies-bg: light-dark(#fff3e0, #3d2508);
+  --color-type-zoomies-text: light-dark(#92400e, #ffb74d); /* 5.8:1 light */
+  --color-type-existential-bg: light-dark(#ede7f6, #2a1f47);
+  --color-type-existential-text: light-dark(#4527a0, #c5a8f0); /* 7.2:1 light */
+  --color-status-shipped-bg: light-dark(#e0f2fe, #0c2d45);
+  --color-status-shipped-text: light-dark(#075985, #7dd3fc);
+
+  /* Type scale */
+  --font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Menlo', 'Consolas', 'Courier New', monospace;
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 8%), 0 1px 2px rgb(0 0 0 / 6%);
+  --shadow-md: 0 4px 6px rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 6%);
+  --shadow-lg: 0 10px 15px rgb(0 0 0 / 10%), 0 4px 6px rgb(0 0 0 / 5%);
+
+  /* Touch targets — WCAG 2.5.5 enhanced */
+  --target-min: 44px;
+
+  /* Layout */
+  --max-width: 1200px;
+  --content-width: 800px;
+  --nav-height: 64px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-theme: 200ms ease; /* bg/text colour swap on theme change */
+}
+
+/* -------------------------------------------------- */
+
+/* Dark mode — explicit user overrides */
+
+/* -------------------------------------------------- */
+
+/* Forces every light-dark() call above to resolve to its dark/light
+   argument, regardless of the OS preference — wins over the :root
+   default because attribute selectors beat a bare :root on specificity. */
+:root[data-user-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+:root[data-user-color-scheme='light'] {
+  color-scheme: light;
+}
+
+body {
+  transition:
+    background-color var(--transition-theme),
+    color var(--transition-theme);
+}
+
+/* Honour reduced-motion requests */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-theme: 0ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

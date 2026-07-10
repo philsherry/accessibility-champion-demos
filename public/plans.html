@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="assets/js/theme-init.js"></script>
+  <title>Subscription Plans — Nip &amp; Claw</title>
+  <meta name="description" content="Monthly catnip subscriptions. The Catnap, The Zoomies, The Full Send.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#1e3d2f">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/plans.css">
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Skip link — Section 6, Chapter 9 — Keyboard navigation and focus. -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+      <div class="inner">
+        <a href="index.html" class="site-logo">
+          <span class="wordmark">Nip &amp; Claw</span>
+          <span class="tagline">purrveyors of the finest artisanal catnip</span>
+        </a>
+        <div class="nav-cart">
+          <a href="checkout.html" class="cart-link" aria-label="Cart, 2 items">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Cart
+            <span class="cart-count" aria-hidden="true">2</span>
+          </a>
+        </div>
+        <nav class="site-nav" aria-label="Main">
+          <ul role="list">
+            <li><a href="index.html">Products</a></li>
+            <li><a href="plans.html" aria-current="page">Subscriptions</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+          </ul>
+        </nav>
+        <fieldset class="theme-toggle" data-component="theme-toggle">
+          <legend class="sr-only">Colour scheme</legend>
+          <label class="theme-option">
+            <input type="radio" name="theme" value="auto" checked>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span class="sr-only">System default</span>
+          </label>
+          <label class="theme-option">
+            <input type="radio" name="theme" value="light">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <span class="sr-only">Light theme</span>
+          </label>
+          <label class="theme-option">
+            <input type="radio" name="theme" value="dark">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            <span class="sr-only">Dark theme</span>
+          </label>
+        </fieldset>
+      </div>
+    </header>
+
+    <main id="main" class="main-content" tabindex="-1">
+
+      <div class="plans-intro">
+        <h1>Subscription plans</h1>
+        <p>Monthly curated catnip, delivered while your human is at work. Cancel anytime. (Your human cannot cancel on your behalf.)</p>
+      </div>
+
+      <!-- Comparison table — discussed in Section 6, Chapter 13 — Accessible tables.
+
+           This table has two axes: plan names across the top (column headers)
+           and features down the left (row headers). Both use <th> with scope
+           to associate headers with their cells in both directions.
+
+           The first header cell (top-left, the "Feature" column) uses scope="col"
+           even though it describes the row header column — this is correct.
+
+           Check/cross cells hide the raw Unicode characters ✓ and — from assistive
+           tech (aria-hidden) and pair them with sr-only text ("Included" /
+           "Not included") instead — a bare <span> has no default accessible-name-
+           supporting role, so aria-label alone isn't reliably exposed, and these
+           glyphs aren't images, so role="img" would misrepresent what they are.
+           Discussed in Section 6, Chapter 6 — ARIA — when and how to use it
+           (naming with aria-label when no visible text conveys the meaning). -->
+      <div class="plans-table-wrapper">
+        <table class="plans-table">
+          <caption class="sr-only">Nip &amp; Claw subscription plan comparison — The Catnap, The Zoomies, and The Full Send</caption>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only">Feature</span></th>
+              <th scope="col">
+                <span class="plan-name">The Catnap</span>
+                <span class="plan-price">£9<span class="plan-price-sub">/month</span></span>
+                <span class="plan-tagline">For the cat who has <em>a</em> Tuesday</span>
+              </th>
+              <th scope="col">
+                <span class="plan-recommended">Most popular</span>
+                <span class="plan-name">The Zoomies</span>
+                <span class="plan-price">£19<span class="plan-price-sub">/month</span></span>
+                <span class="plan-tagline">For the cat who has <em>every</em> Tuesday</span>
+              </th>
+              <th scope="col">
+                <span class="plan-name">The Full Send</span>
+                <span class="plan-price">£29<span class="plan-price-sub">/month</span></span>
+                <span class="plan-tagline">For the cat who has already made their decision</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                Strains per month
+                <span class="feature-hint">Curated by our feline sommeliers</span>
+              </th>
+              <td>1</td>
+              <td>3</td>
+              <td>Unlimited</td>
+            </tr>
+            <tr>
+              <th scope="row">Potency range</th>
+              <td>Mild to medium</td>
+              <td>Mixed</td>
+              <td>Full spectrum</td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Delivery frequency
+                <span class="feature-hint">While human is at work</span>
+              </th>
+              <td>Monthly</td>
+              <td>Monthly</td>
+              <td>Monthly + on-demand</td>
+            </tr>
+            <tr>
+              <th scope="row">Exclusive limited editions</th>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Early access to new strains
+                <span class="feature-hint">Before they're listed publicly</span>
+              </th>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Tasting notes card</th>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+            </tr>
+            <tr>
+              <th scope="row">
+                Priority dispatch
+                <span class="feature-hint">Your human will not understand the invoices</span>
+              </th>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Cancel anytime</th>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td><a href="checkout.html?plan=catnap" class="btn btn-secondary">Choose The Catnap</a></td>
+              <td><a href="checkout.html?plan=zoomies" class="btn btn-primary">Choose The Zoomies</a></td>
+              <td><a href="checkout.html?plan=fullsend" class="btn btn-secondary">Choose The Full Send</a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- FAQ — <details> / <summary> disclosure pattern.
+           Native HTML handles the open/close toggle; no JS required.
+           Screen readers announce the summary text and the expanded/collapsed state.
+           The + / × visual indicator (CSS ::after) is decorative (aria-hidden via
+           CSS content) — the state is conveyed by the <details> element itself.
+           Discussed in Section 6, Chapter 5 — Accessible HTML (native interactive elements). -->
+      <section class="faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Frequently asked questions</h2>
+
+        <details>
+          <summary>Can I pause my subscription?</summary>
+          <p>Yes. From your account you can pause delivery for up to 3 months. Your human will not notice. They have not noticed any of this.</p>
+        </details>
+
+        <details>
+          <summary>What if I don't like the curated strain?</summary>
+          <p>We offer a 100% satisfaction guarantee. If a strain does not produce the expected zoomies, extended loaf formation, or wall-staring duration, contact us within 14 days. We will send a replacement. Lucy Fur has never complained. We consider this a good sign.</p>
+        </details>
+
+        <details>
+          <summary>Is there a minimum commitment?</summary>
+          <p>No minimum commitment. Cancel anytime. Although once you've had the Girl Scout Mousies, the data suggests you won't.</p>
+        </details>
+
+        <details>
+          <summary>My human cancelled my subscription. Can I reinstate it?</summary>
+          <p>We are sorry to hear this. You can reinstate at any time. We recommend waiting until your human is asleep.</p>
+        </details>
+
+      </section>
+
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="inner">
+        <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
+        <p>Subscription queries: lucy@nipandclaw.com · <a href="index.html">Back to products</a></p>
+        <p>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion</a> book. All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not. · <a href="accessibility.html">Accessibility statement</a></p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="assets/js/theme.js"></script>
+</body>
+</html>

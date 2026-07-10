@@ -1,0 +1,9 @@
+{
+  "root": true,
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "attribute-boolean-style": "off",
+    "attribute-empty-style": "off",
+    "no-redundant-role": "off"
+  }
+}

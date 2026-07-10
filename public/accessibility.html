@@ -3,152 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="assets/js/theme-init.js"></script>
   <title>Accessibility statement — Nip &amp; Claw</title>
   <meta name="description" content="Our commitment to accessibility, conformance status, known limitations, and how to report issues.">
-  <link rel="stylesheet" href="_shared/tokens.css">
-  <link rel="stylesheet" href="_shared/base.css">
-  <style>
-    .statement-body {
-      max-width: var(--content-width);
-    }
-
-    .statement-body h2 {
-      color: var(--color-brand);
-      margin-top: var(--space-10);
-      margin-bottom: var(--space-4);
-    }
-
-    .statement-body h3 {
-      margin-top: var(--space-6);
-      margin-bottom: var(--space-3);
-    }
-
-    .statement-body p,
-    .statement-body li {
-      color: var(--color-muted);
-      font-size: var(--text-base);
-      line-height: 1.7;
-    }
-
-    .statement-body ul,
-    .statement-body ol {
-      padding-left: var(--space-6);
-      margin-bottom: var(--space-4);
-    }
-
-    .statement-body li {
-      margin-bottom: var(--space-2);
-    }
-
-    .statement-body a {
-      color: var(--color-brand);
-    }
-
-    .conformance-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-3);
-      background: var(--color-success-bg);
-      color: var(--color-success);
-      border: 1.5px solid var(--color-success);
-      border-radius: var(--radius-md);
-      padding: var(--space-3) var(--space-5);
-      font-weight: 700;
-      font-size: var(--text-sm);
-      margin-bottom: var(--space-8);
-    }
-
-    .conformance-badge svg {
-      flex-shrink: 0;
-    }
-
-    .tech-list {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-2);
-      margin-bottom: var(--space-4);
-    }
-
-    .tech-list li {
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-pill);
-      padding: var(--space-1) var(--space-4);
-      font-size: var(--text-sm);
-      color: var(--color-text);
-      font-weight: 500;
-      margin: 0;
-    }
-
-    .known-issue {
-      border-left: 3px solid var(--color-gold-text);
-      padding-left: var(--space-5);
-      margin-bottom: var(--space-5);
-    }
-
-    .known-issue p { margin-top: var(--space-2); }
-
-    .known-issue strong {
-      color: var(--color-text);
-      font-size: var(--text-sm);
-    }
-
-    .audit-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: var(--text-sm);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      margin-bottom: var(--space-6);
-    }
-
-    .audit-table th {
-      background: var(--color-brand);
-      color: var(--color-white);
-      padding: var(--space-3) var(--space-5);
-      text-align: left;
-      font-size: var(--text-xs);
-      letter-spacing: .07em;
-      text-transform: uppercase;
-    }
-
-    .audit-table td {
-      padding: var(--space-3) var(--space-5);
-      border-bottom: 1px solid var(--color-border);
-      vertical-align: top;
-    }
-
-    .audit-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .result-pass  { color: var(--color-success); font-weight: 700; }
-    .result-fixed { color: var(--color-brand-light); font-weight: 700; }
-  </style>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#1e3d2f">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/accessibility.css">
 </head>
 <body>
   <div class="page-wrapper">
 
-    <!-- Skip link — Chapter 06025 — Keyboard navigation and focus. -->
+    <!-- Skip link — Section 6, Chapter 9 — Keyboard navigation and focus. -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
     <header class="site-header" role="banner">
       <div class="inner">
-        <a href="index.html" class="site-logo" aria-label="Nip &amp; Claw — home">
-          <span class="wordmark" aria-hidden="true">Nip &amp; Claw</span>
-          <span class="tagline" aria-hidden="true">purrveyors of the finest artisanal catnip</span>
+        <a href="index.html" class="site-logo">
+          <span class="wordmark">Nip &amp; Claw</span>
+          <span class="tagline">purrveyors of the finest artisanal catnip</span>
         </a>
-        <nav class="site-nav" aria-label="Main">
-          <ul role="list">
-            <li><a href="index.html">Products</a></li>
-            <li><a href="plans.html">Subscriptions</a></li>
-            <li><a href="orders.html">My Orders</a></li>
-          </ul>
-        </nav>
         <div class="nav-cart">
           <a href="checkout.html" class="cart-link" aria-label="Cart, 2 items">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -156,6 +34,31 @@
             <span class="cart-count" aria-hidden="true">2</span>
           </a>
         </div>
+        <nav class="site-nav" aria-label="Main">
+          <ul role="list">
+            <li><a href="index.html">Products</a></li>
+            <li><a href="plans.html">Subscriptions</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+          </ul>
+        </nav>
+        <fieldset class="theme-toggle" data-component="theme-toggle">
+          <legend class="sr-only">Colour scheme</legend>
+          <label class="theme-option">
+            <input type="radio" name="theme" value="auto" checked>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span class="sr-only">System default</span>
+          </label>
+          <label class="theme-option">
+            <input type="radio" name="theme" value="light">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <span class="sr-only">Light theme</span>
+          </label>
+          <label class="theme-option">
+            <input type="radio" name="theme" value="dark">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            <span class="sr-only">Dark theme</span>
+          </label>
+        </fieldset>
       </div>
     </header>
 
@@ -170,7 +73,7 @@
         <!-- role="note" marks this as supplementary information related to the
              surrounding content. aria-label provides the accessible name since
              the badge contains both an icon and text; the label includes both.
-             Discussed in Chapter 06022 — ARIA. -->
+             Discussed in Section 6, Chapter 6 — ARIA — when and how to use it. -->
         <div class="conformance-badge" role="note" aria-label="Conformance status: WCAG 2.2 Level AA">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
           Targeting WCAG 2.2 Level AA conformance
@@ -236,7 +139,7 @@
 
         <p>This site is built with:</p>
 
-        <ul class="tech-list" aria-label="Technologies">
+        <ul class="tech-list">
           <li>HTML5</li>
           <li>CSS (no preprocessor)</li>
           <li>Vanilla JavaScript (ES5-compatible)</li>
@@ -279,7 +182,7 @@
         </ul>
 
         <h3>Colour contrast</h3>
-        <p>All text colour combinations have been verified to meet the 4.5:1 ratio for normal text and 3:1 for large text. The design token comments in <code>_shared/tokens.css</code> document the ratio for each pairing.</p>
+        <p>All text colour combinations have been verified to meet the 4.5:1 ratio for normal text and 3:1 for large text. The design token comments in <code>assets/css/tokens.css</code> document the ratio for each pairing.</p>
 
         <h2>Reporting an issue</h2>
 
@@ -300,7 +203,7 @@
 
     <footer class="site-footer" role="contentinfo">
       <div class="inner">
-        <p><strong style="color:#fff;">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
+        <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
         <p><a href="index.html">Back to products</a></p>
         <p>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion</a> book. All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not.</p>
       </div>
@@ -308,5 +211,6 @@
 
   </div>
 
+  <script src="assets/js/theme.js"></script>
 </body>
 </html>

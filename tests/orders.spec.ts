@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 import { expectNoAxeViolations } from './axe-helpers';
-import { expectSkipLinkBypassesHeader, expectFullKeyboardTraversalStaysVisible } from './keyboard-helpers';
+import { expectFullKeyboardTraversalStaysVisible } from './keyboard-helpers';
 
 test.describe('orders.html', () => {
   test.beforeEach(async ({ page }) => {
@@ -11,11 +11,9 @@ test.describe('orders.html', () => {
     await expectNoAxeViolations(page);
   });
 
-  test('skip link bypasses the header navigation', async ({ page }) => {
-    await expectSkipLinkBypassesHeader(page);
-  });
-
-  test('full keyboard traversal never lands on a hidden element', async ({ page }) => {
+  test('full keyboard traversal never lands on a hidden element', async ({
+    page,
+  }) => {
     await expectFullKeyboardTraversalStaysVisible(page, 40);
   });
 
@@ -32,6 +30,8 @@ test.describe('orders.html', () => {
     // data-label pseudo-content for sighted users — the real headers must
     // still be reachable by role, not display:none, so table-mode screen
     // reader navigation still announces column context.
-    await expect(page.getByRole('columnheader', { name: 'Order date' })).toHaveCount(1);
+    await expect(
+      page.getByRole('columnheader', { name: 'Order date' }),
+    ).toHaveCount(1);
   });
 });

@@ -1,15 +1,51 @@
 {
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@eslint/compat": "^2.1.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.1",
+    "@types/istanbul-lib-coverage": "^2.0.6",
+    "@types/istanbul-lib-report": "^3.0.3",
+    "@types/istanbul-reports": "^3.0.4",
+    "@types/node": "^24.13.3",
+    "eslint": "^10.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-html": "^8.1.4",
+    "eslint-plugin-playwright": "^2.10.5",
+    "fallow": "^3.3.0",
+    "globals": "^17.7.0",
+    "html-validate": "^11.5.5",
+    "http-server": "^14.1.1",
+    "istanbul-lib-coverage": "^3.2.2",
+    "istanbul-lib-report": "^3.0.1",
+    "istanbul-reports": "^3.2.0",
+    "npm-run-all-next": "^1.4.2",
+    "postcss-html": "^1.8.1",
+    "prettier": "^3.9.5",
+    "stylelint": "^17.14.0",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-standard": "^40.0.0",
+    "typescript-eslint": "^8.63.0",
+    "v8-to-istanbul": "^9.3.0",
+    "wallace-cli": "^4.0.2"
+  },
   "name": "accessibility-champion-demos",
   "private": true,
-  "type": "module",
   "scripts": {
-    "test": "playwright test",
-    "test:ui": "playwright test --ui"
+    "analyze": "run-s test:coverage analyze:code analyze:css",
+    "analyze:code": "fallow health --score --coverage reports/coverage/coverage-final.json",
+    "analyze:css": "cat public/assets/css/*.css | wallace",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "run-s lint:js lint:css format:check",
+    "lint:css": "stylelint \"**/*.{css,html}\"",
+    "lint:js": "eslint .",
+    "reports": "http-server ./reports -p 4311 -o",
+    "start": "http-server ./public -p 4310 -o",
+    "test": "playwright test --grep-invert @visual",
+    "test:coverage": "COVERAGE=1 playwright test --project=Desktop --grep-invert @visual",
+    "test:ui": "playwright test --ui",
+    "test:visual": "playwright test --grep @visual"
   },
-  "devDependencies": {
-    "@axe-core/playwright": "^4.10.0",
-    "@playwright/test": "^1.48.0",
-    "@types/node": "^22.0.0",
-    "http-server": "^14.1.1"
-  }
+  "type": "module"
 }
