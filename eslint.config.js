@@ -37,6 +37,22 @@ export default tseslint.config(
     },
   },
 
+  // The service worker and its vendored polyfill run in the
+  // ServiceWorkerGlobalScope, not a normal browser window — a distinct
+  // global set (self, caches, clients, importScripts, ExtendableEvent,
+  // FetchEvent). Still a classic script (importScripts, not
+  // import/export), like the block above.
+  {
+    files: [
+      'public/service-worker.js',
+      'public/assets/js/async-waituntil-polyfill.js',
+    ],
+    languageOptions: {
+      sourceType: 'script',
+      globals: { ...globals.serviceworker },
+    },
+  },
+
   // addProductToCart is declared in cart.js and consumed from
   // index.js/orders.js — with no bundler, every <script src> shares one
   // global scope in load order, so ESLint needs to be told that global
