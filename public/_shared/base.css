@@ -34,24 +34,17 @@ body {
   border-radius: var(--radius-sm);
 }
 
-/* Skip link */
+/* Skip link — always visible (not hidden-until-focus), matching the
+   Accessibility Champion book's own site, which keeps its skip links
+   permanently on screen rather than revealing them only on focus. */
 .skip-link {
-  position: absolute;
-  top: -100%;
-  left: var(--space-4);
-  z-index: 9999;
-  padding: var(--space-3) var(--space-5);
+  display: inline-block;
+  padding: var(--space-2) var(--space-5);
   background: var(--color-brand);
   color: var(--color-white);
   font-weight: 700;
   font-size: var(--text-sm);
-  border-radius: var(--radius-md);
   text-decoration: none;
-  transition: top var(--transition-fast);
-}
-
-.skip-link:focus {
-  top: var(--space-4);
 }
 
 /* -------------------------------------------------- */

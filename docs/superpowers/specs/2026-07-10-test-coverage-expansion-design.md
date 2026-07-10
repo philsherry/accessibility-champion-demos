@@ -6,7 +6,15 @@ Educational, not just coverage-for-coverage's-sake: this repo is read by readers
 
 ## Scope
 
-Four component specs, four e2e specs, one small feature addition (reorder), and two shared-code extractions (`public/_shared/js/` and `tests/utilities/`) that the new work would otherwise duplicate.
+Four component specs, four e2e specs, one small feature addition (reorder), two shared-code extractions (`public/_shared/js/` and `tests/utilities/`) that the new work would otherwise duplicate, and one markup/CSS fix (skip link visibility — see below).
+
+## Skip link: always-visible, not hidden-until-focus
+
+The book's chapter text (06030-document-structure.md) describes skip links as "usually hidden until it receives keyboard focus" — but the book's *own live site* doesn't follow that; its skip link sits permanently visible at the top of every page. This demo previously matched the chapter's general description (hidden-until-focus) rather than the book's own implementation. Changed `.skip-link` in `public/_shared/base.css` to always-visible (removed the `position: absolute; top: -100%` / `:focus` reveal), matching the book's site. Wording stays "Skip to main content" — plain and unambiguous, matching both the chapter text and the book's own site (no themed variant).
+
+This also lines up with a point the book makes elsewhere: accessibility-first as a methodology means giving everyone the same experience, not hiding things of value from some users and revealing them only to others on request. A skip link that only sighted keyboard users ever see (because it's hidden until focus) is arguably the opposite of that — an always-visible skip link is available to everyone equally, not gated behind a specific interaction.
+
+This is a header-site concern, done before `header-site.spec.ts` is written so the new component test encodes the current, correct behavior rather than needing rework immediately after.
 
 ## Directory structure
 
