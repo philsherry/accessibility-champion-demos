@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures';
 
 // The strain-type filter bar — index.html only, the only page with this
 // region. Not a <nav>, despite the name suggesting one: it's a toggle-button

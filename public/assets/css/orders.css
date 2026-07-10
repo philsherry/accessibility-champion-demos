@@ -20,7 +20,7 @@
      screen reader user navigating this table in table mode would hear
      values with no column context. Sighted users get the same
      information via the data-label pseudo-content on each cell below.
-     Mirrors _shared/base.css's .sr-only technique property-for-property
+     Mirrors assets/css/base.css's .sr-only technique property-for-property
      rather than applying that class directly — .sr-only is unconditional,
      and this needs to be scoped to this one breakpoint: above 600px the
      table renders normally and the header must stay visible. */

@@ -74,7 +74,27 @@ npm start
 
 ## Testing
 
-`npm install && npx playwright install --with-deps chromium` once, then `npm test` runs the full accessibility test suite (axe-core + keyboard navigation checks) against every page, at three viewports — Mobile (390×844), Tablet (768×1024), and Desktop (1440×900) — run in that order, matching this project's accessibility-first, mobile-second design priority. See `CONVENTIONS.md` for how tests locate elements on the page.
+`npm install && npx playwright install --with-deps chromium` once, then:
+
+- `npm test` — the full suite (axe-core accessibility scans, HTML structural validation, keyboard navigation, and component/e2e behaviour) against every page, at three viewports — Mobile (390×844), Tablet (768×1024), and Desktop (1440×900) — run in that order, matching this project's accessibility-first, mobile-second design priority. See `CONVENTIONS.md` for how tests locate elements on the page.
+- `npm run test:coverage` — the same suite, Desktop only (avoids tripling redundant capture across viewports), with JS code coverage collected via Playwright's native `page.coverage` API — read directly from Chromium's own inspector protocol, no build step or bundler required.
+- `npm run test:visual` — visual regression snapshots (tagged `@visual`, excluded from `npm test`).
+- `npm run test:ui` — Playwright's interactive UI mode.
+
+Every page is checked for:
+- **axe-core** accessibility violations (WCAG 2.x A/AA rule tags) — `tests/axe-helpers.ts`
+- **HTML structural validity** against `html-validate:recommended` (`.htmlvalidate.json`) — validated against the browser-rendered DOM (post-JS), not the static source, so it also catches issues introduced at runtime that a static linter like djlint can't see (invalid nesting, empty headings, duplicate IDs)
+- **Full keyboard traversal** — every focusable element stays visible
+
+### Reports
+
+Every run writes its results to `reports/`, one subdirectory per tool (gitignored — regenerated locally, not committed):
+
+- `reports/playwright/html/` — the full Playwright HTML report (every test, every viewport, with traces/screenshots on failure)
+- `reports/html-validate/` — one row per page/state/viewport checked; written on every `npm test` run (a `test:coverage` run only produces the Desktop-only subset, since it runs one project)
+- `reports/coverage/` — JS coverage as an Istanbul HTML report; only written by `npm run test:coverage`
+
+`npm run reports` serves and opens a browsable index of whatever's currently in `reports/`.
 
 ---
 

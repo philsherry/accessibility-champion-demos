@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test } from './fixtures';
 import { expectNoAxeViolations } from './axe-helpers';
 import { expectFullKeyboardTraversalStaysVisible } from './keyboard-helpers';
 

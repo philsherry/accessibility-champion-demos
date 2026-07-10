@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subscription Plans — Nip &amp; Claw</title>
   <meta name="description" content="Monthly catnip subscriptions. The Catnap, The Zoomies, The Full Send.">
-  <link rel="stylesheet" href="_shared/tokens.css">
-  <link rel="stylesheet" href="_shared/base.css">
-  <link rel="stylesheet" href="_shared/plans.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/plans.css">
 </head>
 <body>
   <div class="page-wrapper">
@@ -54,8 +54,11 @@
            The first header cell (top-left, the "Feature" column) uses scope="col"
            even though it describes the row header column — this is correct.
 
-           Check/cross cells use aria-label="Included" / aria-label="Not included"
-           so screen readers don't announce the raw Unicode characters ✓ and —.
+           Check/cross cells hide the raw Unicode characters ✓ and — from assistive
+           tech (aria-hidden) and pair them with sr-only text ("Included" /
+           "Not included") instead — a bare <span> has no default accessible-name-
+           supporting role, so aria-label alone isn't reliably exposed, and these
+           glyphs aren't images, so role="img" would misrepresent what they are.
            Discussed in Section 6, Chapter 6 — ARIA — when and how to use it
            (naming with aria-label when no visible text conveys the meaning). -->
       <div class="plans-table-wrapper">
@@ -70,7 +73,7 @@
                 <span class="plan-tagline">For the cat who has <em>a</em> Tuesday</span>
               </th>
               <th scope="col">
-                <span class="plan-recommended" aria-label="Recommended plan">Most popular</span>
+                <span class="plan-recommended">Most popular</span>
                 <span class="plan-name">The Zoomies</span>
                 <span class="plan-price">£19<span class="plan-price-sub">/month</span></span>
                 <span class="plan-tagline">For the cat who has <em>every</em> Tuesday</span>
@@ -109,39 +112,39 @@
             </tr>
             <tr>
               <th scope="row">Exclusive limited editions</th>
-              <td><span class="cross" aria-label="Not included">—</span></td>
-              <td><span class="cross" aria-label="Not included">—</span></td>
-              <td><span class="check" aria-label="Included">✓</span></td>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
             </tr>
             <tr>
               <th scope="row">
                 Early access to new strains
                 <span class="feature-hint">Before they're listed publicly</span>
               </th>
-              <td><span class="cross" aria-label="Not included">—</span></td>
-              <td><span class="check" aria-label="Included">✓</span></td>
-              <td><span class="check" aria-label="Included">✓</span></td>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
             </tr>
             <tr>
               <th scope="row">Tasting notes card</th>
-              <td><span class="cross" aria-label="Not included">—</span></td>
-              <td><span class="check" aria-label="Included">✓</span></td>
-              <td><span class="check" aria-label="Included">✓</span></td>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
             </tr>
             <tr>
               <th scope="row">
                 Priority dispatch
                 <span class="feature-hint">Your human will not understand the invoices</span>
               </th>
-              <td><span class="cross" aria-label="Not included">—</span></td>
-              <td><span class="cross" aria-label="Not included">—</span></td>
-              <td><span class="check" aria-label="Included">✓</span></td>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="cross" aria-hidden="true">—</span><span class="sr-only">Not included</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Included</span></td>
             </tr>
             <tr>
               <th scope="row">Cancel anytime</th>
-              <td><span class="check" aria-label="Yes">✓</span></td>
-              <td><span class="check" aria-label="Yes">✓</span></td>
-              <td><span class="check" aria-label="Yes">✓</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
+              <td><span class="check" aria-hidden="true">✓</span><span class="sr-only">Yes</span></td>
             </tr>
           </tbody>
           <tfoot>

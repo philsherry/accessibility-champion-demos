@@ -30,7 +30,7 @@ Why write this down at all, on a static HTML site with no component framework? T
 Four tools, each scoped to what it's actually good at, rather than one tool stretched to cover all of them:
 
 - **djlint** — HTML structure, plus formatting the embedded `<style>`/`<script>` blocks inside each page (`format_css`/`format_js` in `.djlintrc`).
-- **stylelint** (`stylelint.config.js`) — CSS correctness: deprecated properties, modern colour-function notation, duplicate declarations. Runs against both `_shared/*.css` and the inline `<style>` blocks (`stylelint-config-html`).
+- **stylelint** (`stylelint.config.js`) — CSS correctness: deprecated properties, modern colour-function notation, duplicate declarations. Runs against both `assets/css/*.css` and the inline `<style>` blocks (`stylelint-config-html`).
 - **ESLint** (`eslint.config.js`) — JS correctness, both the Playwright test suite and each page's inline `<script>` (`eslint-plugin-html` extracts and lints it as real JS).
 - **Prettier** (`prettier.config.js`) — formatting for everything djlint doesn't already own: `.ts`/`.js`/`.css`/`.json`. Deliberately excludes `*.html` (`.prettierignore`) — running two formatters against the same file just means they fight each other on every save.
 

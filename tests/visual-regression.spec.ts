@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures';
 
 // Full-page screenshot baseline for every page, at whichever viewport the
 // current project runs (Mobile/Tablet/Desktop — see playwright.config.ts).

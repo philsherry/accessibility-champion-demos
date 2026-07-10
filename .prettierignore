@@ -1,7 +1,5 @@
 node_modules/
-test-results/
-playwright-report/
-blob-report/
+reports/
 package-lock.json
 
 # djlint already formats these (including embedded <style>/<script> blocks

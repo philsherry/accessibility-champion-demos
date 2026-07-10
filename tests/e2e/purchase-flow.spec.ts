@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures';
 
 // The core purchase journey, crossing the seam between two pages —
 // distinct from the component specs, which each test one region in

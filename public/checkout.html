@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout — Nip &amp; Claw</title>
   <meta name="description" content="Complete your Nip &amp; Claw subscription. Secure checkout.">
-  <link rel="stylesheet" href="_shared/tokens.css">
-  <link rel="stylesheet" href="_shared/base.css">
-  <link rel="stylesheet" href="_shared/checkout.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/checkout.css">
 </head>
 <body>
   <div class="page-wrapper">
@@ -85,7 +85,10 @@
           tabindex="-1"
           hidden
         >
-          <h2 id="error-summary-heading"></h2>
+          <!-- Non-empty by default — showErrorSummary() below overwrites this with the
+               actual error count, but a hidden heading should never be empty even
+               before JS runs. -->
+          <h2 id="error-summary-heading">Error summary</h2>
           <p>Please fix the following before we can process your order:</p>
           <ul id="error-summary-list"></ul>
         </div>

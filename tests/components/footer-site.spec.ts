@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures';
 import { PAGES } from '../utilities/pages';
 
 // The footer — one region, tested in isolation, but exercised on every page

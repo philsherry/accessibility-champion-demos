@@ -6,7 +6,12 @@ let cartCount = 2;
 // increment/badge/aria-label/live-region-announce logic exists in exactly
 // one place rather than being duplicated inline a second time.
 // Discussed in Section 6, Chapter 12 — Live regions and error announcement.
-// eslint-disable-next-line no-unused-vars -- called from inline onclick="addProductToCart(this)"/wrapped by addToCart() across the HTML pages, invisible to ESLint's static analysis
+//
+// Called from inline onclick="addProductToCart(this)" (orders.html) and
+// wrapped by addToCart() (index.html) — both invisible to ESLint's static
+// analysis, hence the /* exported */ below telling no-unused-vars this
+// global is consumed elsewhere.
+/* exported addProductToCart */
 function addProductToCart(btn) {
   const product = btn.dataset.product;
   cartCount++;

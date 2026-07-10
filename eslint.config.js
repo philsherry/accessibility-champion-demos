@@ -11,6 +11,9 @@ const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url));
 
 export default tseslint.config(
   includeIgnoreFile(gitignorePath),
+  // Generated report output (each tool's own gitignore lives inside its own
+  // reports/<tool>/ subdirectory, not the root .gitignore — see there for why).
+  { ignores: ['reports/**'] },
   js.configs.recommended,
   prettier,
 
@@ -22,22 +25,28 @@ export default tseslint.config(
     },
   },
 
-  // Shared browser JS, loaded via <script src> on multiple pages.
+  // Shared browser JS, loaded via <script src> on multiple pages. Plain
+  // classic scripts, not ES modules — sourceType: 'script' both reflects
+  // that accurately and enables the /* exported */ pragma below (a no-op
+  // under the default 'module' sourceType).
   {
-    files: ['public/_shared/js/*.js'],
+    files: ['public/assets/js/*.js'],
     languageOptions: {
+      sourceType: 'script',
       globals: { ...globals.browser },
     },
   },
 
   // Inline <script> blocks in the 5 page files. addProductToCart comes from
-  // the externally-loaded _shared/js/cart.js — eslint-plugin-html only sees
+  // the externally-loaded assets/js/cart.js — eslint-plugin-html only sees
   // inline script content, not <script src> references, so it has no way to
-  // know that global exists without being told here.
+  // know that global exists without being told here. Also plain classic
+  // scripts — see sourceType note above.
   {
     files: ['public/*.html'],
     plugins: { html },
     languageOptions: {
+      sourceType: 'script',
       globals: { ...globals.browser, addProductToCart: 'readonly' },
     },
   },

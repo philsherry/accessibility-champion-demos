@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures';
 
 // orders.html's reorder buttons previously had no click handler at all —
 // they existed solely to demonstrate the accessible-icon-button-naming

@@ -5,7 +5,14 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  reporter: 'list',
+  reporter: [
+    ['list'],
+    ['html', { outputFolder: './reports/playwright/html', open: 'never' }],
+  ],
+  outputDir: './reports/playwright/test-results',
+  // No-op unless COVERAGE=1 (see tests/utilities/coverage.ts) — merges and
+  // reports the JS coverage collected by tests/fixtures.ts's page fixture.
+  globalTeardown: './tests/global-teardown.ts',
   use: {
     baseURL: 'http://127.0.0.1:4310',
     trace: 'retain-on-failure',

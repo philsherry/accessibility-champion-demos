@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures';
 
 // The product-card grid — index.html only. Tests the cards' own structure
 // and naming (in isolation from the filter-bar that drives their

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures';
 
 // A keyboard-only journey across multiple pages via the header nav —
 // complements header-site.spec.ts's per-page aria-current snapshots with

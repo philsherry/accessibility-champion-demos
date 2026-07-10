@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures';
 
 // A full error-recovery loop — invalid submit, fix the fields, resubmit,
 // confirm success — as opposed to checkout.spec.ts's existing single-shot

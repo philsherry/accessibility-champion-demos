@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../fixtures';
 import { expectSkipLinkBypassesHeader } from '../keyboard-helpers';
 import { PAGES } from '../utilities/pages';
 
