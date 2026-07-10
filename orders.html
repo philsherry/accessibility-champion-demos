@@ -20,7 +20,25 @@
 
     /* Responsive: on narrow viewports, each row stacks */
     @media (max-width: 600px) {
-      .orders-table thead { display: none; }
+      /* Visually hidden, not display:none — display:none removes the
+         <th scope="col"> headers from the accessibility tree entirely, so a
+         screen reader user navigating this table in table mode would hear
+         values with no column context. Sighted users get the same
+         information via the data-label pseudo-content on each cell below.
+         Mirrors _shared/base.css's .sr-only technique property-for-property
+         rather than applying that class directly — .sr-only is unconditional,
+         and this needs to be scoped to this one breakpoint: above 600px the
+         table renders normally and the header must stay visible. */
+      .orders-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
 
       .orders-table tr {
         display: block;
@@ -92,7 +110,7 @@
       </div>
     </header>
 
-    <main id="main" class="main-content">
+    <main id="main" class="main-content" tabindex="-1">
 
       <div class="page-heading">
         <h1>My orders</h1>
@@ -232,7 +250,6 @@
     </footer>
 
   </div>
-
 
 </body>
 </html>

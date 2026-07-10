@@ -134,56 +134,45 @@ body {
   font-weight: 700;
 }
 
-/* Mobile nav — two-row layout: logo + cart on row 1, nav on row 2.
-   Single-row doesn't work because "Subscriptions" + "My Orders" push the
-   logo off-screen on narrow viewports. Two-row keeps logo always visible.
+/* Mobile nav — CSS Grid, two rows: logo (full width) on row 1, nav + cart
+   on row 2. Grid areas place elements visually WITHOUT touching document
+   order — logo, nav, and cart stay in that exact order in the DOM, so
+   keyboard tab order always matches what's on screen, row by row,
+   left-to-right. (The previous version used flexbox `order` to pull the
+   cart up next to the logo — visually tidy, but it meant a keyboard user
+   watching the focus ring saw it jump: logo, then down to the nav row,
+   then back up to the cart. That mismatch is why the tagline used to get
+   dropped too — cramming logo + cart onto one row left no room for it.
+   Giving the logo its own full row removes that pressure entirely.)
    Nav scrolls horizontally if labels overflow — items remain keyboard
    accessible and touch-swipeable. Scrollbar hidden via scrollbar-width. */
 @media (max-width: 640px) {
-  .site-logo .tagline {
-    display: none;
-  }
-
   .site-header {
     height: auto; /* grow to fit two rows */
   }
 
   .site-header .inner {
-    flex-wrap: wrap;
-    row-gap: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'logo logo'
+      'nav  cart';
+    row-gap: var(--space-2);
     column-gap: var(--space-3);
-    padding: var(--space-2) var(--space-4) 0;
-    align-items: center;
+    padding: var(--space-2) var(--space-4);
   }
 
-  /* Row 1: logo (left) + cart (right).
-     Row 2: nav — full width, horizontally scrollable.
-     flex order overrides document order so cart stays with logo. */
   .site-logo {
-    flex-shrink: 0;
-    order: 1;
+    grid-area: logo;
   }
 
-  /* Cart pulled to right end of row 1 */
-  .nav-cart {
-    order: 2;
-    margin-left: auto;
-    gap: var(--space-2);
-  }
-
-  /* Nav bumped to row 2, full width, scrollable */
   .site-nav {
-    order: 3;
-    flex: 0 0 100%;
+    grid-area: nav;
+    min-width: 0; /* let a grid item shrink below its content size */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;  /* Firefox */
     padding-bottom: var(--space-2);
-    /* bleed to edges so items reach the gutters */
-    margin-left: calc(-1 * var(--space-4));
-    margin-right: calc(-1 * var(--space-4));
-    padding-left: var(--space-4);
-    padding-right: var(--space-4);
   }
 
   .site-nav::-webkit-scrollbar {
@@ -198,6 +187,11 @@ body {
     padding: var(--space-2) var(--space-3);
     font-size: var(--text-xs);
     white-space: nowrap; /* prevent label wrapping inside a button */
+  }
+
+  .nav-cart {
+    grid-area: cart;
+    gap: var(--space-2);
   }
 
   .cart-link {
