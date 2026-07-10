@@ -12,6 +12,7 @@
    - --color-text on --color-bg:         14.6:1
    - --color-text on --color-surface:    13.2:1
    - --color-brand-text on --color-bg:   6.7:1  (AA for normal text)
+   - --color-brand-light on --color-bg:  8.55:1
    - --color-muted on --color-bg:        7.5:1  (AA for normal text)
    - --color-gold-text on --color-bg:    8.9:1
    - --color-error on --color-bg:        6.1:1  (AA for normal text)
@@ -25,7 +26,6 @@
      change with the colour-scheme theme. */
   --color-brand: #1e3d2f; /* deep forest green — primary */
   --color-brand-mid: #2d5a40; /* medium green — hover/active states */
-  --color-brand-light: #3d7a57; /* lighter green — secondary actions */
   --color-gold-light: #d4a840; /* gold for use on dark green bg — 7.8:1 */
   --color-gold-text: #7a5c1e; /* gold for use on light bg — 5.8:1 */
   --color-gold-hover: #c09030; /* hero button hover — hero is always brand-dark, no theme variant needed */
@@ -43,6 +43,17 @@
      text stops being legible once the page background goes dark. */
   --color-brand-text: #1e3d2f;
   --color-brand-text-rgb: 30 61 47; /* same colour, unpacked for rgb()-with-alpha use (focus rings) */
+
+  /* Lighter accent text (reorder icon, "fixed" audit label) — only ever
+     used as text on page background, never as a fill, so it's themed
+     the same way as --color-brand-text but keeps its own, lighter,
+     shade in light mode. */
+  --color-brand-light: #3d7a57;
+
+  /* Decorative "not included" mark in the plans comparison table —
+     deliberately understated (not a semantic error/muted colour), so it
+     gets its own token rather than reusing --color-muted. */
+  --color-cross-mark: #aaa;
 
   /* Semantic */
   --color-error: #b91c1c;
@@ -135,6 +146,8 @@
     --color-gold-text: #e0b84f; /* 8.9:1 on bg */
     --color-brand-text: #5fb583; /* 6.7:1 on bg */
     --color-brand-text-rgb: 95 181 131;
+    --color-brand-light: #7fc99a; /* 8.55:1 on bg */
+    --color-cross-mark: #a6b0a8;
     --color-error: #f87171; /* 6.1:1 on bg */
     --color-error-rgb: 248 113 113;
     --color-error-bg: #3a1a1a;
@@ -167,6 +180,8 @@
   --color-gold-text: #e0b84f;
   --color-brand-text: #5fb583;
   --color-brand-text-rgb: 95 181 131;
+  --color-brand-light: #7fc99a;
+  --color-cross-mark: #a6b0a8;
   --color-error: #f87171;
   --color-error-rgb: 248 113 113;
   --color-error-bg: #3a1a1a;
@@ -198,6 +213,8 @@
   --color-gold-text: #7a5c1e;
   --color-brand-text: #1e3d2f;
   --color-brand-text-rgb: 30 61 47;
+  --color-brand-light: #3d7a57;
+  --color-cross-mark: #aaa;
   --color-error: #b91c1c;
   --color-error-rgb: 185 28 28;
   --color-error-bg: #fde8e8;

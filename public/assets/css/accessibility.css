@@ -124,6 +124,6 @@
 }
 
 .result-fixed {
-  color: var(--color-brand-text);
+  color: var(--color-brand-light);
   font-weight: 700;
 }

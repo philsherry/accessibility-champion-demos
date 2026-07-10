@@ -140,7 +140,7 @@
 }
 
 .cross {
-  color: var(--color-muted);
+  color: var(--color-cross-mark);
   font-size: var(--text-lg);
 }
 
