@@ -744,6 +744,7 @@ tbody th[scope='row'] {
 }
 
 .theme-option {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -765,6 +766,17 @@ tbody th[scope='row'] {
 .theme-option .icon {
   width: 20px;
   height: 20px;
+}
+
+/* Both the icon and the sr-only label text sit in normal flow, stacked
+   on top of the clipped radio input below — without this, they intercept
+   clicks and taps meant for the input, since they paint above the
+   input's static-position fallback location. The label's native
+   input association still handles the click either way; this just
+   keeps a direct click/tap on the input itself (e.g. Playwright's
+   getByRole('radio').check()) from timing out. */
+.theme-option > *:not(input) {
+  pointer-events: none;
 }
 
 .theme-toggle input {
