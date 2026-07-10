@@ -5,13 +5,11 @@ export async function expectSkipLinkBypassesHeader(page: Page): Promise<void> {
   await page.keyboard.press('Tab');
   await expect(skipLink).toBeFocused();
   await page.keyboard.press('Enter');
-  await page.keyboard.press('Tab');
 
-  const bypassedHeader = await page.evaluate(() => {
-    const active = document.activeElement;
-    return active !== null && active.closest('header') === null;
-  });
-  expect(bypassedHeader, 'Tab after the skip link should not land back inside <header>').toBe(true);
+  // Fragment navigation to a non-focusable target isn't guaranteed to move
+  // focus — some engines just scroll, leaving focus wherever it was. The
+  // skip-link target must carry tabindex="-1" so focus actually lands there.
+  await expect(page.locator('#main')).toBeFocused();
 }
 
 export async function expectFullKeyboardTraversalStaysVisible(
