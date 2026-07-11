@@ -73,15 +73,34 @@ document
       const status = select.value;
       applyStatusToRow(row, status);
 
-      const all = readStoredStatuses();
-      all[orderId] = status;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
-
       const liveRegion = document.getElementById('admin-status');
-      liveRegion.textContent = '';
-      void liveRegion.offsetWidth; // force repaint so screen readers notice the change
-      liveRegion.textContent =
-        'Order #' + orderId + ' marked as ' + STATUS_LABELS[status] + '.';
+      function announce(message) {
+        liveRegion.textContent = '';
+        void liveRegion.offsetWidth; // force repaint so screen readers notice the change
+        liveRegion.textContent = message;
+      }
+
+      // localStorage.setItem can throw (quota exceeded, private-browsing
+      // storage restrictions) — the row above already shows the new
+      // status, so a silent failure here would leave the page looking
+      // saved when it isn't. Announce that distinction rather than
+      // letting the exception skip the announcement entirely.
+      try {
+        const all = readStoredStatuses();
+        all[orderId] = status;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+        announce(
+          'Order #' + orderId + ' marked as ' + STATUS_LABELS[status] + '.',
+        );
+      } catch {
+        announce(
+          'Order #' +
+            orderId +
+            ' shown as ' +
+            STATUS_LABELS[status] +
+            ', but the change could not be saved.',
+        );
+      }
     });
   });
 

@@ -84,8 +84,9 @@ function clearOldCaches() {
 // just taken over, so service-worker-register.js can record when this
 // cached version was installed — displayed on offline.html. Fires once
 // per version bump (on activate), not on every visit or every background
-// stale-while-revalidate refetch, so the displayed timestamp tracks the
-// manual CACHE_VERSION bump policy above.
+// stale-while-revalidate refetch, so the displayed timestamp tracks
+// CACHE_VERSION's actual bump policy: automatic, via the __BUILD_ID__
+// substitution described above, not a manually-maintained value.
 function notifyClientsOfUpdate() {
   return self.clients.matchAll().then((clients) => {
     clients.forEach((client) => {
