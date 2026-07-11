@@ -3,6 +3,7 @@
  */
 export default {
   extends: ['stylelint-config-standard', 'stylelint-config-html/html'],
+  plugins: ['stylelint-order'],
   overrides: [
     {
       files: ['**/*.html'],
@@ -24,5 +25,6 @@ export default {
     // (e.g. .btn-icon--danger).
     'selector-class-pattern':
       '^[a-z][a-z0-9]*(-[a-z0-9]+)*(--[a-z0-9]+(-[a-z0-9]+)*)?$',
+    'order/properties-alphabetical-order': true,
   },
 };

@@ -4,13 +4,13 @@
 
 .statement-body h2 {
   color: var(--color-brand-text);
-  margin-top: var(--space-10);
   margin-bottom: var(--space-4);
+  margin-top: var(--space-10);
 }
 
 .statement-body h3 {
-  margin-top: var(--space-6);
   margin-bottom: var(--space-3);
+  margin-top: var(--space-6);
 }
 
 .statement-body p,
@@ -22,8 +22,8 @@
 
 .statement-body ul,
 .statement-body ol {
-  padding-left: var(--space-6);
   margin-bottom: var(--space-4);
+  padding-left: var(--space-6);
 }
 
 .statement-body li {
@@ -35,17 +35,17 @@
 }
 
 .conformance-badge {
-  display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
   background: var(--color-success-bg);
-  color: var(--color-success);
   border: 1.5px solid var(--color-success);
   border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-5);
-  font-weight: 700;
+  color: var(--color-success);
+  display: inline-flex;
   font-size: var(--text-sm);
+  font-weight: 700;
+  gap: var(--space-3);
   margin-bottom: var(--space-8);
+  padding: var(--space-3) var(--space-5);
 }
 
 .conformance-badge svg {
@@ -53,29 +53,29 @@
 }
 
 .tech-list {
-  list-style: none;
-  padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
+  list-style: none;
   margin-bottom: var(--space-4);
+  padding: 0;
 }
 
 .tech-list li {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
-  padding: var(--space-1) var(--space-4);
-  font-size: var(--text-sm);
   color: var(--color-text);
+  font-size: var(--text-sm);
   font-weight: 500;
   margin: 0;
+  padding: var(--space-1) var(--space-4);
 }
 
 .known-issue {
   border-left: 3px solid var(--color-gold-text);
-  padding-left: var(--space-5);
   margin-bottom: var(--space-5);
+  padding-left: var(--space-5);
 }
 
 .known-issue p {
@@ -92,33 +92,33 @@
    same pattern as .plans-table-wrapper (subscriptions.css) and the book's own
    Table component. */
 .audit-table-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-6);
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
 }
 
 .audit-table {
-  width: 100%;
+  background: var(--color-surface);
   border-collapse: collapse;
   font-size: var(--text-sm);
-  background: var(--color-surface);
+  width: 100%;
 }
 
 .audit-table th {
   background: var(--color-brand);
   color: var(--color-white);
-  padding: var(--space-3) var(--space-5);
-  text-align: left;
   font-size: var(--text-xs);
   letter-spacing: 0.07em;
+  padding: var(--space-3) var(--space-5);
+  text-align: left;
   text-transform: uppercase;
 }
 
 .audit-table td {
-  padding: var(--space-3) var(--space-5);
   border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-5);
   vertical-align: top;
 }
 

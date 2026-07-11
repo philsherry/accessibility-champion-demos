@@ -4,8 +4,8 @@
 
 .offline-body h2 {
   color: var(--color-brand-text);
-  margin-top: var(--space-10);
   margin-bottom: var(--space-4);
+  margin-top: var(--space-10);
 }
 
 .offline-body p {
@@ -16,6 +16,6 @@
 }
 
 #offline-cache-status {
-  font-weight: 600;
   color: var(--color-text);
+  font-weight: 600;
 }

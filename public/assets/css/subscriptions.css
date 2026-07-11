@@ -1,8 +1,8 @@
 /* Plans page */
 
 .plans-intro {
-  max-width: 600px;
   margin-bottom: var(--space-10);
+  max-width: 600px;
 }
 
 .plans-intro h1 {
@@ -17,35 +17,35 @@
 
 /* Comparison table — plans layout */
 .plans-table-wrapper {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   margin-bottom: var(--space-10);
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
 }
 
 .plans-table {
-  width: 100%;
-  border-collapse: collapse;
   background: var(--color-surface);
+  border-collapse: collapse;
   font-size: var(--text-sm);
   min-width: 600px;
+  width: 100%;
 }
 
 /* Column headers — plan names */
 .plans-table thead th {
+  background: var(--color-brand);
+  border-right: 1px solid rgb(255 255 255 / 10%);
   padding: var(--space-6) var(--space-5);
   text-align: center;
   vertical-align: top;
-  background: var(--color-brand);
-  border-right: 1px solid rgb(255 255 255 / 10%);
 }
 
 .plans-table thead th:first-child {
+  background: #162e23; /* slightly darker for the feature-label column */
   text-align: left;
   width: 40%;
-  background: #162e23; /* slightly darker for the feature-label column */
 }
 
 .plans-table thead th:last-child {
@@ -53,76 +53,76 @@
 }
 
 .plan-name {
-  font-size: var(--text-xl);
-  font-weight: 800;
   color: var(--color-white);
   display: block;
+  font-size: var(--text-xl);
+  font-weight: 800;
   margin-bottom: var(--space-1);
 }
 
 .plan-price {
-  font-size: var(--text-2xl);
-  font-weight: 800;
   color: var(--color-gold-light);
   display: block;
+  font-size: var(--text-2xl);
+  font-weight: 800;
   margin-bottom: var(--space-2);
 }
 
 .plan-price-sub {
-  font-size: var(--text-xs);
   color: rgb(255 255 255 / 60%);
-  font-weight: 400;
+  font-size: var(--text-xs);
   font-style: italic;
+  font-weight: 400;
 }
 
 .plan-tagline {
-  font-size: var(--text-xs);
   color: rgb(255 255 255 / 70%);
-  font-style: italic;
   display: block;
+  font-size: var(--text-xs);
+  font-style: italic;
   margin-top: var(--space-2);
 }
 
 /* Recommended badge */
 .plan-recommended {
-  display: inline-block;
   background: var(--color-gold-light);
+  border-radius: var(--radius-pill);
   color: var(--color-brand);
+  display: inline-block;
   font-size: var(--text-xs);
   font-weight: 800;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 0.15rem 0.55rem;
-  border-radius: var(--radius-pill);
   margin-top: var(--space-2);
+  padding: 0.15rem 0.55rem;
+  text-transform: uppercase;
 }
 
 /* Row headers — feature names */
 .plans-table tbody th[scope='row'] {
-  font-weight: 600;
-  text-align: left;
-  color: var(--color-text);
-  padding: var(--space-4) var(--space-5);
   background: var(--color-table-header-cell);
   border-right: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-weight: 600;
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
   vertical-align: middle;
 }
 
 .feature-hint {
-  font-size: var(--text-xs);
   color: var(--color-muted);
-  font-weight: 400;
   display: block;
+  font-size: var(--text-xs);
+  font-weight: 400;
   margin-top: 2px;
 }
 
 /* Value cells */
 .plans-table tbody td {
-  text-align: center;
-  padding: var(--space-4) var(--space-5);
   border-right: 1px solid var(--color-border);
-  vertical-align: middle;
   color: var(--color-text);
+  padding: var(--space-4) var(--space-5);
+  text-align: center;
+  vertical-align: middle;
 }
 
 .plans-table tbody td:last-child {
@@ -146,10 +146,10 @@
 
 /* CTA row */
 .plans-table tfoot td {
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
   padding: var(--space-5);
   text-align: center;
-  border-right: 1px solid var(--color-border);
-  background: var(--color-surface);
 }
 
 .plans-table tfoot td:last-child {
@@ -157,8 +157,8 @@
 }
 
 .plans-table tfoot td:first-child {
-  border-right: 1px solid var(--color-border);
   background: var(--color-table-header-cell);
+  border-right: 1px solid var(--color-border);
 }
 
 /* FAQ section */
@@ -177,14 +177,14 @@ details {
 }
 
 summary {
-  font-weight: 600;
-  cursor: pointer;
-  font-size: var(--text-base);
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-size: var(--text-base);
+  font-weight: 600;
   gap: var(--space-4);
+  justify-content: space-between;
+  list-style: none;
 }
 
 summary::-webkit-details-marker {
@@ -192,10 +192,10 @@ summary::-webkit-details-marker {
 }
 
 summary::after {
-  content: '+';
-  font-size: var(--text-xl);
   color: var(--color-brand-text);
+  content: '+';
   flex-shrink: 0;
+  font-size: var(--text-xl);
   transition: transform var(--transition-fast);
 }
 
@@ -204,7 +204,7 @@ details[open] summary::after {
 }
 
 details p {
-  margin-top: var(--space-3);
   color: var(--color-muted);
   font-size: var(--text-sm);
+  margin-top: var(--space-3);
 }

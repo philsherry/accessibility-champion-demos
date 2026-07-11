@@ -19,12 +19,12 @@ html {
 }
 
 body {
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-family);
   font-size: var(--text-base);
-  line-height: 1.6;
-  color: var(--color-text);
-  background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
 }
 
 /* Focus ring — one shared definition for every focusable element, ported
@@ -88,68 +88,68 @@ body {
 
 .site-header {
   background: var(--color-brand);
+  box-shadow: var(--shadow-md);
   color: var(--color-white);
+  height: var(--nav-height);
   position: sticky;
   top: 0;
   z-index: 100;
-  height: var(--nav-height);
-  box-shadow: var(--shadow-md);
 }
 
 .site-header .inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 var(--space-4);
-  height: 100%;
-  display: flex;
   align-items: center;
+  display: flex;
   gap: var(--space-3);
+  height: 100%;
+  margin: 0 auto;
+  max-width: var(--max-width);
+  padding: 0 var(--space-4);
 }
 
 .site-logo {
-  text-decoration: none;
   flex-shrink: 0;
+  text-decoration: none;
 }
 
 .site-logo .wordmark {
+  color: var(--color-white);
   font-size: var(--text-xl);
   font-weight: 800;
-  color: var(--color-white);
   letter-spacing: -0.02em;
   line-height: 1;
 }
 
 .site-logo .tagline {
-  font-size: var(--text-xs);
   color: var(--color-gold-light);
+  display: block;
+  font-size: var(--text-xs);
   font-style: italic;
   letter-spacing: 0.01em;
-  display: block;
   margin-top: 1px;
 }
 
 .site-nav ul {
-  list-style: none;
+  align-items: center;
   display: flex;
   gap: var(--space-1);
-  align-items: center;
+  list-style: none;
 }
 
 .site-nav a {
-  padding: var(--space-2) var(--space-3);
+  align-items: center;
+  border-radius: var(--radius-md);
   color: var(--color-white);
+  display: flex;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
 
   /* Underlined by default so links are recognisable without relying on
      colour alone (WCAG 1.4.1) — removed on hover/focus, where the
      background fill already provides that same distinction. */
   text-decoration: underline;
-  font-size: var(--text-sm);
-  font-weight: 500;
-  border-radius: var(--radius-md);
   transition: background var(--transition-fast);
-  min-height: var(--target-min);
-  display: flex;
-  align-items: center;
 }
 
 .site-nav a:hover {
@@ -192,13 +192,13 @@ body {
   }
 
   .site-header .inner {
+    align-items: center;
     display: grid;
-    grid-template-columns: 1fr auto;
+    gap: var(--space-4) var(--space-3);
     grid-template-areas:
       'logo badge'
       'nav  cart';
-    align-items: center;
-    gap: var(--space-4) var(--space-3);
+    grid-template-columns: 1fr auto;
     padding: var(--space-2) var(--space-4);
   }
 
@@ -207,8 +207,6 @@ body {
   }
 
   .nav-cart {
-    grid-area: cart;
-
     /* nav (sharing this row) can wrap its 3 links to a second line at
        narrow widths — align-self: end keeps cart level with nav's last
        (lowest) line instead of vertically centering across both lines,
@@ -216,6 +214,7 @@ body {
        tab order (My Orders sits below cart in DOM but was rendering
        above it). */
     align-self: end;
+    grid-area: cart;
   }
 
   .site-nav {
@@ -227,8 +226,8 @@ body {
   }
 
   .site-nav a {
-    padding: var(--space-2) var(--space-3);
     font-size: var(--text-xs);
+    padding: var(--space-2) var(--space-3);
   }
 
   .connectivity-badge {
@@ -243,43 +242,43 @@ body {
 }
 
 .nav-cart {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: var(--space-4);
 }
 
 .cart-link {
-  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  color: var(--color-white);
-  text-decoration: none;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  padding: var(--space-2) var(--space-3);
   border: 1.5px solid rgb(255 255 255 / 30%);
   border-radius: var(--radius-pill);
+  color: var(--color-white);
+  display: flex;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  gap: var(--space-2);
   min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
   transition:
     border-color var(--transition-fast),
     background var(--transition-fast);
 }
 
 .cart-link:hover {
-  border-color: var(--color-gold-light);
   background: rgb(255 255 255 / 10%);
+  border-color: var(--color-gold-light);
 }
 
 .cart-count {
   background: var(--color-gold-light);
-  color: var(--color-brand);
-  font-weight: 800;
-  font-size: var(--text-xs);
   border-radius: var(--radius-pill);
-  padding: 0 var(--space-2);
-  min-width: 1.4rem;
-  text-align: center;
+  color: var(--color-brand);
+  font-size: var(--text-xs);
+  font-weight: 800;
   line-height: 1.5;
+  min-width: 1.4rem;
+  padding: 0 var(--space-2);
+  text-align: center;
 }
 
 /* No border/background by default — sitting next to the logo rather
@@ -289,14 +288,12 @@ body {
    offline state gets a background fill (below) to draw attention to the
    one state actually worth noticing. */
 .connectivity-badge {
-  display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
   color: var(--color-white);
+  display: inline-flex;
   font-size: var(--text-sm);
   font-weight: 600;
-  padding: var(--space-2) var(--space-3);
-  min-height: var(--target-min);
+  gap: var(--space-2);
 
   /* Auto margins on both sides split the row's remaining free space
      evenly between "logo↔badge" and "badge↔nav" — centred, equidistant
@@ -305,6 +302,8 @@ body {
      gap before nav. Reset to 0 in the mobile grid layout below, where
      the badge is positioned by grid-area instead. */
   margin-inline: auto;
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-3);
   transition:
     background var(--transition-fast),
     color var(--transition-fast);
@@ -312,8 +311,8 @@ body {
 
 .connectivity-badge--offline {
   background: var(--color-gold-light);
-  color: var(--color-brand);
   border-radius: var(--radius-md);
+  color: var(--color-brand);
 }
 
 /* -------------------------------------------------- */
@@ -323,16 +322,16 @@ body {
 /* -------------------------------------------------- */
 
 .page-wrapper {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .main-content {
   flex: 1;
-  padding: var(--space-8) var(--space-6);
-  max-width: var(--max-width);
   margin: 0 auto;
+  max-width: var(--max-width);
+  padding: var(--space-8) var(--space-6);
   width: 100%;
 }
 
@@ -345,15 +344,15 @@ body {
 h1 {
   font-size: var(--text-3xl);
   font-weight: 800;
-  line-height: 1.2;
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 h2 {
   font-size: var(--text-2xl);
   font-weight: 700;
-  line-height: 1.25;
   letter-spacing: -0.015em;
+  line-height: 1.25;
 }
 
 h3 {
@@ -388,13 +387,13 @@ p + p {
 
 /* Type badge / label */
 .type-badge {
+  border-radius: var(--radius-pill);
   display: inline-block;
   font-size: var(--text-xs);
   font-weight: 700;
   letter-spacing: 0.07em;
-  text-transform: uppercase;
   padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-pill);
+  text-transform: uppercase;
 }
 
 .type-naptime {
@@ -419,18 +418,18 @@ p + p {
 /* -------------------------------------------------- */
 
 .btn {
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  min-height: var(--target-min);
-  padding: var(--space-3) var(--space-6);
+  border: 2px solid transparent;
   border-radius: var(--radius-md);
+  cursor: pointer;
+  display: inline-flex;
   font-family: var(--font-family);
   font-size: var(--text-base);
   font-weight: 600;
-  cursor: pointer;
-  border: 2px solid transparent;
+  gap: var(--space-2);
+  justify-content: center;
+  min-height: var(--target-min);
+  padding: var(--space-3) var(--space-6);
   text-decoration: none;
   transition:
     background var(--transition-fast),
@@ -450,8 +449,8 @@ p + p {
 
 .btn-secondary {
   background: transparent;
-  color: var(--color-brand-text);
   border-color: var(--color-brand-text);
+  color: var(--color-brand-text);
 }
 
 .btn-secondary:hover {
@@ -461,8 +460,8 @@ p + p {
 
 .btn-ghost {
   background: transparent;
-  color: var(--color-muted);
   border-color: var(--color-border);
+  color: var(--color-muted);
 }
 
 .btn-ghost:hover {
@@ -472,33 +471,33 @@ p + p {
 
 /* Icon-only button — 44×44px minimum */
 .btn-icon {
-  width: var(--target-min);
-  height: var(--target-min);
-  padding: 0;
-  border-radius: var(--radius-md);
+  align-items: center;
   background: transparent;
   border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
   color: var(--color-muted);
   cursor: pointer;
-  font-family: inherit;
   display: inline-flex;
-  align-items: center;
+  font-family: inherit;
+  height: var(--target-min);
   justify-content: center;
+  padding: 0;
   transition:
     background var(--transition-fast),
     color var(--transition-fast),
     border-color var(--transition-fast);
+  width: var(--target-min);
 }
 
 .btn-icon:hover {
   background: var(--color-bg);
-  color: var(--color-text);
   border-color: var(--color-brand-light);
+  color: var(--color-text);
 }
 
 .btn-icon.btn-icon--danger {
-  color: var(--color-error);
   border-color: var(--color-error-border);
+  color: var(--color-error);
 }
 
 .btn-icon.btn-icon--danger:hover {
@@ -516,8 +515,8 @@ p + p {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  overflow: hidden;
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
   transition:
     box-shadow var(--transition-base),
     transform var(--transition-base);
@@ -542,16 +541,16 @@ p + p {
 }
 
 label {
+  color: var(--color-text);
   display: block;
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-text);
   margin-bottom: var(--space-2);
 }
 
 .field-hint {
-  font-size: var(--text-xs);
   color: var(--color-muted);
+  font-size: var(--text-xs);
   margin-top: var(--space-1);
 }
 
@@ -561,18 +560,18 @@ input[type='tel'],
 input[type='number'],
 select,
 textarea {
-  width: 100%;
-  padding: var(--space-3) var(--space-4);
-  font-family: var(--font-family);
-  font-size: var(--text-base);
-  color: var(--color-text);
   background: var(--color-surface);
   border: 1.5px solid var(--color-input-border);
   border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: var(--text-base);
+  min-height: var(--target-min);
+  padding: var(--space-3) var(--space-4);
   transition:
     border-color var(--transition-fast),
     box-shadow var(--transition-fast);
-  min-height: var(--target-min);
+  width: 100%;
 }
 
 input:focus,
@@ -594,11 +593,11 @@ input.has-error:focus {
 }
 
 .field-error {
-  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--text-sm);
   color: var(--color-error);
+  display: flex;
+  font-size: var(--text-sm);
+  gap: var(--space-2);
   margin-top: var(--space-2);
 }
 
@@ -614,19 +613,19 @@ input.has-error:focus {
 /* -------------------------------------------------- */
 
 .table-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  width: 100%;
 }
 
 table {
-  width: 100%;
+  background: var(--color-surface);
   border-collapse: collapse;
   font-size: var(--text-sm);
-  background: var(--color-surface);
+  width: 100%;
 }
 
 thead {
@@ -635,11 +634,11 @@ thead {
 }
 
 thead th {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.07em;
   padding: var(--space-4) var(--space-5);
   text-align: left;
-  font-weight: 700;
-  font-size: var(--text-xs);
-  letter-spacing: 0.07em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -664,15 +663,15 @@ tbody th[scope='row'] {
 }
 
 tbody th[scope='row'] {
+  color: var(--color-text);
   font-weight: 600;
   text-align: left;
-  color: var(--color-text);
 }
 
 .table-actions {
+  align-items: center;
   display: flex;
   gap: var(--space-2);
-  align-items: center;
 }
 
 /* -------------------------------------------------- */
@@ -683,22 +682,22 @@ tbody th[scope='row'] {
 
 .filter-bar {
   display: flex;
-  gap: var(--space-3);
   flex-wrap: wrap;
+  gap: var(--space-3);
   margin-bottom: var(--space-8);
 }
 
 .filter-btn {
-  padding: var(--space-2) var(--space-5);
+  background: var(--color-surface);
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-pill);
-  background: var(--color-surface);
+  color: var(--color-muted);
+  cursor: pointer;
   font-family: var(--font-family);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-muted);
-  cursor: pointer;
   min-height: var(--target-min);
+  padding: var(--space-2) var(--space-5);
   transition: all var(--transition-fast);
 }
 
@@ -710,8 +709,8 @@ tbody th[scope='row'] {
 
 .filter-btn[aria-pressed='true'] {
   background: var(--color-brand);
-  color: var(--color-white);
   border-color: var(--color-brand);
+  color: var(--color-white);
 }
 
 /* -------------------------------------------------- */
@@ -721,13 +720,13 @@ tbody th[scope='row'] {
 /* -------------------------------------------------- */
 
 .status-badge {
-  display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  border-radius: var(--radius-pill);
+  display: inline-flex;
   font-size: var(--text-xs);
   font-weight: 700;
+  gap: var(--space-1);
   padding: 0.2rem 0.65rem;
-  border-radius: var(--radius-pill);
   white-space: nowrap;
 }
 
@@ -760,16 +759,16 @@ tbody th[scope='row'] {
 .site-footer {
   background: var(--color-brand);
   color: rgb(255 255 255 / 70%);
-  padding: var(--space-8) var(--space-6);
   margin-top: auto;
+  padding: var(--space-8) var(--space-6);
 }
 
 .site-footer .inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  margin: 0 auto;
+  max-width: var(--max-width);
 }
 
 .site-footer p {
@@ -793,11 +792,11 @@ tbody th[scope='row'] {
    layout, which only has a fixed budget of horizontal space; the footer
    has no such constraint. */
 .footer-top {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
+  justify-content: space-between;
 }
 
 /* -------------------------------------------------- */
@@ -809,14 +808,14 @@ tbody th[scope='row'] {
    -------------------------------------------------- */
 
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
   border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 /* -------------------------------------------------- */
@@ -826,15 +825,15 @@ tbody th[scope='row'] {
 /* -------------------------------------------------- */
 
 .icon {
-  width: 1.25em;
-  height: 1.25em;
   fill: none;
+  flex-shrink: 0;
+  height: 1.25em;
   stroke: currentcolor;
-  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  flex-shrink: 0;
+  stroke-width: 2;
   vertical-align: -0.15em;
+  width: 1.25em;
 }
 
 /* The HTML UA stylesheet's [hidden] { display: none } rule doesn't
@@ -852,26 +851,26 @@ svg.icon[hidden] {
 /* -------------------------------------------------- */
 
 .theme-toggle {
+  border: none;
   display: flex;
   gap: var(--space-1);
-  border: none;
   margin: 0;
   padding: 0;
 }
 
 .theme-option {
-  position: relative;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: var(--target-min);
-  height: var(--target-min);
   border-radius: var(--radius-md);
   color: rgb(255 255 255 / 70%);
   cursor: pointer;
+  display: flex;
+  height: var(--target-min);
+  justify-content: center;
+  position: relative;
   transition:
     background var(--transition-fast),
     color var(--transition-fast);
+  width: var(--target-min);
 }
 
 .theme-option:hover {
@@ -880,8 +879,8 @@ svg.icon[hidden] {
 }
 
 .theme-option .icon {
-  width: 20px;
   height: 20px;
+  width: 20px;
 }
 
 /* Both the icon and the sr-only label text sit in normal flow, stacked
@@ -896,14 +895,14 @@ svg.icon[hidden] {
 }
 
 .theme-toggle input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
   border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .theme-toggle .theme-option:has(input:checked) {
