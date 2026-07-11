@@ -97,7 +97,13 @@
     border: 0;
   }
 
-  .admin-table tr {
+  /* :not([hidden]) — without it, this unconditional `display: block`
+     (author CSS, always wins over the UA stylesheet's `[hidden] {
+     display: none }` at equal-or-lower specificity) would override the
+     filter bar's `row.hidden = true`, defeating the hide. orders.css's
+     otherwise-identical block never hit this because that table never
+     dynamically hides rows. */
+  .admin-table tr:not([hidden]) {
     display: block;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
