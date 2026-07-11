@@ -21,6 +21,38 @@
     <!-- Skip link — Section 6, Chapter 9 — Keyboard navigation and focus. -->
     <a href="#main" class="skip-link">Skip to main content</a>
 
+    <!-- Icon sprite — Section 6, Chapter 5 accessible-name pattern extended:
+         icons are aria-hidden decoration alongside real text labels, never
+         a replacement for them (WebKit's "golden rule of customizable
+         select"). Defined once, referenced by every status <option> below
+         via <use>. -->
+    <svg hidden aria-hidden="true">
+      <symbol id="icon-processing" viewBox="0 0 24 24">
+        <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+        <path d="M12 22V12" />
+        <polyline points="3.29 7 12 12 20.71 7" />
+        <path d="m7.5 4.27 9 5.15" />
+      </symbol>
+      <symbol id="icon-shipped" viewBox="0 0 24 24">
+        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+        <path d="M15 18H9" />
+        <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" />
+        <circle cx="17" cy="18" r="2" />
+        <circle cx="7" cy="18" r="2" />
+      </symbol>
+      <symbol id="icon-delivered" viewBox="0 0 24 24">
+        <path d="M12 22V12" />
+        <path d="m16 17 2 2 4-4" />
+        <path d="M21 11.127V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.32-.753" />
+        <path d="M3.29 7 12 12l8.71-5" />
+        <path d="m7.5 4.27 8.997 5.148" />
+      </symbol>
+      <symbol id="icon-cancelled" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M4.929 4.929 19.07 19.071" />
+      </symbol>
+    </svg>
+
     <header class="site-header" role="banner">
       <div class="inner">
         <a href="index.html" class="site-logo">
@@ -103,10 +135,10 @@
                   <span class="status-badge status-processing">Processing</span>
                   <label class="sr-only" for="status-1042">Status for order #1042</label>
                   <select id="status-1042" class="status-select" data-component="status-select" data-order-id="1042">
-                    <option value="processing" selected>Processing</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
-                    <option value="cancelled">Cancelled</option>
+                    <option value="processing" selected><svg class="icon" aria-hidden="true"><use href="#icon-processing"></use></svg><span>Processing</span></option>
+                    <option value="shipped"><svg class="icon" aria-hidden="true"><use href="#icon-shipped"></use></svg><span>Shipped</span></option>
+                    <option value="delivered"><svg class="icon" aria-hidden="true"><use href="#icon-delivered"></use></svg><span>Delivered</span></option>
+                    <option value="cancelled"><svg class="icon" aria-hidden="true"><use href="#icon-cancelled"></use></svg><span>Cancelled</span></option>
                   </select>
                   <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1042" aria-label="Save status for order #1042">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -126,10 +158,10 @@
                   <span class="status-badge status-delivered">Delivered</span>
                   <label class="sr-only" for="status-1039">Status for order #1039</label>
                   <select id="status-1039" class="status-select" data-component="status-select" data-order-id="1039">
-                    <option value="processing">Processing</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered" selected>Delivered</option>
-                    <option value="cancelled">Cancelled</option>
+                    <option value="processing"><svg class="icon" aria-hidden="true"><use href="#icon-processing"></use></svg><span>Processing</span></option>
+                    <option value="shipped"><svg class="icon" aria-hidden="true"><use href="#icon-shipped"></use></svg><span>Shipped</span></option>
+                    <option value="delivered" selected><svg class="icon" aria-hidden="true"><use href="#icon-delivered"></use></svg><span>Delivered</span></option>
+                    <option value="cancelled"><svg class="icon" aria-hidden="true"><use href="#icon-cancelled"></use></svg><span>Cancelled</span></option>
                   </select>
                   <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1039" aria-label="Save status for order #1039">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -149,10 +181,10 @@
                   <span class="status-badge status-shipped">Shipped</span>
                   <label class="sr-only" for="status-1041">Status for order #1041</label>
                   <select id="status-1041" class="status-select" data-component="status-select" data-order-id="1041">
-                    <option value="processing">Processing</option>
-                    <option value="shipped" selected>Shipped</option>
-                    <option value="delivered">Delivered</option>
-                    <option value="cancelled">Cancelled</option>
+                    <option value="processing"><svg class="icon" aria-hidden="true"><use href="#icon-processing"></use></svg><span>Processing</span></option>
+                    <option value="shipped" selected><svg class="icon" aria-hidden="true"><use href="#icon-shipped"></use></svg><span>Shipped</span></option>
+                    <option value="delivered"><svg class="icon" aria-hidden="true"><use href="#icon-delivered"></use></svg><span>Delivered</span></option>
+                    <option value="cancelled"><svg class="icon" aria-hidden="true"><use href="#icon-cancelled"></use></svg><span>Cancelled</span></option>
                   </select>
                   <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1041" aria-label="Save status for order #1041">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -172,10 +204,10 @@
                   <span class="status-badge status-cancelled">Cancelled</span>
                   <label class="sr-only" for="status-1037">Status for order #1037</label>
                   <select id="status-1037" class="status-select" data-component="status-select" data-order-id="1037">
-                    <option value="processing">Processing</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
-                    <option value="cancelled" selected>Cancelled</option>
+                    <option value="processing"><svg class="icon" aria-hidden="true"><use href="#icon-processing"></use></svg><span>Processing</span></option>
+                    <option value="shipped"><svg class="icon" aria-hidden="true"><use href="#icon-shipped"></use></svg><span>Shipped</span></option>
+                    <option value="delivered"><svg class="icon" aria-hidden="true"><use href="#icon-delivered"></use></svg><span>Delivered</span></option>
+                    <option value="cancelled" selected><svg class="icon" aria-hidden="true"><use href="#icon-cancelled"></use></svg><span>Cancelled</span></option>
                   </select>
                   <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1037" aria-label="Save status for order #1037">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -195,10 +227,10 @@
                   <span class="status-badge status-shipped">Shipped</span>
                   <label class="sr-only" for="status-1040">Status for order #1040</label>
                   <select id="status-1040" class="status-select" data-component="status-select" data-order-id="1040">
-                    <option value="processing">Processing</option>
-                    <option value="shipped" selected>Shipped</option>
-                    <option value="delivered">Delivered</option>
-                    <option value="cancelled">Cancelled</option>
+                    <option value="processing"><svg class="icon" aria-hidden="true"><use href="#icon-processing"></use></svg><span>Processing</span></option>
+                    <option value="shipped" selected><svg class="icon" aria-hidden="true"><use href="#icon-shipped"></use></svg><span>Shipped</span></option>
+                    <option value="delivered"><svg class="icon" aria-hidden="true"><use href="#icon-delivered"></use></svg><span>Delivered</span></option>
+                    <option value="cancelled"><svg class="icon" aria-hidden="true"><use href="#icon-cancelled"></use></svg><span>Cancelled</span></option>
                   </select>
                   <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1040" aria-label="Save status for order #1040">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
@@ -218,10 +250,10 @@
                   <span class="status-badge status-processing">Processing</span>
                   <label class="sr-only" for="status-1038">Status for order #1038</label>
                   <select id="status-1038" class="status-select" data-component="status-select" data-order-id="1038">
-                    <option value="processing" selected>Processing</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
-                    <option value="cancelled">Cancelled</option>
+                    <option value="processing" selected><svg class="icon" aria-hidden="true"><use href="#icon-processing"></use></svg><span>Processing</span></option>
+                    <option value="shipped"><svg class="icon" aria-hidden="true"><use href="#icon-shipped"></use></svg><span>Shipped</span></option>
+                    <option value="delivered"><svg class="icon" aria-hidden="true"><use href="#icon-delivered"></use></svg><span>Delivered</span></option>
+                    <option value="cancelled"><svg class="icon" aria-hidden="true"><use href="#icon-cancelled"></use></svg><span>Cancelled</span></option>
                   </select>
                   <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1038" aria-label="Save status for order #1038">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>

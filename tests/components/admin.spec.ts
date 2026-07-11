@@ -108,4 +108,77 @@ test.describe('admin — order management', () => {
       .selectOption('delivered');
     await expectNoAxeViolations(page);
   });
+
+  test('status select options are colour-coded and icon-tagged for every status', async ({
+    page,
+  }) => {
+    // This repo's Chromium (bundled with the pinned Playwright version)
+    // supports `appearance: base-select` unconditionally — confirmed
+    // directly via getComputedStyle() before writing this test, see
+    // docs/superpowers/specs/2026-07-11-admin-status-select-icons-design.md's
+    // "Verification" section. No feature-detection/skip needed here.
+    //
+    // Every <select> on this page carries all 4 <option>s regardless of
+    // which one is selected for that row, so checking row #1042's select
+    // alone (mixing its one selected option with three unselected ones)
+    // covers all 4 statuses' styling without looping over every row.
+    const expectations = [
+      {
+        value: 'processing',
+        label: 'Processing',
+        bg: 'rgb(254, 243, 199)',
+        color: 'rgb(146, 64, 14)',
+      },
+      {
+        value: 'shipped',
+        label: 'Shipped',
+        bg: 'rgb(224, 242, 254)',
+        color: 'rgb(7, 89, 133)',
+      },
+      {
+        value: 'delivered',
+        label: 'Delivered',
+        bg: 'rgb(220, 252, 231)',
+        color: 'rgb(22, 101, 52)',
+      },
+      {
+        value: 'cancelled',
+        label: 'Cancelled',
+        bg: 'rgb(243, 244, 246)',
+        color: 'rgb(87, 83, 78)',
+      },
+    ];
+
+    for (const { value, label, bg, color } of expectations) {
+      const result = await page.evaluate((value) => {
+        const option = document.querySelector(
+          `#status-1042 option[value="${value}"]`,
+        );
+        if (!option) return null;
+        const style = getComputedStyle(option);
+        const use = option.querySelector('svg.icon use');
+        const span = option.querySelector('span');
+        const symbolId = use ? use.getAttribute('href')?.slice(1) : null;
+        return {
+          display: style.display,
+          gap: style.gap,
+          backgroundColor: style.backgroundColor,
+          color: style.color,
+          spanText: span ? span.textContent : null,
+          symbolId,
+          symbolExists: symbolId
+            ? Boolean(document.getElementById(symbolId))
+            : false,
+        };
+      }, value);
+
+      expect(result?.display).toBe('flex');
+      expect(result?.gap).toBe('8px');
+      expect(result?.backgroundColor).toBe(bg);
+      expect(result?.color).toBe(color);
+      expect(result?.spanText).toBe(label);
+      expect(result?.symbolId).toBe(`icon-${value}`);
+      expect(result?.symbolExists).toBe(true);
+    }
+  });
 });
