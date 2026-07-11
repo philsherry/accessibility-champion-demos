@@ -1,5 +1,6 @@
 .DS_Store
-screenshots/
+.playwright-mcp/
+*.png
 node_modules/
 playwright/.cache/
-.playwright-mcp/
+screenshots/

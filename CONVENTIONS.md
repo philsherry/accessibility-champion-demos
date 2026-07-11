@@ -37,3 +37,19 @@ Four tools, each scoped to what it's actually good at, rather than one tool stre
 `npm run lint` runs all of them; `lint:js`/`lint:css`/`format:check` run independently for a faster loop while editing one layer.
 
 Two fixes this setup caught worth calling out as examples of what a linter is actually for: `.site-nav a` had two conflicting `display` declarations in the same rule (dead code — the second silently won), and the `.sr-only` visually-hidden technique (Chapter 06025) used the deprecated `clip: rect(0,0,0,0)` instead of modern `clip-path: inset(50%)` — same visual result, but `clip` has been removed from the spec for years. Neither was a style nit; both were stylelint pointing at something actually wrong.
+
+## Test-writing: two Playwright lint rules worth keeping on
+
+Two `eslint-plugin-playwright` rules catch real bugs in the test suite itself, not just style, and are worth understanding rather than reflexively silencing.
+
+**`no-conditional-in-test` / `no-conditional-expect`** flags `if`/`else`, ternaries, and `switch` statements inside a test body. The failure mode this guards against: a conditional whose untaken branch quietly never runs its assertion. A real regression — a missing link, a wrong attribute — and "this branch just didn't execute this run" produce the exact same test output: green. The whole value of an assertion is that it fails loudly when it should; a conditional wrapped around it can make that not true.
+
+The fix is almost always to change *when* the branch is decided, not to hide the conditional behind a comment:
+
+- If the condition is knowable before the test runs — which page a test is being generated for, say — decide the branch at test-registration time instead of inside the test body. Two small, single-purpose tests instead of one test with an `if`/`else` in it. See `footer-site.spec.ts` and `header-site.spec.ts`, which each generate a page's worth of tests from a loop, and pick the right assertion per page outside the test callback itself.
+- If the condition can only be known once the test is actually running (a measured viewport width, a value read back from the DOM), it can't be hoisted — extract a small named function that computes the expected value, and assert against its result unconditionally. See `responsive-layout.spec.ts`'s `expectedHeaderDisplay`.
+- For "only check X across the items where some condition holds," filter the list down to the matching items first, then assert on all of them unconditionally, rather than looping over everything with an `if` inside. See `header-site.spec.ts`'s `sameRowPairs`.
+
+**`no-force-option`** flags `.check({ force: true })` / `.click({ force: true })`, which skip Playwright's built-in check that the element being interacted with is actually visible, unobscured, and reachable — the same properties that determine whether a real mouse user could click it. Most of the time a forced click is masking a genuine problem: a control nobody could actually reach.
+
+Occasionally it's legitimate. This site's theme-toggle radio inputs are deliberately shrunk to a near-invisible hit area, by design, so a sighted user always clicks the surrounding label instead (see `theme-toggle.spec.ts`) — the input itself was never meant to be directly clickable. But before trusting an explanation like that and silencing the warning, verify it: temporarily remove `force: true` and run the test. If it now fails for the reason expected, that's real evidence worth recording next to the disable comment — a claim that force is "needed" isn't the same thing as having just confirmed it's needed, and the markup can drift out of sync with an old comment over time.

@@ -12,13 +12,17 @@ test('dark mode chosen on one page persists after navigating to another', async 
   await page
     .getByRole('group', { name: 'Colour scheme' })
     .getByRole('radio', { name: 'Dark theme' })
+    // Required — see theme-toggle.spec.ts for why: the radio's own hit
+    // area is clipped to 1x1px by design, so Playwright's actionability
+    // check needs bypassing even though a real click event still fires.
+    // eslint-disable-next-line playwright/no-force-option
     .check({ force: true });
 
   await page
     .getByRole('navigation', { name: 'Main' })
     .getByRole('link', { name: 'Subscriptions' })
     .click();
-  await expect(page).toHaveURL(/plans\.html/);
+  await expect(page).toHaveURL(/subscriptions\.html/);
 
   await expect(page.locator('html')).toHaveAttribute(
     'data-user-color-scheme',

@@ -25,6 +25,7 @@
     "stylelint": "^17.14.0",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-standard": "^40.0.0",
+    "stylelint-order": "^8.1.1",
     "typescript-eslint": "^8.63.0",
     "v8-to-istanbul": "^9.3.0",
     "wallace-cli": "^4.0.2"
@@ -37,7 +38,7 @@
     "analyze:css": "cat public/assets/css/*.css | wallace",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "run-s lint:js lint:css format:check",
+    "lint": "run-s format lint:js lint:css format:check",
     "lint:css": "stylelint \"**/*.{css,html}\"",
     "lint:js": "eslint .",
     "reports": "http-server ./reports -p 4311 -o",

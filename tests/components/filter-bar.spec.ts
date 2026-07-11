@@ -17,7 +17,11 @@ test.describe('filter-bar', () => {
     const filterGroup = page.getByRole('group', { name: 'Filter by type' });
     const zoomiesBtn = filterGroup.getByRole('button', { name: 'Zoomies' });
     const allBtn = filterGroup.getByRole('button', { name: 'All strains' });
-    const liveRegion = page.getByRole('status');
+    // Scoped by id, not getByRole('status') — the header's
+    // #connectivity-status live region shares the same role on every
+    // page now, which makes a bare role locator ambiguous. The filter
+    // announcement reuses #cart-status (see assets/js/index.js).
+    const liveRegion = page.locator('#cart-status');
     const grid = page.locator('[data-testid="test_product-grid"]');
 
     await zoomiesBtn.click();
@@ -52,7 +56,11 @@ test.describe('filter-bar', () => {
       name: 'Existential',
     });
     const allBtn = filterGroup.getByRole('button', { name: 'All strains' });
-    const liveRegion = page.getByRole('status');
+    // Scoped by id, not getByRole('status') — the header's
+    // #connectivity-status live region shares the same role on every
+    // page now, which makes a bare role locator ambiguous. The filter
+    // announcement reuses #cart-status (see assets/js/index.js).
+    const liveRegion = page.locator('#cart-status');
     const grid = page.locator('[data-testid="test_product-grid"]');
 
     await existentialBtn.click();

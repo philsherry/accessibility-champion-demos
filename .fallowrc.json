@@ -4,6 +4,7 @@
     "maxCrap": 31,
     "maxCyclomatic": 20
   },
+  "dynamicallyLoaded": ["public/assets/js/async-waituntil-polyfill.js"],
   "ignoreDependencies": ["npm-run-all-next", "postcss-html", "wallace-cli"],
   "rules": {
     "circular-dependencies": "error",

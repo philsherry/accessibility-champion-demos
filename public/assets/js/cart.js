@@ -13,10 +13,10 @@ let cartCount = 2;
  * Discussed in Section 6, Chapter 12 — Live regions and error
  * announcement.
  *
- * Called from assets/js/orders.js's reorder-button listeners and
- * wrapped by addToCart() (assets/js/index.js) — both separate files,
- * invisible to ESLint's static analysis, hence the `exported` pragma
- * below telling no-unused-vars this global is consumed elsewhere.
+ * Called from assets/js/orders.js's and assets/js/index.js's own
+ * button listeners — both separate files, invisible to ESLint's static
+ * analysis, hence the `exported` pragma below telling no-unused-vars
+ * this global is consumed elsewhere.
  *
  * @param {HTMLButtonElement} btn - The clicked button; its
  *   `data-product` attribute names the product being added.

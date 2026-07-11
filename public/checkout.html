@@ -26,6 +26,19 @@
           <span class="wordmark">Nip &amp; Claw</span>
           <span class="tagline">purrveyors of the finest artisanal catnip</span>
         </a>
+        <span class="connectivity-badge" data-component="connectivity-badge">
+          <svg class="icon" data-component="connectivity-icon-online" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6 2 2 4-4"/><path d="M2 12h20A10 10 0 1 1 12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 4-10"/></svg>
+          <svg class="icon" data-component="connectivity-icon-offline" hidden viewBox="0 0 24 24" aria-hidden="true"><path d="M10.114 4.462A14.5 14.5 0 0 1 12 2a10 10 0 0 1 9.313 13.643"/><path d="M15.557 15.556A14.5 14.5 0 0 1 12 22 10 10 0 0 1 4.929 4.929"/><path d="M15.892 10.234A14.5 14.5 0 0 0 12 2a10 10 0 0 0-3.643.687"/><path d="M17.656 12H22"/><path d="M19.071 19.071A10 10 0 0 1 12 22 14.5 14.5 0 0 1 8.44 8.45"/><path d="M2 12h10"/><path d="m2 2 20 20"/></svg>
+          <span data-component="connectivity-badge-label">Online</span>
+        </span>
+        <div id="connectivity-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+        <nav class="site-nav" aria-label="Main">
+          <ul role="list">
+            <li><a href="index.html">Products</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+          </ul>
+        </nav>
         <div class="nav-cart">
           <a href="checkout.html" class="cart-link" aria-label="Cart, 2 items" aria-current="page">
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
@@ -33,31 +46,6 @@
             <span class="cart-count" aria-hidden="true">2</span>
           </a>
         </div>
-        <nav class="site-nav" aria-label="Main">
-          <ul role="list">
-            <li><a href="index.html">Products</a></li>
-            <li><a href="plans.html">Subscriptions</a></li>
-            <li><a href="orders.html">My Orders</a></li>
-          </ul>
-        </nav>
-        <fieldset class="theme-toggle" data-component="theme-toggle">
-          <legend class="sr-only">Colour scheme</legend>
-          <label class="theme-option">
-            <input type="radio" name="theme" value="auto" checked>
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            <span class="sr-only">System default</span>
-          </label>
-          <label class="theme-option">
-            <input type="radio" name="theme" value="light">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-            <span class="sr-only">Light theme</span>
-          </label>
-          <label class="theme-option">
-            <input type="radio" name="theme" value="dark">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-            <span class="sr-only">Dark theme</span>
-          </label>
-        </fieldset>
       </div>
     </header>
 
@@ -75,7 +63,10 @@
         </div>
         <h1 tabindex="-1">Order placed!</h1>
         <p>Lucy Fur's first delivery is on its way. Your human will not understand the invoice.</p>
-        <a href="orders.html" class="btn btn-primary">View my orders</a>
+        <div class="success-actions">
+          <a href="orders.html" class="btn btn-primary">View my orders</a>
+          <a href="receipt.html" id="view-receipt-link" class="btn btn-secondary">View receipt</a>
+        </div>
       </div>
 
       <!-- Checkout form wrapper — hidden after successful submission -->
@@ -398,15 +389,39 @@
 
     <footer class="site-footer" role="contentinfo">
       <div class="inner">
-        <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
-        <p>Checkout support: lucy@nipandclaw.com · <a href="plans.html">Back to plans</a></p>
-        <p>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion</a> book. All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not. · <a href="accessibility.html">Accessibility statement</a></p>
+        <div class="footer-top">
+          <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
+          <fieldset class="theme-toggle" data-component="theme-toggle">
+            <legend class="sr-only">Colour scheme</legend>
+            <label class="theme-option">
+              <input type="radio" name="theme" value="auto" checked>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span class="sr-only">System default</span>
+            </label>
+            <label class="theme-option">
+              <input type="radio" name="theme" value="light">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+              <span class="sr-only">Light theme</span>
+            </label>
+            <label class="theme-option">
+              <input type="radio" name="theme" value="dark">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              <span class="sr-only">Dark theme</span>
+            </label>
+          </fieldset>
+        </div>
+        <div>Checkout support: lucy@nipandclaw.com · <a href="subscriptions.html">Back to plans</a></div>
+        <div>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion book</a>. · <a href="accessibility.html">Accessibility statement</a> · <a href="offline.html">Offline access</a> · <a href="admin.html">Staff</a></div>
+        <div>All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not.</div>
       </div>
     </footer>
 
   </div>
 
   <script src="assets/js/theme.js"></script>
+  <script src="assets/js/connectivity-badge.js"></script>
+  <script src="assets/js/service-worker-register.js"></script>
+  <script src="assets/js/plans-data.js"></script>
   <script src="assets/js/checkout.js"></script>
 
 </body>

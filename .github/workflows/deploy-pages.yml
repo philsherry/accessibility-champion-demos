@@ -23,6 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Inject cache version into the service worker
+        run: sed -i "s/__BUILD_ID__/${GITHUB_SHA::7}/" public/service-worker.js
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public

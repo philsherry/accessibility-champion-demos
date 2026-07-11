@@ -1,0 +1,141 @@
+.staff-notice {
+  background: var(--color-warning-bg);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-md);
+  color: var(--color-warning);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-6);
+  padding: var(--space-4);
+}
+
+.order-count {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  margin-top: var(--space-2);
+}
+
+.status-cell {
+  align-items: center;
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* Native <select> baseline — every browser gets this regardless of
+   Customizable Select support. */
+.status-select {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: var(--text-sm);
+  min-height: var(--target-min);
+  padding: var(--space-1) var(--space-2);
+}
+
+/* Customizable Select — colour-codes each option to match this site's
+   existing status-badge palette. Every option keeps its real text label
+   regardless of colour (the "golden rule" of this feature: colour is
+   decoration, never the only signal — same principle already applied to
+   .status-badge/.type-badge elsewhere on this site). Feature-detected:
+   browsers without support fall through to the plain native <select>
+   styled above, with full functionality either way. */
+@supports (appearance: base-select) {
+  .status-select {
+    appearance: base-select;
+  }
+
+  .status-select::picker(select) {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-1);
+  }
+
+  .status-select option {
+    align-items: center;
+    border-radius: var(--radius-sm);
+    display: flex;
+    font-weight: 700;
+    gap: var(--space-2);
+    padding: var(--space-2);
+  }
+
+  .status-select option[value='processing'] {
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+  }
+
+  .status-select option[value='shipped'] {
+    background: var(--color-status-shipped-bg);
+    color: var(--color-status-shipped-text);
+  }
+
+  .status-select option[value='delivered'] {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+  }
+
+  .status-select option[value='cancelled'] {
+    background: var(--color-status-cancelled-bg);
+    color: var(--color-status-cancelled-text);
+  }
+}
+
+/* Responsive: on narrow viewports, each row stacks — identical technique
+   to .orders-table in orders.css, applied under a page-specific class
+   name (this site's existing convention: each page's table gets its own
+   class even though the underlying pattern repeats). */
+@media (width <= 600px) {
+  .admin-table thead {
+    border: 0;
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  /* :not([hidden]) — without it, this unconditional `display: block`
+     (author CSS, always wins over the UA stylesheet's `[hidden] {
+     display: none }` at equal-or-lower specificity) would override the
+     filter bar's `row.hidden = true`, defeating the hide. orders.css's
+     otherwise-identical block never hit this because that table never
+     dynamically hides rows. */
+  .admin-table tr:not([hidden]) {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    display: block;
+    margin-bottom: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .admin-table td,
+  .admin-table th[scope='row'] {
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    font-size: var(--text-sm);
+    justify-content: space-between;
+    padding: var(--space-2) 0;
+  }
+
+  .admin-table td:last-child,
+  .admin-table th[scope='row']:last-child {
+    border-bottom: none;
+  }
+
+  .admin-table td::before {
+    color: var(--color-muted);
+    content: attr(data-label);
+    flex-shrink: 0;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-right: var(--space-4);
+    text-transform: uppercase;
+  }
+}

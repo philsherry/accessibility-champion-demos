@@ -2,38 +2,8 @@
  * Checkout page (checkout.html) — populates the order summary from the
  * `?plan=` query param, and validates the checkout form on submit.
  *
- * Order summary — populate from ?plan= query param.
- * taglineParts: array of [text, isItalic] tuples.
- * Built with DOM methods (no innerHTML) to keep content safe.
+ * PLANS is declared in plans-data.js, loaded before this file.
  */
-const PLANS = {
-  catnap: {
-    name: 'The Catnap',
-    price: 9,
-    taglineParts: [
-      ['For the cat who has ', false],
-      ['a', true],
-      [' Tuesday', false],
-    ],
-    promo: false,
-  },
-  zoomies: {
-    name: 'The Zoomies',
-    price: 19,
-    taglineParts: [
-      ['For the cat who has ', false],
-      ['every', true],
-      [' Tuesday', false],
-    ],
-    promo: true,
-  },
-  fullsend: {
-    name: 'The Full Send',
-    price: 29,
-    taglineParts: [['For the cat who has already made their decision', false]],
-    promo: false,
-  },
-};
 
 const params = new URLSearchParams(location.search);
 const planKey = params.get('plan') || 'zoomies';
@@ -272,6 +242,8 @@ document.getElementById('checkout-form').addEventListener('submit', (e) => {
   const success = document.getElementById('checkout-success');
   success.hidden = false;
   success.querySelector('h1').focus();
+  document.getElementById('view-receipt-link').href =
+    'receipt.html?plan=' + planKey;
 });
 
 /* Inline re-validation on blur — clears error once the field is corrected */
