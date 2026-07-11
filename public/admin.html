@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="assets/js/theme-init.js"></script>
+  <title>Staff — Order Management — Nip &amp; Claw</title>
+  <meta name="description" content="Staff order-management view. No login required — see below for why.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#1e3d2f">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- Skip link — Section 6, Chapter 9 — Keyboard navigation and focus. -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="site-header" role="banner">
+      <div class="inner">
+        <a href="index.html" class="site-logo">
+          <span class="wordmark">Nip &amp; Claw</span>
+          <span class="tagline">purrveyors of the finest artisanal catnip</span>
+        </a>
+        <span class="connectivity-badge" data-component="connectivity-badge">
+          <svg class="icon" data-component="connectivity-icon-online" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6 2 2 4-4"/><path d="M2 12h20A10 10 0 1 1 12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 4-10"/></svg>
+          <svg class="icon" data-component="connectivity-icon-offline" hidden viewBox="0 0 24 24" aria-hidden="true"><path d="M10.114 4.462A14.5 14.5 0 0 1 12 2a10 10 0 0 1 9.313 13.643"/><path d="M15.557 15.556A14.5 14.5 0 0 1 12 22 10 10 0 0 1 4.929 4.929"/><path d="M15.892 10.234A14.5 14.5 0 0 0 12 2a10 10 0 0 0-3.643.687"/><path d="M17.656 12H22"/><path d="M19.071 19.071A10 10 0 0 1 12 22 14.5 14.5 0 0 1 8.44 8.45"/><path d="M2 12h10"/><path d="m2 2 20 20"/></svg>
+          <span data-component="connectivity-badge-label">Online</span>
+        </span>
+        <div id="connectivity-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+        <nav class="site-nav" aria-label="Main">
+          <ul role="list">
+            <li><a href="index.html">Products</a></li>
+            <li><a href="subscriptions.html">Subscriptions</a></li>
+            <li><a href="orders.html">My Orders</a></li>
+          </ul>
+        </nav>
+        <div class="nav-cart">
+          <a href="checkout.html" class="cart-link" aria-label="Cart, 2 items">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Cart
+            <span class="cart-count" aria-hidden="true">2</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="main-content" tabindex="-1">
+
+      <div class="page-heading">
+        <h1>Staff — order management</h1>
+        <p class="order-count">Showing 6 orders</p>
+      </div>
+
+      <!-- Live region for status-save and filter-result feedback. -->
+      <div id="admin-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+      <p class="staff-notice">
+        <strong>Authentication: none required.</strong> Cats assume everything already belongs to them, including the back office — so there's no login here.
+      </p>
+
+      <!-- Status filter bar — same interaction pattern as index.html's
+           strain-type filter, applied to order status instead.
+           Discussed in Section 6, Chapter 5 — Accessible HTML and
+           Section 6, Chapter 12 — Live regions and error announcement. -->
+      <div class="filter-bar" role="group" aria-label="Filter by status">
+        <button type="button" class="filter-btn" aria-pressed="true" data-filter="all" data-component="admin-filter-btn">All orders</button>
+        <button type="button" class="filter-btn" aria-pressed="false" data-filter="processing" data-component="admin-filter-btn">Processing</button>
+        <button type="button" class="filter-btn" aria-pressed="false" data-filter="shipped" data-component="admin-filter-btn">Shipped</button>
+        <button type="button" class="filter-btn" aria-pressed="false" data-filter="delivered" data-component="admin-filter-btn">Delivered</button>
+        <button type="button" class="filter-btn" aria-pressed="false" data-filter="cancelled" data-component="admin-filter-btn">Cancelled</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="admin-table">
+          <caption class="sr-only">All customer orders, most recent first</caption>
+          <thead>
+            <tr>
+              <th scope="col">Order</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Order date</th>
+              <th scope="col">Strain</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Total</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-order-id="1042" data-status="processing">
+              <th scope="row" data-label="Order">#1042</th>
+              <td data-label="Customer">Lucy Fur</td>
+              <td data-label="Order date">26 May 2026</td>
+              <td data-label="Strain">Girl Scout Mousies</td>
+              <td data-label="Qty">2×10g</td>
+              <td data-label="Total">£23.98</td>
+              <td data-label="Status">
+                <div class="status-cell">
+                  <span class="status-badge status-processing">Processing</span>
+                  <label class="sr-only" for="status-1042">Status for order #1042</label>
+                  <select id="status-1042" class="status-select" data-component="status-select" data-order-id="1042">
+                    <option value="processing" selected>Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                  <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1042" aria-label="Save status for order #1042">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-order-id="1039" data-status="delivered">
+              <th scope="row" data-label="Order">#1039</th>
+              <td data-label="Customer">Lucy Fur</td>
+              <td data-label="Order date">19 May 2026</td>
+              <td data-label="Strain">Purple Whisker</td>
+              <td data-label="Qty">1×10g</td>
+              <td data-label="Total">£8.99</td>
+              <td data-label="Status">
+                <div class="status-cell">
+                  <span class="status-badge status-delivered">Delivered</span>
+                  <label class="sr-only" for="status-1039">Status for order #1039</label>
+                  <select id="status-1039" class="status-select" data-component="status-select" data-order-id="1039">
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered" selected>Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                  <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1039" aria-label="Save status for order #1039">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-order-id="1041" data-status="shipped">
+              <th scope="row" data-label="Order">#1041</th>
+              <td data-label="Customer">Princess Slayer</td>
+              <td data-label="Order date">24 May 2026</td>
+              <td data-label="Strain">Trainwreck (My Owner's Furniture)</td>
+              <td data-label="Qty">1×10g</td>
+              <td data-label="Total">£9.99</td>
+              <td data-label="Status">
+                <div class="status-cell">
+                  <span class="status-badge status-shipped">Shipped</span>
+                  <label class="sr-only" for="status-1041">Status for order #1041</label>
+                  <select id="status-1041" class="status-select" data-component="status-select" data-order-id="1041">
+                    <option value="processing">Processing</option>
+                    <option value="shipped" selected>Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                  <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1041" aria-label="Save status for order #1041">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-order-id="1037" data-status="cancelled">
+              <th scope="row" data-label="Order">#1037</th>
+              <td data-label="Customer">Princess Slayer</td>
+              <td data-label="Order date">15 May 2026</td>
+              <td data-label="Strain">Bruce Banner (Smash the Curtains)</td>
+              <td data-label="Qty">2×10g</td>
+              <td data-label="Total">£19.98</td>
+              <td data-label="Status">
+                <div class="status-cell">
+                  <span class="status-badge status-cancelled">Cancelled</span>
+                  <label class="sr-only" for="status-1037">Status for order #1037</label>
+                  <select id="status-1037" class="status-select" data-component="status-select" data-order-id="1037">
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled" selected>Cancelled</option>
+                  </select>
+                  <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1037" aria-label="Save status for order #1037">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-order-id="1040" data-status="shipped">
+              <th scope="row" data-label="Order">#1040</th>
+              <td data-label="Customer">Baron Von Furrington</td>
+              <td data-label="Order date">22 May 2026</td>
+              <td data-label="Strain">Grand Daddy Pawple</td>
+              <td data-label="Qty">1×10g</td>
+              <td data-label="Total">£8.99</td>
+              <td data-label="Status">
+                <div class="status-cell">
+                  <span class="status-badge status-shipped">Shipped</span>
+                  <label class="sr-only" for="status-1040">Status for order #1040</label>
+                  <select id="status-1040" class="status-select" data-component="status-select" data-order-id="1040">
+                    <option value="processing">Processing</option>
+                    <option value="shipped" selected>Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                  <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1040" aria-label="Save status for order #1040">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr data-order-id="1038" data-status="processing">
+              <th scope="row" data-label="Order">#1038</th>
+              <td data-label="Customer">Baron Von Furrington</td>
+              <td data-label="Order date">17 May 2026</td>
+              <td data-label="Strain">Wedding Cake (I Knocked It Off the Counter)</td>
+              <td data-label="Qty">3×10g</td>
+              <td data-label="Total">£29.97</td>
+              <td data-label="Status">
+                <div class="status-cell">
+                  <span class="status-badge status-processing">Processing</span>
+                  <label class="sr-only" for="status-1038">Status for order #1038</label>
+                  <select id="status-1038" class="status-select" data-component="status-select" data-order-id="1038">
+                    <option value="processing" selected>Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                  <button type="button" class="btn-icon" data-component="save-status-btn" data-order-id="1038" aria-label="Save status for order #1038">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="inner">
+        <div class="footer-top">
+          <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
+          <fieldset class="theme-toggle" data-component="theme-toggle">
+            <legend class="sr-only">Colour scheme</legend>
+            <label class="theme-option">
+              <input type="radio" name="theme" value="auto" checked>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span class="sr-only">System default</span>
+            </label>
+            <label class="theme-option">
+              <input type="radio" name="theme" value="light">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+              <span class="sr-only">Light theme</span>
+            </label>
+            <label class="theme-option">
+              <input type="radio" name="theme" value="dark">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              <span class="sr-only">Dark theme</span>
+            </label>
+          </fieldset>
+        </div>
+        <div>Staff view — not part of the customer storefront. <a href="index.html">Back to products</a></div>
+        <div>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion book</a>. · <a href="accessibility.html">Accessibility statement</a> · <a href="offline.html">Offline access</a></div>
+        <div>All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not.</div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/connectivity-badge.js"></script>
+  <script src="assets/js/service-worker-register.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/admin.js"></script>
+
+</body>
+</html>
