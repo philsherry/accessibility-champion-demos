@@ -1,377 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="assets/js/theme-init.js"></script>
-  <title>Products — Nip &amp; Claw</title>
-  <meta name="description" content="Artisanal small-batch catnip. Curated by cats, for cats, while their humans are asleep.">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="manifest" href="site.webmanifest">
-  <meta name="theme-color" content="#1e3d2f">
-  <link rel="stylesheet" href="assets/css/tokens.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/index.css">
-</head>
-<body>
-  <div class="page-wrapper">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="assets/js/theme-init.js"></script>
+    <title>Products — Nip &amp; Claw</title>
+    <meta name="description"
+          content="Artisanal small-batch catnip. Curated by cats, for cats, while their humans are asleep.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#1e3d2f">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+  </head>
+  <body>
+    <div class="page-wrapper">
 
-    <!-- Skip link — first focusable element on every page.
+      <!-- Skip link — first focusable element on every page.
          Keyboard users press Tab once to reach it; Enter activates it and
          moves focus to #main, bypassing repeated navigation.
          Discussed in Section 6, Chapter 9 — Keyboard navigation and focus. -->
-    <a href="#main" class="skip-link">Skip to main content</a>
+      <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- role="banner" is the implicit ARIA role for <header> at page level.
+      <!-- role="banner" is the implicit ARIA role for <header> at page level.
          Explicit here for clarity; discussed in Section 6, Chapter 3 — Document structure. -->
-    <header class="site-header" role="banner">
-      <div class="inner">
-        <a href="index.html" class="site-logo">
-          <span class="wordmark">Nip &amp; Claw</span>
-          <span class="tagline">purrveyors of the finest artisanal catnip</span>
-        </a>
-        <span class="connectivity-badge" data-component="connectivity-badge">
-          <svg class="icon" data-component="connectivity-icon-online" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6 2 2 4-4"/><path d="M2 12h20A10 10 0 1 1 12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 4-10"/></svg>
-          <svg class="icon" data-component="connectivity-icon-offline" hidden viewBox="0 0 24 24" aria-hidden="true"><path d="M10.114 4.462A14.5 14.5 0 0 1 12 2a10 10 0 0 1 9.313 13.643"/><path d="M15.557 15.556A14.5 14.5 0 0 1 12 22 10 10 0 0 1 4.929 4.929"/><path d="M15.892 10.234A14.5 14.5 0 0 0 12 2a10 10 0 0 0-3.643.687"/><path d="M17.656 12H22"/><path d="M19.071 19.071A10 10 0 0 1 12 22 14.5 14.5 0 0 1 8.44 8.45"/><path d="M2 12h10"/><path d="m2 2 20 20"/></svg>
-          <span data-component="connectivity-badge-label">Online</span>
-        </span>
-        <div id="connectivity-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
-        <nav class="site-nav" aria-label="Main">
-          <ul role="list">
-            <li><a href="index.html" aria-current="page">Products</a></li>
-            <li><a href="subscriptions.html">Subscriptions</a></li>
-            <li><a href="orders.html">My Orders</a></li>
-          </ul>
-        </nav>
-        <div class="nav-cart">
-          <a href="checkout.html" class="cart-link" aria-label="Cart, 2 items">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-            Cart
-            <span class="cart-count" aria-hidden="true">2</span>
+      <header class="site-header" role="banner">
+        <div class="inner">
+          <a href="index.html" class="site-logo">
+            <span class="wordmark">Nip &amp; Claw</span>
+            <span class="tagline">purrveyors of the finest artisanal catnip</span>
           </a>
+          <span class="connectivity-badge" data-component="connectivity-badge">
+            <svg class="icon"
+                 data-component="connectivity-icon-online"
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+              <path d="m15 6 2 2 4-4" />
+              <path d="M2 12h20A10 10 0 1 1 12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 4-10" />
+            </svg>
+            <svg class="icon"
+                 data-component="connectivity-icon-offline"
+                 hidden
+                 viewBox="0 0 24 24"
+                 aria-hidden="true">
+              <path d="M10.114 4.462A14.5 14.5 0 0 1 12 2a10 10 0 0 1 9.313 13.643" />
+              <path d="M15.557 15.556A14.5 14.5 0 0 1 12 22 10 10 0 0 1 4.929 4.929" />
+              <path d="M15.892 10.234A14.5 14.5 0 0 0 12 2a10 10 0 0 0-3.643.687" />
+              <path d="M17.656 12H22" />
+              <path d="M19.071 19.071A10 10 0 0 1 12 22 14.5 14.5 0 0 1 8.44 8.45" />
+              <path d="M2 12h10" />
+              <path d="m2 2 20 20" />
+            </svg>
+            <span data-component="connectivity-badge-label">Online</span>
+          </span>
+          <div id="connectivity-status"
+               class="sr-only"
+               role="status"
+               aria-live="polite"
+               aria-atomic="true">
+          </div>
+          <nav class="site-nav" aria-label="Main">
+            <ul role="list">
+              <li>
+                <a href="index.html" aria-current="page">Products</a>
+              </li>
+              <li>
+                <a href="subscriptions.html">Subscriptions</a>
+              </li>
+              <li>
+                <a href="orders.html">My Orders</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="nav-cart">
+            <a href="checkout.html" class="cart-link" aria-label="Cart, 2 items">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              Cart
+              <span class="cart-count" aria-hidden="true">2</span>
+            </a>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <section class="site-hero" aria-labelledby="hero-heading">
-      <h1 id="hero-heading">Premium catnip, sourced&nbsp;at&nbsp;3am</h1>
-      <p>Artisanal small-batch catnip. Curated by cats, for cats, while their humans are asleep.</p>
-      <div class="hero-cta">
-        <a href="#products" class="btn btn-hero-primary">Browse strains</a>
-        <a href="subscriptions.html" class="btn btn-hero-secondary">See subscriptions</a>
-      </div>
-    </section>
+      <section class="site-hero" aria-labelledby="hero-heading">
+        <h1 id="hero-heading">
+          Premium catnip, sourced&nbsp;at&nbsp;3am
+        </h1>
+        <p>
+          Artisanal small-batch catnip. Curated by cats, for cats, while their humans are asleep.
+        </p>
+        <div class="hero-cta">
+          <a href="#products" class="btn btn-hero-primary">Browse strains</a>
+          <a href="subscriptions.html" class="btn btn-hero-secondary">See subscriptions</a>
+        </div>
+      </section>
 
-    <main id="main" class="main-content" tabindex="-1">
+      <main id="main" class="main-content" tabindex="-1">
 
-      <!-- Live region for cart and filter announcements.
+        <!-- Live region for cart and filter announcements.
            role="status" + aria-live="polite" announces changes without interrupting
            what the screen reader is currently saying. aria-atomic="true" reads the
            full updated text, not just the changed portion.
            Must exist in the DOM at page load — screen readers register live regions
            during initial parse; regions injected later may not be observed.
            Discussed in Section 6, Chapter 12 — Live regions and error announcement. -->
-      <div id="cart-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
-      <div class="toast" id="toast" aria-hidden="true"></div>
-
-      <section aria-labelledby="products-heading" id="products" tabindex="-1">
-        <div class="section-header">
-          <h2 id="products-heading">Current strains</h2>
-          <a href="#" class="view-all">View all strains</a>
+        <div id="cart-status"
+             class="sr-only"
+             role="status"
+             aria-live="polite"
+             aria-atomic="true">
+        </div>
+        <div class="toast" id="toast" aria-hidden="true">
         </div>
 
-        <!-- Filter bar — aria-pressed conveys toggle state to screen readers.
+        <section aria-labelledby="products-heading" id="products" tabindex="-1">
+          <div class="section-header">
+            <h2 id="products-heading">
+              Current strains
+            </h2>
+            <a href="#" class="view-all">View all strains</a>
+          </div>
+
+          <!-- Filter bar — aria-pressed conveys toggle state to screen readers.
              "true" = active filter; "false" = inactive. Without aria-pressed, a
              screen reader user cannot tell which filter is currently selected.
              role="group" + aria-label groups the buttons semantically.
              Discussed in Section 6, Chapter 5 — Accessible HTML (interactive elements and state)
              and Section 6, Chapter 12 — Live regions and error announcement (filter result announcement). -->
-        <div class="filter-bar" role="group" aria-label="Filter by type">
-          <button type="button" class="filter-btn" aria-pressed="true"  data-filter="all">All strains</button>
-          <button type="button" class="filter-btn" aria-pressed="false" data-filter="naptime">Naptime</button>
-          <button type="button" class="filter-btn" aria-pressed="false" data-filter="zoomies">Zoomies</button>
-          <button type="button" class="filter-btn" aria-pressed="false" data-filter="existential">Existential</button>
-        </div>
+          <div class="filter-bar" role="group" aria-label="Filter by type">
+            <button type="button"
+                    class="filter-btn"
+                    aria-pressed="true"
+                    data-filter="all">
+              All strains
+            </button>
+            <button type="button"
+                    class="filter-btn"
+                    aria-pressed="false"
+                    data-filter="naptime">
+              Naptime
+            </button>
+            <button type="button"
+                    class="filter-btn"
+                    aria-pressed="false"
+                    data-filter="zoomies">
+              Zoomies
+            </button>
+            <button type="button"
+                    class="filter-btn"
+                    aria-pressed="false"
+                    data-filter="existential">
+              Existential
+            </button>
+          </div>
 
-        <ul class="product-grid" role="list" data-testid="test_product-grid">
+          <ul class="product-grid" role="list" data-testid="test_product-grid">
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">🌿</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">Purple Whisker</h3>
-                  <span class="product-price">£8.99</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  🌿
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-naptime">Naptime</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★★ (4.9)</span>
-                </div>
-                <p class="product-desc">Our flagship strain. Classic, reliable, and beloved by cats across the postcode. Enhanced loaf formation guaranteed.</p>
-                <!-- Each "Add to cart" button needs a unique accessible name so keyboard
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      Purple Whisker
+                    </h3>
+                    <span class="product-price">£8.99</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-naptime">Naptime</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★★ (4.9)</span>
+                  </div>
+                  <p class="product-desc">
+                    Our flagship strain. Classic, reliable, and beloved by cats across the postcode. Enhanced loaf formation guaranteed.
+                  </p>
+                  <!-- Each "Add to cart" button needs a unique accessible name so keyboard
                      and screen reader users can distinguish 12 identical-sounding buttons.
                      The sr-only span appends the product name to the visible text:
                      screen readers announce "Add to cart Purple Whisker";
                      sighted users see "Add to cart" with the card heading providing context.
                      Discussed in Section 6, Chapter 5 — Accessible HTML (accessible button names). -->
-                <button type="button" class="btn btn-primary product-cta" data-product="Purple Whisker">Add to cart<span class="sr-only"> Purple Whisker</span></button>
-              </div>
-            </article>
-          </li>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="Purple Whisker">
+                    Add to cart<span class="sr-only"> Purple Whisker</span>
+                  </button>
+                </div>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">🍃</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">OG Floof</h3>
-                  <span class="product-price">£7.50</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  🍃
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-existential">Existential</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★☆ (4.7)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      OG Floof
+                    </h3>
+                    <span class="product-price">£7.50</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-existential">Existential</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★☆ (4.7)</span>
+                  </div>
+                  <p class="product-desc">
+                    Heritage strain, very chill. Makes them stare at walls and reconsider whether the bird outside is real.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="OG Floof">
+                    Add to cart<span class="sr-only"> OG Floof</span>
+                  </button>
                 </div>
-                <p class="product-desc">Heritage strain, very chill. Makes them stare at walls and reconsider whether the bird outside is real.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="OG Floof">Add to cart<span class="sr-only"> OG Floof</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">⚡</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">Trainwreck (My Owner's Furniture)</h3>
-                  <span class="product-price">£9.99</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  ⚡
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-zoomies">Zoomies</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★★ (4.8)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      Trainwreck (My Owner's Furniture)
+                    </h3>
+                    <span class="product-price">£9.99</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-zoomies">Zoomies</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★★ (4.8)</span>
+                  </div>
+                  <p class="product-desc">
+                    Strong. Unpredictable. Not recommended near anything fragile, a full water glass, or a sleeping human.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="Trainwreck (My Owner's Furniture)">
+                    Add to cart<span class="sr-only"> Trainwreck (My Owner's Furniture)</span>
+                  </button>
                 </div>
-                <p class="product-desc">Strong. Unpredictable. Not recommended near anything fragile, a full water glass, or a sleeping human.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="Trainwreck (My Owner's Furniture)">Add to cart<span class="sr-only"> Trainwreck (My Owner's Furniture)</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">👴</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">Grand Daddy Pawple</h3>
-                  <span class="product-price">£8.50</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  👴
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-naptime">Naptime</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★☆ (4.6)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      Grand Daddy Pawple
+                    </h3>
+                    <span class="product-price">£8.50</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-naptime">Naptime</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★☆ (4.6)</span>
+                  </div>
+                  <p class="product-desc">
+                    For the senior cat. Gentle onset, soft landing. Extended loaf duration. Reduced curtain incidents.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="Grand Daddy Pawple">
+                    Add to cart<span class="sr-only"> Grand Daddy Pawple</span>
+                  </button>
                 </div>
-                <p class="product-desc">For the senior cat. Gentle onset, soft landing. Extended loaf duration. Reduced curtain incidents.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="Grand Daddy Pawple">Add to cart<span class="sr-only"> Grand Daddy Pawple</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">🍪</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">Girl Scout Mousies</h3>
-                  <span class="product-price">£11.99</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  🍪
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-existential">Existential</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★★ (5.0)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      Girl Scout Mousies
+                    </h3>
+                    <span class="product-price">£11.99</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-existential">Existential</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★★ (5.0)</span>
+                  </div>
+                  <p class="product-desc">
+                    Limited seasonal batch. Gone when it's gone. Three cats queued for this. One of them was Lucy Fur.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="Girl Scout Mousies">
+                    Add to cart<span class="sr-only"> Girl Scout Mousies</span>
+                  </button>
                 </div>
-                <p class="product-desc">Limited seasonal batch. Gone when it's gone. Three cats queued for this. One of them was Lucy Fur.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="Girl Scout Mousies">Add to cart<span class="sr-only"> Girl Scout Mousies</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">💪</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">Gorilla Glue (The Good Rug Variety)</h3>
-                  <span class="product-price">£9.50</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  💪
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-naptime">Naptime</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★☆ (4.5)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      Gorilla Glue (The Good Rug Variety)
+                    </h3>
+                    <span class="product-price">£9.50</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-naptime">Naptime</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★☆ (4.5)</span>
+                  </div>
+                  <p class="product-desc">
+                    Sticky. Long-lasting. You'll know why it's called the Good Rug Variety after the third session.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="Gorilla Glue (The Good Rug Variety)">
+                    Add to cart<span class="sr-only"> Gorilla Glue (The Good Rug Variety)</span>
+                  </button>
                 </div>
-                <p class="product-desc">Sticky. Long-lasting. You'll know why it's called the Good Rug Variety after the third session.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="Gorilla Glue (The Good Rug Variety)">Add to cart<span class="sr-only"> Gorilla Glue (The Good Rug Variety)</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">🕷️</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">White Widow… It's a Spider, I Will Destroy It</h3>
-                  <span class="product-price">£10.50</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  🕷️
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-zoomies">Zoomies</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★☆ (4.4)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      White Widow… It's a Spider, I Will Destroy It
+                    </h3>
+                    <span class="product-price">£10.50</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-zoomies">Zoomies</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★☆ (4.4)</span>
+                  </div>
+                  <p class="product-desc">
+                    High anxiety. Strong zoomies. The name is a warning and a promise. Best enjoyed without anything breakable in the room.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="White Widow… It's a Spider, I Will Destroy It">
+                    Add to cart<span class="sr-only"> White Widow… It's a Spider, I Will Destroy It</span>
+                  </button>
                 </div>
-                <p class="product-desc">High anxiety. Strong zoomies. The name is a warning and a promise. Best enjoyed without anything breakable in the room.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="White Widow… It's a Spider, I Will Destroy It">Add to cart<span class="sr-only"> White Widow… It's a Spider, I Will Destroy It</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">💨</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">Sour Diesel Paws</h3>
-                  <span class="product-price">£8.99</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  💨
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-zoomies">Zoomies</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★★ (4.8)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      Sour Diesel Paws
+                    </h3>
+                    <span class="product-price">£8.99</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-zoomies">Zoomies</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★★ (4.8)</span>
+                  </div>
+                  <p class="product-desc">
+                    Fast onset. Very zoomy. Zoomies onset: 2–4 minutes. Duration: until the human wakes up and checks the kitchen.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="Sour Diesel Paws">
+                    Add to cart<span class="sr-only"> Sour Diesel Paws</span>
+                  </button>
                 </div>
-                <p class="product-desc">Fast onset. Very zoomy. Zoomies onset: 2–4 minutes. Duration: until the human wakes up and checks the kitchen.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="Sour Diesel Paws">Add to cart<span class="sr-only"> Sour Diesel Paws</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">🦍</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">Bruce Banner (Smash the Curtains)</h3>
-                  <span class="product-price">£12.99</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  🦍
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-zoomies">Zoomies</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★★ (4.9)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      Bruce Banner (Smash the Curtains)
+                    </h3>
+                    <span class="product-price">£12.99</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-zoomies">Zoomies</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★★ (4.9)</span>
+                  </div>
+                  <p class="product-desc">
+                    Very potent. Not for beginners. The name says it. Review: "I have seen things." — Chairman Meow, Liverpool.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="Bruce Banner (Smash the Curtains)">
+                    Add to cart<span class="sr-only"> Bruce Banner (Smash the Curtains)</span>
+                  </button>
                 </div>
-                <p class="product-desc">Very potent. Not for beginners. The name says it. Review: "I have seen things." — Chairman Meow, Liverpool.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="Bruce Banner (Smash the Curtains)">Add to cart<span class="sr-only"> Bruce Banner (Smash the Curtains)</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">🎂</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">Wedding Cake (I Knocked It Off the Counter)</h3>
-                  <span class="product-price">£10.99</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  🎂
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-existential">Existential</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★☆ (4.6)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      Wedding Cake (I Knocked It Off the Counter)
+                    </h3>
+                    <span class="product-price">£10.99</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-existential">Existential</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★☆ (4.6)</span>
+                  </div>
+                  <p class="product-desc">
+                    Celebratory. Messy. Order for special occasions: birthdays, 4am Tuesdays, revenge on the vacuum cleaner.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="Wedding Cake (I Knocked It Off the Counter)">
+                    Add to cart<span class="sr-only"> Wedding Cake (I Knocked It Off the Counter)</span>
+                  </button>
                 </div>
-                <p class="product-desc">Celebratory. Messy. Order for special occasions: birthdays, 4am Tuesdays, revenge on the vacuum cleaner.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="Wedding Cake (I Knocked It Off the Counter)">Add to cart<span class="sr-only"> Wedding Cake (I Knocked It Off the Counter)</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">🍞</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">The Deep Loaf</h3>
-                  <span class="product-price">£9.99</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  🍞
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-naptime">Naptime</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★★ (4.9)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      The Deep Loaf
+                    </h3>
+                    <span class="product-price">£9.99</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-naptime">Naptime</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★★ (4.9)</span>
+                  </div>
+                  <p class="product-desc">
+                    For when you want your loaf super-baked. Onset: gradual. Duration: the entire working day and then some. One reviewer described it as "transcendently horizontal".
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="The Deep Loaf">
+                    Add to cart<span class="sr-only"> The Deep Loaf</span>
+                  </button>
                 </div>
-                <p class="product-desc">For when you want your loaf super-baked. Onset: gradual. Duration: the entire working day and then some. One reviewer described it as "transcendently horizontal".</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="The Deep Loaf">Add to cart<span class="sr-only"> The Deep Loaf</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-          <li data-component="product-card">
-            <article class="card product-card">
-              <div class="product-image" aria-hidden="true" role="presentation">🐺</div>
-              <div class="card-body">
-                <div class="product-header">
-                  <h3 class="product-name">Midnight Howler</h3>
-                  <span class="product-price">£13.50</span>
+            <li data-component="product-card">
+              <article class="card product-card">
+                <div class="product-image" aria-hidden="true" role="presentation">
+                  🐺
                 </div>
-                <div class="product-meta">
-                  <span class="type-badge type-zoomies">Zoomies</span>
-                  <span class="product-weight">10g</span>
-                  <span class="product-rating">★★★★★ (5.0)</span>
+                <div class="card-body">
+                  <div class="product-header">
+                    <h3 class="product-name">
+                      Midnight Howler
+                    </h3>
+                    <span class="product-price">£13.50</span>
+                  </div>
+                  <div class="product-meta">
+                    <span class="type-badge type-zoomies">Zoomies</span>
+                    <span class="product-weight">10g</span>
+                    <span class="product-rating">★★★★★ (5.0)</span>
+                  </div>
+                  <p class="product-desc">
+                    3am flat circuit at full speed, narrated. Your neighbours will hear. There is a Rolling Stones connection, if you look hard enough. Named in honour of Lucy Fur, who has done this thing.
+                  </p>
+                  <button type="button"
+                          class="btn btn-primary product-cta"
+                          data-product="Midnight Howler">
+                    Add to cart<span class="sr-only"> Midnight Howler</span>
+                  </button>
                 </div>
-                <p class="product-desc">3am flat circuit at full speed, narrated. Your neighbours will hear. There is a Rolling Stones connection, if you look hard enough. Named in honour of Lucy Fur, who has done this thing.</p>
-                <button type="button" class="btn btn-primary product-cta" data-product="Midnight Howler">Add to cart<span class="sr-only"> Midnight Howler</span></button>
-              </div>
-            </article>
-          </li>
+              </article>
+            </li>
 
-        </ul>
-      </section>
+          </ul>
+        </section>
 
-    </main>
+      </main>
 
-    <footer class="site-footer" role="contentinfo">
-      <div class="inner">
-        <div class="footer-top">
-          <p><strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.</p>
-          <fieldset class="theme-toggle" data-component="theme-toggle">
-            <legend class="sr-only">Colour scheme</legend>
-            <label class="theme-option">
-              <input type="radio" name="theme" value="auto" checked>
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              <span class="sr-only">System default</span>
-            </label>
-            <label class="theme-option">
-              <input type="radio" name="theme" value="light">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-              <span class="sr-only">Light theme</span>
-            </label>
-            <label class="theme-option">
-              <input type="radio" name="theme" value="dark">
-              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-              <span class="sr-only">Dark theme</span>
-            </label>
-          </fieldset>
+      <footer class="site-footer" role="contentinfo">
+        <div class="inner">
+          <div class="footer-top">
+            <p>
+              <strong class="footer-brand">Nip &amp; Claw</strong> — purrveyors of the finest artisanal catnip since your human got a smartphone.
+            </p>
+            <fieldset class="theme-toggle" data-component="theme-toggle">
+              <legend class="sr-only">
+                Colour scheme
+              </legend>
+              <label class="theme-option">
+                <input type="radio" name="theme" value="auto" checked>
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+                <span class="sr-only">System default</span>
+              </label>
+              <label class="theme-option">
+                <input type="radio" name="theme" value="light">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2" />
+                  <path d="M12 20v2" />
+                  <path d="m4.93 4.93 1.41 1.41" />
+                  <path d="m17.66 17.66 1.41 1.41" />
+                  <path d="M2 12h2" />
+                  <path d="M20 12h2" />
+                  <path d="m6.34 17.66-1.41 1.41" />
+                  <path d="m19.07 4.93-1.41 1.41" />
+                </svg>
+                <span class="sr-only">Light theme</span>
+              </label>
+              <label class="theme-option">
+                <input type="radio" name="theme" value="dark">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                </svg>
+                <span class="sr-only">Dark theme</span>
+              </label>
+            </fieldset>
+          </div>
+          <div>
+            All strains are 100% catnip. No cats were consulted about GDPR compliance. <a href="subscriptions.html">Subscription plans</a> · <a href="orders.html">My orders</a>
+          </div>
+          <div>
+            This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion book</a>. · <a href="accessibility.html">Accessibility statement</a> · <a href="offline.html">Offline access</a>
+          </div>
+          <div>
+            All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not.
+          </div>
         </div>
-        <p>All strains are 100% catnip. No cats were consulted about GDPR compliance. <a href="subscriptions.html">Subscription plans</a> · <a href="orders.html">My orders</a></p>
-        <p>This is a demo site for the <a href="https://accessibilitychampion.com">Accessibility Champion</a> book. All accessibility patterns shown are discussed in the book. Nip &amp; Claw is a fictional store. Lucy Fur, however, is not. · <a href="accessibility.html">Accessibility statement</a> · <a href="offline.html">Offline access</a></p>
-      </div>
-    </footer>
+      </footer>
 
-  </div><!-- /.page-wrapper -->
+    </div>
+    <!-- /.page-wrapper -->
 
-  <!-- Toast notification — visible to sighted users; cart-status announces to screen readers -->
-  <script src="assets/js/theme.js"></script>
-  <script src="assets/js/connectivity-badge.js"></script>
-  <script src="assets/js/service-worker-register.js"></script>
-  <script src="assets/js/cart.js"></script>
-  <script src="assets/js/index.js"></script>
+    <!-- Toast notification — visible to sighted users; cart-status announces to screen readers -->
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/connectivity-badge.js"></script>
+    <script src="assets/js/service-worker-register.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/index.js"></script>
 
-</body>
+  </body>
 </html>
