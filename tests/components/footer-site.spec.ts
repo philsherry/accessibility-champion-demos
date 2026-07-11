@@ -64,9 +64,9 @@ for (const { path } of PAGES) {
         page,
       }) => {
         const footer = page.getByRole('contentinfo');
-        await expect(
-          footer.getByRole('link', { name: 'Staff' }),
-        ).toHaveCount(0);
+        await expect(footer.getByRole('link', { name: 'Staff' })).toHaveCount(
+          0,
+        );
       });
     } else {
       test('links to the staff admin view', async ({ page }) => {

@@ -52,7 +52,9 @@ test('choosing a plan, completing checkout, and viewing the receipt shows the ri
   await page.locator('#cvc').fill('123');
   await page.getByRole('button', { name: 'Place order' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Order placed!' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Order placed!' }),
+  ).toBeVisible();
   await page.getByRole('link', { name: 'View receipt' }).click();
   await expect(page).toHaveURL(/receipt\.html\?plan=catnap/);
 
@@ -81,5 +83,7 @@ test('the copy-link fallback announces confirmation when Web Share is unavailabl
   await page.goto('/receipt.html?plan=zoomies');
 
   await page.getByRole('button', { name: 'Share this receipt' }).click();
-  await expect(page.locator('#receipt-status')).toHaveText('Receipt link copied.');
+  await expect(page.locator('#receipt-status')).toHaveText(
+    'Receipt link copied.',
+  );
 });

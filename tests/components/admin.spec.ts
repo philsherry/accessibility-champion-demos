@@ -96,7 +96,9 @@ test.describe('admin — order management', () => {
     await expectNoAxeViolations(page);
 
     await page.getByRole('button', { name: 'Processing' }).click();
-    await waitForFilterTransition(page.getByRole('button', { name: 'All orders' }));
+    await waitForFilterTransition(
+      page.getByRole('button', { name: 'All orders' }),
+    );
     await expectNoAxeViolations(page);
 
     // Mid-edit: a value selected but not yet saved.

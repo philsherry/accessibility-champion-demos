@@ -93,7 +93,10 @@
   --color-status-shipped-bg: light-dark(#e0f2fe, #0c2d45);
   --color-status-shipped-text: light-dark(#075985, #7dd3fc);
   --color-status-cancelled-bg: light-dark(#f3f4f6, #292524);
-  --color-status-cancelled-text: light-dark(#57534e, #d6d3d1); /* 5.6:1 light, 8.9:1 dark */
+  --color-status-cancelled-text: light-dark(
+    #57534e,
+    #d6d3d1
+  ); /* 5.6:1 light, 8.9:1 dark */
 
   /* Type scale */
   --font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;

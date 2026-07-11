@@ -61,62 +61,68 @@ document.querySelectorAll('tr[data-order-id]').forEach((row) => {
 });
 
 /* Save buttons — commit the row's <select> value, persist it, announce it. */
-document.querySelectorAll('[data-component="save-status-btn"]').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const orderId = btn.dataset.orderId;
-    const row = btn.closest('tr');
-    const select = row.querySelector('[data-component="status-select"]');
-    if (!orderId || !row || !select) return;
+document
+  .querySelectorAll('[data-component="save-status-btn"]')
+  .forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const orderId = btn.dataset.orderId;
+      const row = btn.closest('tr');
+      const select = row.querySelector('[data-component="status-select"]');
+      if (!orderId || !row || !select) return;
 
-    const status = select.value;
-    applyStatusToRow(row, status);
+      const status = select.value;
+      applyStatusToRow(row, status);
 
-    const all = readStoredStatuses();
-    all[orderId] = status;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+      const all = readStoredStatuses();
+      all[orderId] = status;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
 
-    const liveRegion = document.getElementById('admin-status');
-    liveRegion.textContent = '';
-    void liveRegion.offsetWidth; // force repaint so screen readers notice the change
-    liveRegion.textContent =
-      'Order #' + orderId + ' marked as ' + STATUS_LABELS[status] + '.';
+      const liveRegion = document.getElementById('admin-status');
+      liveRegion.textContent = '';
+      void liveRegion.offsetWidth; // force repaint so screen readers notice the change
+      liveRegion.textContent =
+        'Order #' + orderId + ' marked as ' + STATUS_LABELS[status] + '.';
+    });
   });
-});
 
 /* Filter bar — toggle aria-pressed, show/hide rows, announce result.
    Identical pattern to index.js's strain-type filter. */
-document.querySelectorAll('[data-component="admin-filter-btn"]').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('[data-component="admin-filter-btn"]').forEach((b) => {
-      b.setAttribute('aria-pressed', 'false');
+document
+  .querySelectorAll('[data-component="admin-filter-btn"]')
+  .forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document
+        .querySelectorAll('[data-component="admin-filter-btn"]')
+        .forEach((b) => {
+          b.setAttribute('aria-pressed', 'false');
+        });
+      btn.setAttribute('aria-pressed', 'true');
+
+      const filter = btn.dataset.filter;
+      const rows = document.querySelectorAll('tr[data-order-id]');
+      let shown = 0;
+
+      rows.forEach((row) => {
+        if (filter === 'all' || row.dataset.status === filter) {
+          row.hidden = false;
+          shown++;
+        } else {
+          row.hidden = true;
+        }
+      });
+
+      const liveRegion = document.getElementById('admin-status');
+      liveRegion.textContent = '';
+      void liveRegion.offsetWidth;
+      liveRegion.textContent =
+        filter === 'all'
+          ? 'Showing all ' + shown + ' orders.'
+          : 'Showing ' +
+            shown +
+            ' ' +
+            STATUS_LABELS[filter] +
+            ' order' +
+            (shown !== 1 ? 's' : '') +
+            '.';
     });
-    btn.setAttribute('aria-pressed', 'true');
-
-    const filter = btn.dataset.filter;
-    const rows = document.querySelectorAll('tr[data-order-id]');
-    let shown = 0;
-
-    rows.forEach((row) => {
-      if (filter === 'all' || row.dataset.status === filter) {
-        row.hidden = false;
-        shown++;
-      } else {
-        row.hidden = true;
-      }
-    });
-
-    const liveRegion = document.getElementById('admin-status');
-    liveRegion.textContent = '';
-    void liveRegion.offsetWidth;
-    liveRegion.textContent =
-      filter === 'all'
-        ? 'Showing all ' + shown + ' orders.'
-        : 'Showing ' +
-          shown +
-          ' ' +
-          STATUS_LABELS[filter] +
-          ' order' +
-          (shown !== 1 ? 's' : '') +
-          '.';
   });
-});

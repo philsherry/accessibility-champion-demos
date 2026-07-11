@@ -242,7 +242,8 @@ document.getElementById('checkout-form').addEventListener('submit', (e) => {
   const success = document.getElementById('checkout-success');
   success.hidden = false;
   success.querySelector('h1').focus();
-  document.getElementById('view-receipt-link').href = 'receipt.html?plan=' + planKey;
+  document.getElementById('view-receipt-link').href =
+    'receipt.html?plan=' + planKey;
 });
 
 /* Inline re-validation on blur — clears error once the field is corrected */
