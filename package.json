@@ -37,7 +37,7 @@
     "analyze:css": "cat public/assets/css/*.css | wallace",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "run-s lint:js lint:css format:check",
+    "lint": "run-s format lint:js lint:css format:check",
     "lint:css": "stylelint \"**/*.{css,html}\"",
     "lint:js": "eslint .",
     "reports": "http-server ./reports -p 4311 -o",

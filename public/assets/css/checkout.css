@@ -36,8 +36,10 @@
 }
 
 .error-summary:focus {
+  /* Inset (negative) offset, not outside the box — see base.css's
+     :focus-visible rule for why. */
   outline: 3px solid var(--color-error);
-  outline-offset: 2px;
+  outline-offset: -3px;
 }
 
 .error-summary h2 {

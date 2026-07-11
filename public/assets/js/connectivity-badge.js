@@ -11,58 +11,67 @@
  * to; the badge's own textContent is never touched directly, which
  * would wipe out the icon markup alongside it.
  */
-document.addEventListener('DOMContentLoaded', () => {
+// Setting the `hidden` IDL property (el.hidden = true) does not reflect
+// to the `hidden` content attribute on SVG elements in every engine — the
+// property reads back correctly but hasAttribute('hidden') stays false,
+// so the CSS [hidden] selector never sees the change. Setting the
+// attribute directly sidesteps that reflection gap.
+function setHidden(el, isHidden) {
+  if (isHidden) {
+    el.setAttribute('hidden', '');
+  } else {
+    el.removeAttribute('hidden');
+  }
+}
+
+function renderConnectivityBadge(elements, isOnline) {
+  const { badge, onlineIcon, offlineIcon, label } = elements;
+  label.textContent = isOnline ? 'Online' : 'Offline';
+  setHidden(onlineIcon, !isOnline);
+  setHidden(offlineIcon, isOnline);
+  badge.classList.toggle('connectivity-badge--offline', !isOnline);
+}
+
+function announceConnectivityChange(liveRegion, isOnline) {
+  const message = isOnline
+    ? "You're back online."
+    : "You're now offline — showing saved content.";
+  liveRegion.textContent = '';
+  void liveRegion.offsetWidth; // force repaint so screen readers notice the change
+  liveRegion.textContent = message;
+}
+
+function queryConnectivityElements() {
   const badge = document.querySelector('[data-component="connectivity-badge"]');
-  const onlineIcon = badge?.querySelector(
-    '[data-component="connectivity-icon-online"]',
-  );
-  const offlineIcon = badge?.querySelector(
-    '[data-component="connectivity-icon-offline"]',
-  );
-  const label = badge?.querySelector(
-    '[data-component="connectivity-badge-label"]',
-  );
-  const liveRegion = document.getElementById('connectivity-status');
-  if (!badge || !onlineIcon || !offlineIcon || !label || !liveRegion) return;
+  return {
+    badge,
+    onlineIcon: badge?.querySelector(
+      '[data-component="connectivity-icon-online"]',
+    ),
+    offlineIcon: badge?.querySelector(
+      '[data-component="connectivity-icon-offline"]',
+    ),
+    label: badge?.querySelector('[data-component="connectivity-badge-label"]'),
+    liveRegion: document.getElementById('connectivity-status'),
+  };
+}
 
-  // Setting the `hidden` IDL property (el.hidden = true) does not reflect
-  // to the `hidden` content attribute on SVG elements in every engine —
-  // the property reads back correctly but hasAttribute('hidden') stays
-  // false, so the CSS [hidden] selector never sees the change. Setting
-  // the attribute directly sidesteps that reflection gap.
-  function setHidden(el, isHidden) {
-    if (isHidden) {
-      el.setAttribute('hidden', '');
-    } else {
-      el.removeAttribute('hidden');
-    }
+function allPresent(elements) {
+  return Object.values(elements).every(Boolean);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const elements = queryConnectivityElements();
+  if (!allPresent(elements)) return;
+
+  const { liveRegion } = elements;
+
+  function handleConnectivityChange(isOnline) {
+    renderConnectivityBadge(elements, isOnline);
+    announceConnectivityChange(liveRegion, isOnline);
   }
 
-  function render(isOnline) {
-    label.textContent = isOnline ? 'Online' : 'Offline';
-    setHidden(onlineIcon, !isOnline);
-    setHidden(offlineIcon, isOnline);
-    badge.classList.toggle('connectivity-badge--offline', !isOnline);
-  }
-
-  function announce(isOnline) {
-    const message = isOnline
-      ? "You're back online."
-      : "You're now offline — showing saved content.";
-    liveRegion.textContent = '';
-    void liveRegion.offsetWidth; // force repaint so screen readers notice the change
-    liveRegion.textContent = message;
-  }
-
-  render(navigator.onLine);
-
-  window.addEventListener('online', () => {
-    render(true);
-    announce(true);
-  });
-
-  window.addEventListener('offline', () => {
-    render(false);
-    announce(false);
-  });
+  renderConnectivityBadge(elements, navigator.onLine);
+  window.addEventListener('online', () => handleConnectivityChange(true));
+  window.addEventListener('offline', () => handleConnectivityChange(false));
 });

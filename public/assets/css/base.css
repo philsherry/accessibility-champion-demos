@@ -27,11 +27,32 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Focus visible — never suppress the ring */
-:focus-visible {
-  outline: 3px solid var(--color-gold-light);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
+/* Focus ring — one shared definition for every focusable element, ported
+   from the Accessibility Champion book's own site
+   (src/lib/assets/css/champ/utilities/_accessibility.css). outline-color
+   defaults to currentColor, so the ring always matches the element's own
+   (already contrast-checked) text colour instead of a single fixed colour
+   that might not contrast against every background it appears on.
+   Per-component overrides (size/colour/offset) should set the custom
+   properties below rather than writing a new :focus-visible rule. */
+:is(a, button, input, select, textarea, summary) {
+  --outline-size: max(2px, 0.08em);
+  --outline-style: solid;
+  --outline-color: var(--color-gold-hover);
+}
+
+:is(a, button, input, select, textarea, summary):focus {
+  outline: var(--outline-size) var(--outline-style) var(--outline-color);
+  outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+:is(a, button, input, select, textarea, summary):focus-visible {
+  outline: var(--outline-size) var(--outline-style) var(--outline-color);
+  outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+:is(a, button, input, select, textarea, summary):focus:not(:focus-visible) {
+  outline: none;
 }
 
 /* Skip link — always visible (not hidden-until-focus), matching the
@@ -43,15 +64,20 @@ body {
    min-height matches --target-min, the same touch-target size every
    other interactive element in the header already uses. */
 .skip-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--target-min);
-  padding: var(--space-2) var(--space-6);
-  background: var(--color-brand);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
   color: var(--color-white);
-  font-weight: 700;
-  font-size: var(--text-sm);
-  text-decoration: none;
+  display: block;
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+  text-align: center;
+  width: 100%;
+
+  &:focus {
+    background-color: var(--color-gold-light);
+    color: var(--color-brand);
+    text-decoration: none;
+  }
 }
 
 /* -------------------------------------------------- */
@@ -126,11 +152,9 @@ body {
   align-items: center;
 }
 
-.site-nav a:hover,
-.site-nav a:focus-visible {
+.site-nav a:hover {
   background: var(--color-brand-mid);
   text-decoration: none;
-  outline: none;
 }
 
 .site-nav a[aria-current='page'] {
@@ -241,11 +265,9 @@ body {
     background var(--transition-fast);
 }
 
-.cart-link:hover,
-.cart-link:focus-visible {
+.cart-link:hover {
   border-color: var(--color-gold-light);
   background: rgb(255 255 255 / 10%);
-  outline: none;
 }
 
 .cart-count {
@@ -422,10 +444,8 @@ p + p {
   color: var(--color-white);
 }
 
-.btn-primary:hover,
-.btn-primary:focus-visible {
+.btn-primary:hover {
   background: var(--color-brand-mid);
-  outline: none;
 }
 
 .btn-secondary {
@@ -434,11 +454,9 @@ p + p {
   border-color: var(--color-brand-text);
 }
 
-.btn-secondary:hover,
-.btn-secondary:focus-visible {
+.btn-secondary:hover {
   background: var(--color-brand);
   color: var(--color-white);
-  outline: none;
 }
 
 .btn-ghost {
@@ -447,11 +465,9 @@ p + p {
   border-color: var(--color-border);
 }
 
-.btn-ghost:hover,
-.btn-ghost:focus-visible {
+.btn-ghost:hover {
   background: var(--color-bg);
   color: var(--color-text);
-  outline: none;
 }
 
 /* Icon-only button — 44×44px minimum */
@@ -474,12 +490,10 @@ p + p {
     border-color var(--transition-fast);
 }
 
-.btn-icon:hover,
-.btn-icon:focus-visible {
+.btn-icon:hover {
   background: var(--color-bg);
   color: var(--color-text);
   border-color: var(--color-brand-light);
-  outline: none;
 }
 
 .btn-icon.btn-icon--danger {
@@ -487,11 +501,9 @@ p + p {
   border-color: var(--color-error-border);
 }
 
-.btn-icon.btn-icon--danger:hover,
-.btn-icon.btn-icon--danger:focus-visible {
+.btn-icon.btn-icon--danger:hover {
   background: var(--color-error-bg);
   border-color: var(--color-error);
-  outline: none;
 }
 
 /* -------------------------------------------------- */
@@ -566,7 +578,6 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  outline: none;
   border-color: var(--color-brand-text);
   box-shadow: 0 0 0 3px
     color-mix(in srgb, var(--color-brand-text) 15%, transparent);

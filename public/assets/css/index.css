@@ -131,11 +131,9 @@
   border-color: var(--color-gold-light);
 }
 
-.btn-hero-primary:hover,
-.btn-hero-primary:focus-visible {
+.btn-hero-primary:hover {
   background: #c09030;
   border-color: #c09030;
-  outline: none;
 }
 
 .btn-hero-secondary {
