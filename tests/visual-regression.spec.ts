@@ -19,6 +19,8 @@ const PAGES = [
   'subscriptions.html',
   'accessibility.html',
   'offline.html',
+  'admin.html',
+  'receipt.html',
 ];
 
 for (const page_ of PAGES) {
@@ -48,3 +50,11 @@ for (const page_ of PAGES) {
     );
   });
 }
+
+test('receipt.html print layout @visual', async ({ page }) => {
+  await page.goto('/receipt.html?plan=zoomies');
+  await page.emulateMedia({ media: 'print' });
+  await expect(page).toHaveScreenshot('receipt-print.png', {
+    fullPage: true,
+  });
+});
