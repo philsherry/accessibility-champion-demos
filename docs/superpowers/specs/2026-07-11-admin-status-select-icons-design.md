@@ -117,17 +117,39 @@ change needed is a `gap` on the existing option layout rule in
 
 Confirmed directly (not assumed) that this repo's actual test environment —
 Chrome for Testing 149.0.7827.55, the exact browser bundled with the pinned
-`@playwright/test@1.61.1` — already supports `appearance: base-select` with
-no flag: `getComputedStyle()` on a live `option[value="processing"]` in
-`admin.html` today returns `display: flex`, `background-color: rgb(254, 243,
+`@playwright/test@1.61.1` — supports `appearance: base-select` with no
+flag: `getComputedStyle()` on a live `option[value="processing"]` in
+`admin.html` returns `display: flex`, `background-color: rgb(254, 243,
 199)`, `color: rgb(146, 64, 14)` — exact matches for the warning-token pair
 already wired to that status. Playwright's own `page.screenshot()` cannot
-capture the *open* picker's content (a known CDP top-layer capture gap, not
-a sign the feature is inactive) — so visual confirmation of the open state
-will be a manual check in a real windowed browser, while the automated test
-added for this asserts computed style directly on the option elements
-(background/color per status, plus that the `<use>` sprite reference
-resolves to a non-empty rendered icon) rather than chasing a screenshot.
+capture the *open* picker's content (a known CDP top-layer capture gap),
+and neither can `getBoundingClientRect()` — it returns a zeroed rect for
+*everything* inside the open picker, including the `<span>` holding real,
+known-present text, so that gap is a limitation of the measurement tooling,
+not evidence against rendering. The automated test added for this asserts
+computed style and DOM structure directly on the option elements (colour
+per status, the `<use>` reference resolving to an existing `<symbol>`,
+the visible text) rather than chasing a screenshot.
+
+**Real-world activation status, checked by hand across four actual
+browsers (Safari Technology Preview 247, the latest stable Safari, Edge,
+and Chrome Canary 152 — the last both with and without
+`chrome://flags/#enable-experimental-web-platform-features` manually
+enabled and the browser relaunched):** none of them activate
+`appearance: base-select` today. All four render the plain native
+`<select>` fallback for *both* this feature's new icons and the
+pre-existing option colour-coding that shipped before this change — the
+colour-coded pills visible in every screenshot are the separate, unrelated
+`.status-badge` element, not `.status-select option` styling. Chrome for
+Testing's apparent "no flag needed" support is specific to that
+test-oriented build (it likely pre-enables this or a related Blink flag
+for automated test authors) and isn't representative of any real visitor's
+browser as of this writing. This was already true of the colour-coding
+before this change — the icon work introduces no new gap, it inherits the
+existing one. The `@supports` gate means real visitors always get a fully
+functional plain-text `<select>` regardless; the enhancement will activate
+automatically, with no further code changes, whenever a browser ships
+default support.
 
 ## Out of scope
 
