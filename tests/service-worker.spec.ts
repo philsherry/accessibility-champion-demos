@@ -10,6 +10,8 @@ const REQUIRED_PRECACHED_PATHS = [
   '/subscriptions.html',
   '/accessibility.html',
   '/offline.html',
+  '/admin.html',
+  '/receipt.html',
 ];
 
 // Waits for the precache to actually finish. Cache.addAll() is atomic
