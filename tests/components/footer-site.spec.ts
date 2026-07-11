@@ -19,32 +19,44 @@ for (const { path } of PAGES) {
       await expect(page.getByRole('contentinfo')).toBeVisible();
     });
 
-    test('links to the accessibility statement, except on the statement page itself', async ({
-      page,
-    }) => {
-      const footer = page.getByRole('contentinfo');
-      const link = footer.getByRole('link', {
-        name: 'Accessibility statement',
+    // Branching on `path` here, outside the test callback, picks which
+    // single-assertion test to register for this page — see CONVENTIONS.md
+    // ("no-conditional-in-test") for why the branch can't live inside the
+    // test body itself.
+    if (path === '/accessibility.html') {
+      test('does not link to the accessibility statement, since this is that page', async ({
+        page,
+      }) => {
+        const footer = page.getByRole('contentinfo');
+        await expect(
+          footer.getByRole('link', { name: 'Accessibility statement' }),
+        ).toHaveCount(0);
       });
+    } else {
+      test('links to the accessibility statement', async ({ page }) => {
+        const footer = page.getByRole('contentinfo');
+        await expect(
+          footer.getByRole('link', { name: 'Accessibility statement' }),
+        ).toHaveAttribute('href', 'accessibility.html');
+      });
+    }
 
-      if (path === '/accessibility.html') {
-        await expect(link).toHaveCount(0);
-      } else {
-        await expect(link).toHaveAttribute('href', 'accessibility.html');
-      }
-    });
-
-    test('links to offline access, except on the offline page itself', async ({
-      page,
-    }) => {
-      const footer = page.getByRole('contentinfo');
-      const link = footer.getByRole('link', { name: 'Offline access' });
-
-      if (path === '/offline.html') {
-        await expect(link).toHaveCount(0);
-      } else {
-        await expect(link).toHaveAttribute('href', 'offline.html');
-      }
-    });
+    if (path === '/offline.html') {
+      test('does not link to offline access, since this is that page', async ({
+        page,
+      }) => {
+        const footer = page.getByRole('contentinfo');
+        await expect(
+          footer.getByRole('link', { name: 'Offline access' }),
+        ).toHaveCount(0);
+      });
+    } else {
+      test('links to offline access', async ({ page }) => {
+        const footer = page.getByRole('contentinfo');
+        await expect(
+          footer.getByRole('link', { name: 'Offline access' }),
+        ).toHaveAttribute('href', 'offline.html');
+      });
+    }
   });
 }

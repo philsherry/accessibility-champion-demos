@@ -13,6 +13,14 @@ import { PAGES } from '../utilities/pages';
 // Playwright's pointer-actionability check for that reason; it still
 // dispatches a real check + change event, exercising the same code path
 // a label click does.
+//
+// Confirmed empirically: removing `force: true` here fails every check()
+// call in this file, since Playwright's actionability check treats the
+// clipped 1x1px input as not interactable regardless of the pointer-events
+// pass-through from the label. eslint-plugin-playwright's no-force-option
+// rule doesn't know that, so it's disabled file-wide below rather than
+// silenced 7 times inline.
+/* eslint-disable playwright/no-force-option */
 
 // Waits for tokens.css's --transition-theme bg/text colour animation to
 // finish, so a colour-contrast check afterwards samples the settled

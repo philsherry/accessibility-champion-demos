@@ -1,6 +1,15 @@
 import { test, expect } from './fixtures';
 import { PAGES } from './utilities/pages';
 
+// A plain (uncalled) function declaration, not a conditional inline in the
+// test body — see CONVENTIONS.md ("no-conditional-in-test"). viewportWidth
+// is only known once the test runs (it comes from the active Playwright
+// project), so unlike the path-based branches elsewhere in this suite, it
+// can't be decided at test-registration time.
+function expectedHeaderDisplay(viewportWidth: number): 'grid' | 'flex' {
+  return viewportWidth <= 640 ? 'grid' : 'flex';
+}
+
 // Guards against horizontal overflow at each of this project's three
 // configured viewports (Mobile/Tablet/Desktop — see playwright.config.ts),
 // and confirms the header actually renders in the layout mode expected
@@ -48,11 +57,7 @@ for (const { path } of PAGES) {
         .locator('.site-header .inner')
         .evaluate((el) => getComputedStyle(el).display);
 
-      if (viewportWidth <= 640) {
-        expect(display).toBe('grid');
-      } else {
-        expect(display).toBe('flex');
-      }
+      expect(display).toBe(expectedHeaderDisplay(viewportWidth));
     });
   });
 }

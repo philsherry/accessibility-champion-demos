@@ -1,3 +1,4 @@
+import type { Page } from '@playwright/test';
 import { test, expect } from '../fixtures';
 import { expectSkipLinkBypassesHeader } from '../keyboard-helpers';
 import { PAGES } from '../utilities/pages';
@@ -42,13 +43,14 @@ for (const { path, currentNavLabel, cartHasAriaCurrent } of PAGES) {
     }) => {
       const positions: { label: string; x: number; y: number }[] = [];
       const capture = async (label: string) => {
+        // document.activeElement is never null (it falls back to <body>),
+        // so this can push unconditionally instead of branching on a null
+        // check — see CONVENTIONS.md ("no-conditional-in-test").
         const box = await page.evaluate(() => {
-          const el = document.activeElement as HTMLElement | null;
-          if (!el) return null;
-          const r = el.getBoundingClientRect();
+          const r = document.activeElement!.getBoundingClientRect();
           return { x: r.left, y: r.top };
         });
-        if (box) positions.push({ label, ...box });
+        positions.push({ label, ...box });
       };
 
       await page.keyboard.press('Tab'); // skip link
@@ -71,37 +73,63 @@ for (const { path, currentNavLabel, cartHasAriaCurrent } of PAGES) {
           `Tab order jumped backward: "${curr.label}" (y=${curr.y}) appears above ` +
             `"${prev.label}" (y=${prev.y}) — tab order doesn't match visual layout`,
         ).toBeGreaterThanOrEqual(prev.y - ROW_TOLERANCE);
+      }
 
-        const sameRow = Math.abs(curr.y - prev.y) <= ROW_TOLERANCE;
-        if (sameRow) {
-          expect(
-            curr.x,
-            `Tab order goes right-to-left within a row: "${curr.label}" (x=${curr.x}) appears to ` +
-              `the left of "${prev.label}" (x=${prev.x}), both on the same row`,
-          ).toBeGreaterThanOrEqual(prev.x);
-        }
+      // Filtering to same-row pairs first, rather than branching on
+      // `sameRow` inside the loop above, keeps the x-order assertion
+      // unconditional — see CONVENTIONS.md ("no-conditional-in-test").
+      const sameRowPairs = positions
+        .slice(1)
+        .map((curr, i) => ({ curr, prev: positions[i] }))
+        .filter(({ curr, prev }) => Math.abs(curr.y - prev.y) <= ROW_TOLERANCE);
+
+      for (const { curr, prev } of sameRowPairs) {
+        expect(
+          curr.x,
+          `Tab order goes right-to-left within a row: "${curr.label}" (x=${curr.x}) appears to ` +
+            `the left of "${prev.label}" (x=${prev.x}), both on the same row`,
+        ).toBeGreaterThanOrEqual(prev.x);
       }
     });
+
+    const NAV_LABELS = ['Products', 'Subscriptions', 'My Orders'];
+
+    // Both branches are picked here, outside the test callback, from data
+    // that's fixed per page (PAGES) — this is what lets the test body below
+    // run its assertions unconditionally. See CONVENTIONS.md
+    // ("no-conditional-in-test").
+    const currentLabels = NAV_LABELS.filter(
+      (label) => label === currentNavLabel,
+    );
+    const otherLabels = NAV_LABELS.filter((label) => label !== currentNavLabel);
+    const assertCartAriaCurrent = cartHasAriaCurrent
+      ? (page: Page) =>
+          expect(page.getByRole('link', { name: /^Cart,/ })).toHaveAttribute(
+            'aria-current',
+            'page',
+          )
+      : (page: Page) =>
+          expect(
+            page.getByRole('link', { name: /^Cart,/ }),
+          ).not.toHaveAttribute('aria-current', 'page');
 
     test('aria-current marks exactly the right element as current', async ({
       page,
     }) => {
       const nav = page.getByRole('navigation', { name: 'Main' });
-      for (const label of ['Products', 'Subscriptions', 'My Orders']) {
-        const link = nav.getByRole('link', { name: label });
-        if (label === currentNavLabel) {
-          await expect(link).toHaveAttribute('aria-current', 'page');
-        } else {
-          await expect(link).not.toHaveAttribute('aria-current', 'page');
-        }
+      for (const label of currentLabels) {
+        await expect(nav.getByRole('link', { name: label })).toHaveAttribute(
+          'aria-current',
+          'page',
+        );
+      }
+      for (const label of otherLabels) {
+        await expect(
+          nav.getByRole('link', { name: label }),
+        ).not.toHaveAttribute('aria-current', 'page');
       }
 
-      const cartLink = page.getByRole('link', { name: /^Cart,/ });
-      if (cartHasAriaCurrent) {
-        await expect(cartLink).toHaveAttribute('aria-current', 'page');
-      } else {
-        await expect(cartLink).not.toHaveAttribute('aria-current', 'page');
-      }
+      await assertCartAriaCurrent(page);
     });
   });
 }
