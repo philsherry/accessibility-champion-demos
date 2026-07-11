@@ -23,7 +23,7 @@ export async function stopCoverage(page: Page, testId: string): Promise<void> {
   // Chromium occasionally reports internal/extension scripts with no
   // meaningful source, so keep the filter anyway rather than assume.
   const ownEntries = entries.filter(
-    (entry) => entry.url.includes('127.0.0.1:4310') && entry.source,
+    (entry) => entry.url.includes('127.0.0.1:4312') && entry.source,
   );
   if (ownEntries.length === 0) return;
 
