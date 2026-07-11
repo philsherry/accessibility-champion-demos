@@ -50,3 +50,7 @@ document.getElementById('share-receipt-btn').addEventListener('click', () => {
     liveRegion.textContent = 'Receipt link copied.';
   });
 });
+
+document.getElementById('print-receipt-btn').addEventListener('click', () => {
+  window.print();
+});
