@@ -58,5 +58,23 @@ for (const { path } of PAGES) {
         ).toHaveAttribute('href', 'offline.html');
       });
     }
+
+    if (path === '/admin.html') {
+      test('does not link to the staff admin view, since this is that page', async ({
+        page,
+      }) => {
+        const footer = page.getByRole('contentinfo');
+        await expect(
+          footer.getByRole('link', { name: 'Staff' }),
+        ).toHaveCount(0);
+      });
+    } else {
+      test('links to the staff admin view', async ({ page }) => {
+        const footer = page.getByRole('contentinfo');
+        await expect(
+          footer.getByRole('link', { name: 'Staff' }),
+        ).toHaveAttribute('href', 'admin.html');
+      });
+    }
   });
 }
