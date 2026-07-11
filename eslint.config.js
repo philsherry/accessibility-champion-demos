@@ -68,6 +68,16 @@ export default tseslint.config(
     },
   },
 
+  // PLANS is declared in plans-data.js and consumed from checkout.js and
+  // receipt.js — same shared-global-via-script-order reasoning as
+  // addProductToCart above.
+  {
+    files: ['public/assets/js/checkout.js', 'public/assets/js/receipt.js'],
+    languageOptions: {
+      globals: { PLANS: 'readonly' },
+    },
+  },
+
   // Inline <script> blocks in the 5 page files, extracted by
   // eslint-plugin-html and linted as real JS. None of the 5 pages
   // currently has any inline script left (all page behaviour now lives
