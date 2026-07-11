@@ -303,3 +303,10 @@
   color: var(--color-muted);
   margin-bottom: var(--space-6);
 }
+
+.success-actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: center;
+}
