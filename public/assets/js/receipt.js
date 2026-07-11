@@ -60,6 +60,14 @@ document.getElementById('share-receipt-btn').addEventListener('click', () => {
     return;
   }
 
+  // navigator.clipboard is undefined in non-secure contexts and
+  // unsupported browsers — accessing .writeText on it would throw
+  // synchronously, before any .catch() could attach to catch it.
+  if (!navigator.clipboard) {
+    announce('Could not copy the receipt link.');
+    return;
+  }
+
   navigator.clipboard
     .writeText(location.href)
     .then(() => announce('Receipt link copied.'))
