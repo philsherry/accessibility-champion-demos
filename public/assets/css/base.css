@@ -707,6 +707,11 @@ tbody th[scope='row'] {
   color: var(--color-status-shipped-text);
 }
 
+.status-cancelled {
+  background: var(--color-status-cancelled-bg);
+  color: var(--color-status-cancelled-text);
+}
+
 /* -------------------------------------------------- */
 
 /* Footer */
