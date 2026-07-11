@@ -1544,7 +1544,7 @@ document.getElementById('receipt-reference').textContent =
 document.getElementById('share-receipt-btn').addEventListener('click', () => {
   const liveRegion = document.getElementById('receipt-status');
 
-  if ('share' in navigator) {
+  if (navigator.share) {
     navigator.share({ title: 'Nip & Claw receipt', url: location.href });
     return;
   }
@@ -1756,14 +1756,43 @@ git commit -m "feat: add receipt.html"
 - [ ] **Step 1: Write the test**
 
 ```typescript
+import type { Locator, Page } from '@playwright/test';
 import { test, expect } from '../fixtures';
 import { expectNoAxeViolations } from '../axe-helpers';
+
+// subscriptions.html's comparison table is the documented
+// horizontally-scrollable pattern (min-width: 600px inside its own
+// overflow-x: auto wrapper) — every real dimension (visualViewport,
+// clientWidth, the page's own "cannot scroll horizontally" test) stays
+// correctly 390px on Mobile. But under Chromium's isMobile CDP emulation
+// specifically, window.innerWidth/documentElement.scrollWidth report that
+// table's un-contained min-content width (956px) even though nothing
+// between it and <body> actually overflows — Playwright uses that
+// inflated value internally for its click-with-auto-scroll actionability
+// check, scrolling to a position that doesn't match what a real
+// 390px-wide screen shows. A manual scroll + coordinate click sidesteps
+// Playwright's own (mis-measured) scroll logic without skipping the real
+// actionability check .click({force:true}) would.
+async function clickViaVerifiedCoordinates(
+  page: Page,
+  locator: Locator,
+): Promise<void> {
+  await locator.scrollIntoViewIfNeeded();
+  const box = await locator.boundingBox();
+  if (!box) {
+    throw new Error('Element has no bounding box');
+  }
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+}
 
 test('choosing a plan, completing checkout, and viewing the receipt shows the right plan', async ({
   page,
 }) => {
   await page.goto('/subscriptions.html');
-  await page.getByRole('link', { name: 'Choose The Catnap' }).click();
+  await clickViaVerifiedCoordinates(
+    page,
+    page.getByRole('link', { name: 'Choose The Catnap' }),
+  );
   await expect(page).toHaveURL(/checkout\.html\?plan=catnap/);
 
   // Every field ships with a realistic default value except the security
@@ -1921,3 +1950,4 @@ git commit -m "docs: mark 'Build the sketched extensions' done in TODO.md"
 - **Spec coverage:** every design-doc section has a task — access/no-gating (Task 8), mock data incl. Princess Slayer/Baron Von Furrington and the `cancelled` status gap (Tasks 2, 8), select+Save not save-on-change (Tasks 7-9), localStorage persistence (Tasks 7, 10), Customizable Select (Task 6), filtering (Tasks 7-9), receipt reachability/data/print/share (Tasks 11-15), `PAGES` fixture + footer link (Tasks 4-5), visual regression incl. print snapshot (Task 17).
 - **Type/name consistency checked:** `STORAGE_KEY`/`admin-order-status`, `data-component` values (`status-select`, `save-status-btn`, `admin-filter-btn`), and element ids (`admin-status`, `receipt-status`, `receipt-plan-name`, etc.) are used identically across the JS, HTML, and spec-file tasks that reference them.
 - **Explicitly out of scope, not attempted here** (matches the design doc): `orders.html` per-row receipt links, `store.html`, the "Pawtal" companion app, multi-item cart checkout.
+- **Found and fixed during execution, not anticipated by the design doc:** `public/service-worker.js`'s `PRECACHE_URLS` (and `tests/service-worker.spec.ts`'s matching `REQUIRED_PRECACHED_PATHS`) didn't list `admin.html`/`receipt.html`/their CSS/JS/`plans-data.js` — neither new page would have worked offline. Also, `.admin-table tr`'s and `.receipt-table tr`'s responsive collapse rule needed `:not([hidden])` — an unconditional `display: block` at narrow viewports overrides the `hidden` attribute's default `display: none` (author CSS always wins over the UA stylesheet regardless of the attribute), which broke `admin.html`'s status filter and would have broken `receipt.html`'s promo-row toggle the same way; `orders.css`'s identical-looking block never hit this because that table never dynamically hides rows.

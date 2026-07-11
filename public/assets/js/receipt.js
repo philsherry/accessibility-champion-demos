@@ -39,7 +39,7 @@ document.getElementById('receipt-reference').textContent =
 document.getElementById('share-receipt-btn').addEventListener('click', () => {
   const liveRegion = document.getElementById('receipt-status');
 
-  if ('share' in navigator) {
+  if (navigator.share) {
     navigator.share({ title: 'Nip & Claw receipt', url: location.href });
     return;
   }

@@ -16,6 +16,21 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:4312',
     trace: 'retain-on-failure',
+    // html { scroll-behavior: smooth } (base.css) animates
+    // programmatic/anchor scrolling; without this, Playwright's
+    // auto-scroll-then-click can dispatch the click before the scroll
+    // animation settles, landing it on whatever element is still
+    // sliding past instead of the intended target — a real failure
+    // mode found clicking a CTA deep in subscriptions.html's
+    // horizontally-scrollable comparison table, not something a real
+    // touchscreen user hits (they don't tap until the scroll visually
+    // stops). tokens.css already defines `scroll-behavior: auto` under
+    // `prefers-reduced-motion: reduce`; emulating that preference here
+    // exercises that existing CSS path instead of adding new behaviour,
+    // and removes this whole class of scroll-timing race for every test.
+    contextOptions: {
+      reducedMotion: 'reduce',
+    },
   },
   // Ordered mobile-first, matching this project's accessibility-first,
   // mobile-second design priority. Mobile and desktop viewports match the
