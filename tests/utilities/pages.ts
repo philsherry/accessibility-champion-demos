@@ -36,4 +36,10 @@ export const PAGES: PageMeta[] = [
   // Reachable via a footer link on every other page, not the main nav —
   // no nav link should be current here.
   { path: '/offline.html', currentNavLabel: null, cartHasAriaCurrent: false },
+  // Staff-only, reachable via a footer link, not the main nav — no nav
+  // link should be current here.
+  { path: '/admin.html', currentNavLabel: null, cartHasAriaCurrent: false },
+  // Reachable only from checkout's success state, not any nav — no nav
+  // link should be current here.
+  { path: '/receipt.html', currentNavLabel: null, cartHasAriaCurrent: false },
 ];
