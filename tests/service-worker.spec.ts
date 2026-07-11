@@ -21,20 +21,40 @@ const REQUIRED_PRECACHED_PATHS = [
 // cache has any entries at all" caught that half-populated state and
 // made this flaky; waiting for every required page path specifically
 // does not.
+//
+// This polls manually rather than using page.waitForFunction(), which
+// was the original implementation: with an async predicate that reads
+// the Cache API (itself async), waitForFunction intermittently returned
+// after a single "not ready yet" evaluation instead of continuing to
+// poll — confirmed by instrumenting both the predicate and the actual
+// cache contents, which showed the promise resolving while the cache
+// was still empty, on both default 'raf' polling and an explicit
+// numeric interval. Root cause traced to waitForFunction itself, not to
+// this file's async/multi-project contention (that issue is real too,
+// but distinct — see the beforeEach comment below). A plain
+// evaluate-then-sleep loop, driven from Node rather than polled inside
+// the page, doesn't exhibit the problem.
 async function waitForPrecache(page: Page) {
-  await page.waitForFunction(
-    async ({ cacheName, requiredPaths }) => {
-      if (!('caches' in window)) return false;
-      const cache = await caches.open(cacheName);
-      const keys = await cache.keys();
-      const cachedPaths = keys.map((request) => new URL(request.url).pathname);
-      return requiredPaths.every((path) =>
-        cachedPaths.some((p) => p.endsWith(path)),
-      );
-    },
-    { cacheName: CACHE_NAME, requiredPaths: REQUIRED_PRECACHED_PATHS },
-    { timeout: 15_000 },
-  );
+  const deadline = Date.now() + 15_000;
+  let lastCount = -1;
+  while (Date.now() < deadline) {
+    const cachedPaths = await page.evaluate(
+      async ({ cacheName }) => {
+        if (!('caches' in window)) return [];
+        const cache = await caches.open(cacheName);
+        const keys = await cache.keys();
+        return keys.map((request) => new URL(request.url).pathname);
+      },
+      { cacheName: CACHE_NAME },
+    );
+    lastCount = cachedPaths.length;
+    const isComplete = REQUIRED_PRECACHED_PATHS.every((path) =>
+      cachedPaths.some((p) => p.endsWith(path)),
+    );
+    if (isComplete) return;
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  throw new Error(`waitForPrecache timed out; last cached count=${lastCount}`);
 }
 
 // Serial, not parallel: service workers register per-origin, and every
