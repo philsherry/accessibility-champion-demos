@@ -1,49 +1,26 @@
 /**
- * Products page (index.html) — "Add to cart" buttons, the toast that
- * confirms an add for sighted users, strain-type derivation, and the
- * filter buttons.
+ * Products page (index.html) — "Add to cart" buttons, strain-type
+ * derivation, and the filter buttons.
  *
  * Depends on assets/js/cart.js being loaded first: `addProductToCart` is
  * declared there (as a page-global classic-script function, not an ES
  * module export — this site has no build step or bundler, so every
  * `<script src>` shares one global scope, in load order) and reused
- * here rather than duplicated.
+ * here rather than duplicated. It already updates the persistent
+ * cart-count badge and announces the change via the #cart-status live
+ * region — both sighted and screen reader users are covered by that
+ * alone. No separate toast: see TODO.md's toast pattern review for why
+ * one previously existed here and was removed (screen-magnifier and
+ * missed-message risk, no user-adjustable timing per WCAG 2.2.1).
  */
-
-/**
- * Adds a product to the cart via addProductToCart (assets/js/cart.js),
- * then shows a toast for sighted users — supplementary to the
- * live-region announcement addProductToCart already sent (screen
- * reader users are covered by that alone). orders.html's reorder
- * doesn't need this, its buttons call addProductToCart directly.
- *
- * @param {HTMLButtonElement} btn - The clicked "Add to cart" button;
- *   its `data-product` attribute names the product being added.
- * @returns {void}
- */
-function addToCart(btn) {
-  addProductToCart(btn);
-
-  const product = btn.dataset.product;
-  const toast = document.getElementById('toast');
-  toast.textContent = `${product} added to cart`;
-  // aria-hidden stays true throughout — the toast is supplementary,
-  // sighted-users-only feedback (see TODO.md); screen reader users are
-  // already covered independently via addProductToCart's live-region
-  // announcement above. Only the visual .visible class toggles.
-  toast.classList.add('visible');
-  setTimeout(() => {
-    toast.classList.remove('visible');
-  }, 2500);
-}
 
 // Each product card's "Add to cart" button (.product-cta) gets its click
 // listener attached here rather than via an inline onclick= attribute —
 // keeps every interactive element on this site consistent (listeners
-// from JS, not HTML) and means addToCart doesn't need to be reachable
-// from raw markup.
+// from JS, not HTML). Same pattern as orders.html's reorder buttons,
+// which call addProductToCart directly too.
 document.querySelectorAll('.product-cta').forEach((btn) => {
-  btn.addEventListener('click', () => addToCart(btn));
+  btn.addEventListener('click', () => addProductToCart(btn));
 });
 
 // Auto-derive data-type on each <li> from its visible badge text.

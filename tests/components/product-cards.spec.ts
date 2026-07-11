@@ -52,6 +52,28 @@ test.describe('product-cards', () => {
     }
   });
 
+  test('adding to cart announces via the live region and shows no visual toast', async ({
+    page,
+  }) => {
+    // No toast anywhere in the page — removed per TODO.md's toast pattern
+    // review (screen-magnifier and missed-message risk, no adjustable
+    // timing). The persistent cart-count badge plus the #cart-status live
+    // region are the only confirmation mechanisms now.
+    await expect(page.locator('.toast')).toHaveCount(0);
+    await expect(page.locator('#toast')).toHaveCount(0);
+
+    const grid = page.locator('[data-testid="test_product-grid"]');
+    await grid
+      .getByRole('button', { name: 'Add to cart Purple Whisker' })
+      .click();
+
+    await expect(page.locator('#cart-status')).toHaveText(
+      'Purple Whisker added to cart. Cart now contains 3 items.',
+    );
+    await expect(page.locator('.cart-count')).toHaveText('3');
+    await expect(page.locator('.toast')).toHaveCount(0);
+  });
+
   test('filtering shows and hides the correct named cards, not just a count', async ({
     page,
   }) => {

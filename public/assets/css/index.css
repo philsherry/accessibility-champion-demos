@@ -185,24 +185,3 @@
   white-space: nowrap;
 }
 
-.toast {
-  position: fixed;
-  bottom: var(--space-6);
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-brand);
-  color: var(--color-white);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-pill);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  box-shadow: var(--shadow-lg);
-  opacity: 0;
-  transition: opacity var(--transition-base);
-  pointer-events: none;
-  z-index: 200;
-}
-
-.toast.visible {
-  opacity: 1;
-}
