@@ -1766,10 +1766,11 @@ test('choosing a plan, completing checkout, and viewing the receipt shows the ri
   await page.getByRole('link', { name: 'Choose The Catnap' }).click();
   await expect(page).toHaveURL(/checkout\.html\?plan=catnap/);
 
-  // The form's default field values are already valid — the existing
-  // purchase-flow.spec.ts/checkout-recovery.spec.ts tests click
-  // "Place order" with no fields filled in first; matching that
-  // established pattern rather than guessing field labels.
+  // Every field ships with a realistic default value except the security
+  // code — deliberately: a real checkout never persists or prefills a
+  // CVC, so both existing checkout e2e tests fill #cvc by hand before
+  // submitting. Matching that established pattern.
+  await page.locator('#cvc').fill('123');
   await page.getByRole('button', { name: 'Place order' }).click();
 
   await expect(page.getByRole('heading', { name: 'Order placed!' })).toBeVisible();
