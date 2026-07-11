@@ -35,20 +35,43 @@ document.getElementById('receipt-reference').textContent =
   'NC-' + today.getFullYear() + '-' + planKey.toUpperCase().slice(0, 3);
 
 /* Share button — Web Share API where available (mobile mainly), with a
-   copy-to-clipboard fallback plus a live-region confirmation elsewhere. */
+   copy-to-clipboard fallback plus a live-region confirmation elsewhere.
+   Both paths can reject (share: cancelled or blocked; clipboard:
+   permissions or unsupported) — announce genuine failures so a screen
+   reader user isn't left assuming the action silently succeeded. */
 document.getElementById('share-receipt-btn').addEventListener('click', () => {
   const liveRegion = document.getElementById('receipt-status');
 
+  function announce(message) {
+    liveRegion.textContent = '';
+    void liveRegion.offsetWidth;
+    liveRegion.textContent = message;
+  }
+
   if (navigator.share) {
-    navigator.share({ title: 'Nip & Claw receipt', url: location.href });
+    navigator
+      .share({ title: 'Nip & Claw receipt', url: location.href })
+      .catch((error) => {
+        // AbortError means the user dismissed the native share sheet
+        // themselves — that's an intentional cancel, not a failure.
+        if (error.name === 'AbortError') return;
+        announce('Could not share the receipt. Try copying the link instead.');
+      });
     return;
   }
 
-  navigator.clipboard.writeText(location.href).then(() => {
-    liveRegion.textContent = '';
-    void liveRegion.offsetWidth;
-    liveRegion.textContent = 'Receipt link copied.';
-  });
+  // navigator.clipboard is undefined in non-secure contexts and
+  // unsupported browsers — accessing .writeText on it would throw
+  // synchronously, before any .catch() could attach to catch it.
+  if (!navigator.clipboard) {
+    announce('Could not copy the receipt link.');
+    return;
+  }
+
+  navigator.clipboard
+    .writeText(location.href)
+    .then(() => announce('Receipt link copied.'))
+    .catch(() => announce('Could not copy the receipt link.'));
 });
 
 document.getElementById('print-receipt-btn').addEventListener('click', () => {
