@@ -167,16 +167,27 @@ for (const { path } of PAGES) {
       // --transition-theme) finish before axe samples colours — otherwise
       // it can catch an interpolated mid-transition colour that belongs
       // to neither theme and isn't what any real user ends up looking at.
+      //
+      // The theme radios live in the footer, so checking one scrolls the
+      // page there — leaving whatever content is now under the sticky
+      // header's fixed band genuinely, if transiently, covered. That's an
+      // inherent property of any sticky header over scrollable content,
+      // unrelated to which colour theme is active; scrolling back to the
+      // top before scanning keeps this test checking what it's actually
+      // for (does the active theme's colours pass axe), not an incidental
+      // scroll position left over from clicking a footer control.
       await group
         .getByRole('radio', { name: 'Light theme' })
         .check({ force: true });
       await waitForThemeTransition(page);
+      await page.evaluate(() => window.scrollTo(0, 0));
       await expectNoAxeViolations(page);
 
       await group
         .getByRole('radio', { name: 'Dark theme' })
         .check({ force: true });
       await waitForThemeTransition(page);
+      await page.evaluate(() => window.scrollTo(0, 0));
       await expectNoAxeViolations(page);
     });
   });
